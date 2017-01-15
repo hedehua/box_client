@@ -43,21 +43,19 @@ function CircleCollider:detectBound(rect,dist)
 	end
 
 	dist = dist or 0
-
 	if(self.r + self.x + dist > rect:right())then
-	
 		return true
 	end
+
 	if(-self.r + self.x - dist < rect:left()) then
-	
 		return true
 	end
+
 	if(self.r + self.y + dist > rect:top()) then
-	
 		return true
 	end
+
 	if(-self.r + self.y - dist < rect:bottom()) then
-	
 		return true
 	end
 	return false

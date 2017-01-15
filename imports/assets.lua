@@ -15,7 +15,7 @@ local assets = {
             },
             ["rect"] = {
                 [1] = 2,
-                [2] = 121,
+                [2] = 2,
                 [3] = 250,
                 [4] = 176,
             },
@@ -49,10 +49,10 @@ local assets = {
         ["content"] = {
             ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
             ["capInsets"] = {
-                [1] = 30,
-                [2] = 0,
-                [3] = 31,
-                [4] = 0,
+                [1] = 10,
+                [2] = 10,
+                [3] = 10,
+                [4] = 10,
             },
             ["name"] = "ui_button_bg",
             ["offset"] = {
@@ -60,14 +60,14 @@ local assets = {
                 [2] = 0,
             },
             ["originalSize"] = {
-                [1] = 62,
-                [2] = 103,
+                [1] = 30,
+                [2] = 50,
             },
             ["rect"] = {
-                [1] = 260,
-                [2] = 107,
-                [3] = 62,
-                [4] = 103,
+                [1] = 124,
+                [2] = 180,
+                [3] = 30,
+                [4] = 50,
             },
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
@@ -306,7 +306,7 @@ local assets = {
                 ["_localZOrder"] = 0,
                 ["_name"] = "plane_box0",
                 ["_objFlags"] = 0,
-                ["_opacity"] = 255,
+                ["_opacity"] = 20,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = nil,
                 ["_position"] = {
@@ -347,7 +347,7 @@ local assets = {
                     ["__uuid__"] = "8f0c9990-def9-4f00-bd03-7816996fdd0f",
                 },
                 ["_srcBlendFactor"] = 770,
-                ["_type"] = 2,
+                ["_type"] = 0,
                 ["node"] = {
                     ["__id__"] = 2,
                 },
@@ -386,8 +386,8 @@ local assets = {
                 [2] = 79,
             },
             ["rect"] = {
-                [1] = 254,
-                [2] = 306,
+                [1] = 158,
+                [2] = 180,
                 [3] = 51,
                 [4] = 79,
             },
@@ -671,8 +671,8 @@ local assets = {
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
-                    ["height"] = 198,
-                    ["width"] = 200,
+                    ["height"] = 150,
+                    ["width"] = 150,
                 },
                 ["_globalZOrder"] = 0,
                 ["_id"] = "",
@@ -798,7 +798,7 @@ local assets = {
             [7] = {
                 ["__type__"] = "cc.Widget",
                 ["_alignFlags"] = 20,
-                ["_bottom"] = 89,
+                ["_bottom"] = 113,
                 ["_enabled"] = true,
                 ["_horizontalCenter"] = -428,
                 ["_isAbsBottom"] = true,
@@ -838,7 +838,7 @@ local assets = {
                 ["_isTrimmedMode"] = true,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
-                ["_sizeMode"] = 1,
+                ["_sizeMode"] = 0,
                 ["_spriteFrame"] = {
                     ["__uuid__"] = "53a5094a-8d17-4f93-8c9c-67352a4dc793",
                 },
@@ -1151,7 +1151,7 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = -64,
+                    ["x"] = -68.97500000000001,
                     ["y"] = 0,
                 },
                 ["_prefab"] = {
@@ -1294,7 +1294,7 @@ local assets = {
                 ["_isAbsRight"] = true,
                 ["_isAbsTop"] = true,
                 ["_isAbsVerticalCenter"] = true,
-                ["_left"] = -105.42,
+                ["_left"] = -110.39500000000001,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
                 ["_originalHeight"] = 0,
@@ -2358,7 +2358,7 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = 0,
+                    ["x"] = 1,
                     ["y"] = 0,
                 },
                 ["_prefab"] = {
@@ -3457,7 +3457,7 @@ local assets = {
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
                     ["x"] = -570,
-                    ["y"] = 250,
+                    ["y"] = 287,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 103,
@@ -3514,8 +3514,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = -321,
-                    ["y"] = 595,
+                    ["x"] = 0,
+                    ["y"] = 0,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 101,
@@ -3734,7 +3734,7 @@ local assets = {
                 ["_originalHeight"] = 0,
                 ["_originalWidth"] = 0,
                 ["_right"] = 0,
-                ["_top"] = 110,
+                ["_top"] = 73,
                 ["_verticalCenter"] = 0,
                 ["isAlignOnce"] = true,
                 ["node"] = {
@@ -3854,8 +3854,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 202,
-                [2] = 403,
+                [1] = 106,
+                [2] = 302,
                 [3] = 50,
                 [4] = 50,
             },
@@ -5323,28 +5323,6 @@ local assets = {
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
     },
-    ["38d6e113-e6ac-4bd5-845d-a33411044ff4"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
-            ["name"] = "icon_button",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 82,
-                [2] = 92,
-            },
-            ["rect"] = {
-                [1] = 254,
-                [2] = 212,
-                [3] = 82,
-                [4] = 92,
-            },
-            ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
-        },
-    },
     ["3a203ef4-28bb-4faf-97a8-fca54bd13ff5"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
@@ -5410,6 +5388,9 @@ local assets = {
                 },
                 ["_cascadeOpacityEnabled"] = true,
                 ["_children"] = {
+                    [1] = {
+                        ["__id__"] = 3,
+                    },
                 },
                 ["_color"] = {
                     ["__type__"] = "cc.Color",
@@ -5420,13 +5401,13 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 3,
+                        ["__id__"] = 6,
                     },
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
-                    ["height"] = 960,
-                    ["width"] = 1920,
+                    ["height"] = 640,
+                    ["width"] = 1280,
                 },
                 ["_globalZOrder"] = 0,
                 ["_id"] = "",
@@ -5442,7 +5423,7 @@ local assets = {
                     ["y"] = 0,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 4,
+                    ["__id__"] = 7,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -5454,34 +5435,93 @@ local assets = {
                 ["groupIndex"] = 0,
             },
             [3] = {
-                ["__type__"] = "cc.Sprite",
-                ["_atlas"] = {
-                    ["__uuid__"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
                 },
-                ["_dstBlendFactor"] = 771,
-                ["_enabled"] = true,
-                ["_fillCenter"] = {
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 4,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 640,
+                    ["width"] = 1280,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "",
+                ["_localZOrder"] = 0,
+                ["_name"] = "layer1",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 2,
+                },
+                ["_position"] = {
                     ["__type__"] = "cc.Vec2",
                     ["x"] = 0,
                     ["y"] = 0,
                 },
-                ["_fillRange"] = 0,
-                ["_fillStart"] = 0,
-                ["_fillType"] = 0,
-                ["_isTrimmedMode"] = true,
+                ["_prefab"] = {
+                    ["__id__"] = 5,
+                },
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [4] = {
+                ["__type__"] = "cc.TiledLayer",
+                ["_enabled"] = true,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
-                ["_sizeMode"] = 0,
-                ["_spriteFrame"] = {
-                    ["__uuid__"] = "e866c8b3-7f7a-46cf-b439-d2112bd33f66",
+                ["node"] = {
+                    ["__id__"] = 3,
                 },
-                ["_srcBlendFactor"] = 770,
-                ["_type"] = 2,
+            },
+            [5] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "4ac568cd-6610-4a15-b178-42d18a3bf95d",
+                },
+                ["fileId"] = "aa6bcTmcktM0pMBRQK/Wath",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [6] = {
+                ["__type__"] = "cc.TiledMap",
+                ["_enabled"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_tmxFile"] = {
+                    ["__uuid__"] = "d6a2b535-83a2-4112-93ea-e442d9ac8f86",
+                },
                 ["node"] = {
                     ["__id__"] = 2,
                 },
             },
-            [4] = {
+            [7] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "4ac568cd-6610-4a15-b178-42d18a3bf95d",
@@ -5553,8 +5593,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 202,
-                [2] = 299,
+                [1] = 158,
+                [2] = 285,
                 [3] = 50,
                 [4] = 50,
             },
@@ -5597,8 +5637,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 202,
-                [2] = 351,
+                [1] = 201,
+                [2] = 233,
                 [3] = 50,
                 [4] = 50,
             },
@@ -5625,34 +5665,6 @@ local assets = {
                 [4] = 50,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["51082b3e-b670-43b2-b188-c301b8cb2d1a"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
-            ["capInsets"] = {
-                [1] = 114,
-                [2] = 65,
-                [3] = 111,
-                [4] = 49,
-            },
-            ["name"] = "ui_bg_half",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 256,
-                [2] = 117,
-            },
-            ["rect"] = {
-                [1] = 2,
-                [2] = 2,
-                [3] = 256,
-                [4] = 117,
-            },
-            ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
     },
     ["5267b272-ec26-42a7-8fb0-b7b09b2f1c95"] = {
@@ -5943,16 +5955,15 @@ local assets = {
                 [2] = 0,
             },
             ["originalSize"] = {
-                [1] = 200,
-                [2] = 198,
+                [1] = 120,
+                [2] = 120,
             },
             ["rect"] = {
                 [1] = 2,
-                [2] = 306,
-                [3] = 200,
-                [4] = 198,
+                [2] = 180,
+                [3] = 120,
+                [4] = 120,
             },
-            ["rotated"] = 1,
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
     },
@@ -6033,34 +6044,6 @@ local assets = {
                 [4] = 50,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["5fd09c98-a268-4934-a410-3ebb126e0286"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
-            ["capInsets"] = {
-                [1] = 33,
-                [2] = 0,
-                [3] = 33,
-                [4] = 0,
-            },
-            ["name"] = "ui_button_red_bg",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 68,
-                [2] = 103,
-            },
-            ["rect"] = {
-                [1] = 260,
-                [2] = 2,
-                [3] = 68,
-                [4] = 103,
-            },
-            ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
     },
     ["63791144-d49c-4566-8000-531a729b14e0"] = {
@@ -6374,17 +6357,17 @@ local assets = {
             ["name"] = "ui_texture",
             ["offset"] = {
                 [1] = 0,
-                [2] = 0.5,
+                [2] = -0.5,
             },
             ["originalSize"] = {
-                [1] = 338,
-                [2] = 508,
+                [1] = 254,
+                [2] = 354,
             },
             ["rect"] = {
                 [1] = 2,
-                [2] = 2,
-                [3] = 334,
-                [4] = 503,
+                [2] = 3,
+                [3] = 250,
+                [4] = 349,
             },
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
@@ -6823,10 +6806,10 @@ local assets = {
         ["content"] = {
             ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
             ["capInsets"] = {
-                [1] = 25,
-                [2] = 25,
-                [3] = 25,
-                [4] = 25,
+                [1] = 20,
+                [2] = 20,
+                [3] = 20,
+                [4] = 20,
             },
             ["name"] = "common_circle",
             ["offset"] = {
@@ -6838,8 +6821,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 202,
-                [2] = 455,
+                [1] = 54,
+                [2] = 302,
                 [3] = 50,
                 [4] = 50,
             },
@@ -6864,9 +6847,6 @@ local assets = {
             ["common_circle_empty"] = {
                 ["__uuid__"] = "2c86e05f-14a3-4cba-8761-7f6f1d4c19c8",
             },
-            ["icon_button"] = {
-                ["__uuid__"] = "38d6e113-e6ac-4bd5-845d-a33411044ff4",
-            },
             ["icon_kulou"] = {
                 ["__uuid__"] = "e7b8b2b8-d100-4b6c-89d3-e88451651087",
             },
@@ -6885,14 +6865,8 @@ local assets = {
             ["stick_touch"] = {
                 ["__uuid__"] = "eab12250-d138-458a-a5ae-9942e72242a3",
             },
-            ["ui_bg_half"] = {
-                ["__uuid__"] = "51082b3e-b670-43b2-b188-c301b8cb2d1a",
-            },
             ["ui_button_bg"] = {
                 ["__uuid__"] = "045bdbb4-370a-480a-ba87-1624782ea317",
-            },
-            ["ui_button_red_bg"] = {
-                ["__uuid__"] = "5fd09c98-a268-4934-a410-3ebb126e0286",
             },
         },
     },
@@ -7318,13 +7292,13 @@ local assets = {
                         ["__id__"] = 13,
                     },
                     [5] = {
-                        ["__id__"] = 20,
+                        ["__id__"] = 21,
                     },
                     [6] = {
-                        ["__id__"] = 27,
+                        ["__id__"] = 29,
                     },
                     [7] = {
-                        ["__id__"] = 38,
+                        ["__id__"] = 40,
                     },
                 },
                 ["_color"] = {
@@ -7355,7 +7329,7 @@ local assets = {
                     ["y"] = 568,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 49,
+                    ["__id__"] = 51,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -7533,7 +7507,7 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_sizeMode"] = 0,
                 ["_spriteFrame"] = {
-                    ["__uuid__"] = "51082b3e-b670-43b2-b188-c301b8cb2d1a",
+                    ["__uuid__"] = "cf3d6e15-e2d1-416b-87e2-d6e2c0d633e0",
                 },
                 ["_srcBlendFactor"] = 770,
                 ["_type"] = 1,
@@ -7596,7 +7570,7 @@ local assets = {
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
                     ["x"] = 0,
-                    ["y"] = 221,
+                    ["y"] = 288,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 12,
@@ -7685,6 +7659,9 @@ local assets = {
                     [1] = {
                         ["__id__"] = 18,
                     },
+                    [2] = {
+                        ["__id__"] = 19,
+                    },
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
@@ -7707,7 +7684,7 @@ local assets = {
                     ["y"] = -174,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 19,
+                    ["__id__"] = 20,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -7846,7 +7823,7 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_sizeMode"] = 0,
                 ["_spriteFrame"] = {
-                    ["__uuid__"] = "5fd09c98-a268-4934-a410-3ebb126e0286",
+                    ["__uuid__"] = "045bdbb4-370a-480a-ba87-1624782ea317",
                 },
                 ["_srcBlendFactor"] = 770,
                 ["_type"] = 1,
@@ -7855,6 +7832,57 @@ local assets = {
                 },
             },
             [19] = {
+                ["_N$disabledColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 124,
+                    ["g"] = 124,
+                    ["r"] = 124,
+                },
+                ["_N$disabledSprite"] = nil,
+                ["_N$enableAutoGrayEffect"] = false,
+                ["_N$interactable"] = true,
+                ["_N$normalColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 214,
+                    ["g"] = 214,
+                    ["r"] = 214,
+                },
+                ["_N$normalSprite"] = nil,
+                ["_N$target"] = {
+                    ["__id__"] = 13,
+                },
+                ["__type__"] = "cc.Button",
+                ["_enabled"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["clickEvents"] = {
+                },
+                ["duration"] = 0.1,
+                ["hoverColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["hoverSprite"] = nil,
+                ["node"] = {
+                    ["__id__"] = 13,
+                },
+                ["pressedColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 211,
+                    ["g"] = 211,
+                    ["r"] = 211,
+                },
+                ["pressedSprite"] = nil,
+                ["transition"] = 3,
+                ["zoomScale"] = 1.2,
+            },
+            [20] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -7865,7 +7893,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [20] = {
+            [21] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -7876,7 +7904,7 @@ local assets = {
                 ["_cascadeOpacityEnabled"] = true,
                 ["_children"] = {
                     [1] = {
-                        ["__id__"] = 21,
+                        ["__id__"] = 22,
                     },
                 },
                 ["_color"] = {
@@ -7888,7 +7916,10 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 25,
+                        ["__id__"] = 26,
+                    },
+                    [2] = {
+                        ["__id__"] = 27,
                     },
                 },
                 ["_contentSize"] = {
@@ -7912,7 +7943,7 @@ local assets = {
                     ["y"] = -167,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 26,
+                    ["__id__"] = 28,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -7923,7 +7954,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [21] = {
+            [22] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -7943,10 +7974,10 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 22,
+                        ["__id__"] = 23,
                     },
                     [2] = {
-                        ["__id__"] = 23,
+                        ["__id__"] = 24,
                     },
                 },
                 ["_contentSize"] = {
@@ -7962,7 +7993,7 @@ local assets = {
                 ["_opacity"] = 255,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = {
-                    ["__id__"] = 20,
+                    ["__id__"] = 21,
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
@@ -7970,7 +8001,7 @@ local assets = {
                     ["y"] = 7.2,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 24,
+                    ["__id__"] = 25,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -7981,7 +8012,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [22] = {
+            [23] = {
                 ["_N$file"] = {
                     ["__uuid__"] = "2c42c621-ff9e-412c-a4fd-796bfeb9d0f2",
                 },
@@ -8000,10 +8031,10 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_useOriginalSize"] = false,
                 ["node"] = {
-                    ["__id__"] = 21,
+                    ["__id__"] = 22,
                 },
             },
-            [23] = {
+            [24] = {
                 ["__type__"] = "cc.LabelOutline",
                 ["_color"] = {
                     ["__type__"] = "cc.Color",
@@ -8017,10 +8048,10 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_width"] = 3,
                 ["node"] = {
-                    ["__id__"] = 21,
+                    ["__id__"] = 22,
                 },
             },
-            [24] = {
+            [25] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -8031,7 +8062,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [25] = {
+            [26] = {
                 ["__type__"] = "cc.Sprite",
                 ["_atlas"] = {
                     ["__uuid__"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
@@ -8056,10 +8087,61 @@ local assets = {
                 ["_srcBlendFactor"] = 770,
                 ["_type"] = 1,
                 ["node"] = {
-                    ["__id__"] = 20,
+                    ["__id__"] = 21,
                 },
             },
-            [26] = {
+            [27] = {
+                ["_N$disabledColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 124,
+                    ["g"] = 124,
+                    ["r"] = 124,
+                },
+                ["_N$disabledSprite"] = nil,
+                ["_N$enableAutoGrayEffect"] = false,
+                ["_N$interactable"] = true,
+                ["_N$normalColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 214,
+                    ["g"] = 214,
+                    ["r"] = 214,
+                },
+                ["_N$normalSprite"] = nil,
+                ["_N$target"] = {
+                    ["__id__"] = 21,
+                },
+                ["__type__"] = "cc.Button",
+                ["_enabled"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["clickEvents"] = {
+                },
+                ["duration"] = 0.1,
+                ["hoverColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["hoverSprite"] = nil,
+                ["node"] = {
+                    ["__id__"] = 21,
+                },
+                ["pressedColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 211,
+                    ["g"] = 211,
+                    ["r"] = 211,
+                },
+                ["pressedSprite"] = nil,
+                ["transition"] = 3,
+                ["zoomScale"] = 1.2,
+            },
+            [28] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -8070,7 +8152,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [27] = {
+            [29] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8081,13 +8163,13 @@ local assets = {
                 ["_cascadeOpacityEnabled"] = true,
                 ["_children"] = {
                     [1] = {
-                        ["__id__"] = 28,
+                        ["__id__"] = 30,
                     },
                     [2] = {
-                        ["__id__"] = 31,
+                        ["__id__"] = 33,
                     },
                     [3] = {
-                        ["__id__"] = 34,
+                        ["__id__"] = 36,
                     },
                 },
                 ["_color"] = {
@@ -8120,7 +8202,7 @@ local assets = {
                     ["y"] = -24,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 37,
+                    ["__id__"] = 39,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8131,7 +8213,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [28] = {
+            [30] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8151,7 +8233,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 29,
+                        ["__id__"] = 31,
                     },
                 },
                 ["_contentSize"] = {
@@ -8167,7 +8249,7 @@ local assets = {
                 ["_opacity"] = 255,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = {
-                    ["__id__"] = 27,
+                    ["__id__"] = 29,
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
@@ -8175,7 +8257,7 @@ local assets = {
                     ["y"] = -21,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 30,
+                    ["__id__"] = 32,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8186,7 +8268,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [29] = {
+            [31] = {
                 ["_N$file"] = {
                     ["__uuid__"] = "2c42c621-ff9e-412c-a4fd-796bfeb9d0f2",
                 },
@@ -8205,10 +8287,10 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_useOriginalSize"] = false,
                 ["node"] = {
-                    ["__id__"] = 28,
+                    ["__id__"] = 30,
                 },
             },
-            [30] = {
+            [32] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -8219,7 +8301,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [31] = {
+            [33] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8239,7 +8321,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 32,
+                        ["__id__"] = 34,
                     },
                 },
                 ["_contentSize"] = {
@@ -8255,7 +8337,7 @@ local assets = {
                 ["_opacity"] = 255,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = {
-                    ["__id__"] = 27,
+                    ["__id__"] = 29,
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
@@ -8263,7 +8345,7 @@ local assets = {
                     ["y"] = 1,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 33,
+                    ["__id__"] = 35,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8274,7 +8356,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [32] = {
+            [34] = {
                 ["__type__"] = "cc.Sprite",
                 ["_atlas"] = {
                     ["__uuid__"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
@@ -8299,10 +8381,10 @@ local assets = {
                 ["_srcBlendFactor"] = 770,
                 ["_type"] = 0,
                 ["node"] = {
-                    ["__id__"] = 31,
+                    ["__id__"] = 33,
                 },
             },
-            [33] = {
+            [35] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -8313,7 +8395,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [34] = {
+            [36] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8333,7 +8415,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 35,
+                        ["__id__"] = 37,
                     },
                 },
                 ["_contentSize"] = {
@@ -8349,7 +8431,7 @@ local assets = {
                 ["_opacity"] = 255,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = {
-                    ["__id__"] = 27,
+                    ["__id__"] = 29,
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
@@ -8357,7 +8439,7 @@ local assets = {
                     ["y"] = -52,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 36,
+                    ["__id__"] = 38,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8368,7 +8450,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [35] = {
+            [37] = {
                 ["_N$file"] = {
                     ["__uuid__"] = "2c42c621-ff9e-412c-a4fd-796bfeb9d0f2",
                 },
@@ -8387,32 +8469,32 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_useOriginalSize"] = false,
                 ["node"] = {
-                    ["__id__"] = 34,
+                    ["__id__"] = 36,
                 },
-            },
-            [36] = {
-                ["__type__"] = "cc.PrefabInfo",
-                ["asset"] = {
-                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
-                },
-                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
-                ["root"] = {
-                    ["__id__"] = 2,
-                },
-                ["sync"] = false,
-            },
-            [37] = {
-                ["__type__"] = "cc.PrefabInfo",
-                ["asset"] = {
-                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
-                },
-                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
-                ["root"] = {
-                    ["__id__"] = 2,
-                },
-                ["sync"] = false,
             },
             [38] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
+                },
+                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [39] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
+                },
+                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [40] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8423,13 +8505,13 @@ local assets = {
                 ["_cascadeOpacityEnabled"] = true,
                 ["_children"] = {
                     [1] = {
-                        ["__id__"] = 39,
+                        ["__id__"] = 41,
                     },
                     [2] = {
-                        ["__id__"] = 42,
+                        ["__id__"] = 44,
                     },
                     [3] = {
-                        ["__id__"] = 45,
+                        ["__id__"] = 47,
                     },
                 },
                 ["_color"] = {
@@ -8462,7 +8544,7 @@ local assets = {
                     ["y"] = 86,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 48,
+                    ["__id__"] = 50,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8473,7 +8555,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [39] = {
+            [41] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8493,7 +8575,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 40,
+                        ["__id__"] = 42,
                     },
                 },
                 ["_contentSize"] = {
@@ -8509,7 +8591,7 @@ local assets = {
                 ["_opacity"] = 255,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = {
-                    ["__id__"] = 38,
+                    ["__id__"] = 40,
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
@@ -8517,7 +8599,7 @@ local assets = {
                     ["y"] = -6,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 41,
+                    ["__id__"] = 43,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8528,7 +8610,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [40] = {
+            [42] = {
                 ["_N$file"] = {
                     ["__uuid__"] = "2c42c621-ff9e-412c-a4fd-796bfeb9d0f2",
                 },
@@ -8547,10 +8629,10 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_useOriginalSize"] = false,
                 ["node"] = {
-                    ["__id__"] = 39,
+                    ["__id__"] = 41,
                 },
             },
-            [41] = {
+            [43] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -8561,7 +8643,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [42] = {
+            [44] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8581,7 +8663,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 43,
+                        ["__id__"] = 45,
                     },
                 },
                 ["_contentSize"] = {
@@ -8597,7 +8679,7 @@ local assets = {
                 ["_opacity"] = 255,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = {
-                    ["__id__"] = 38,
+                    ["__id__"] = 40,
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
@@ -8605,7 +8687,7 @@ local assets = {
                     ["y"] = 14,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 44,
+                    ["__id__"] = 46,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8616,7 +8698,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [43] = {
+            [45] = {
                 ["__type__"] = "cc.Sprite",
                 ["_atlas"] = {
                     ["__uuid__"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
@@ -8641,10 +8723,10 @@ local assets = {
                 ["_srcBlendFactor"] = 770,
                 ["_type"] = 0,
                 ["node"] = {
-                    ["__id__"] = 42,
+                    ["__id__"] = 44,
                 },
             },
-            [44] = {
+            [46] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -8655,7 +8737,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [45] = {
+            [47] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -8675,7 +8757,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 46,
+                        ["__id__"] = 48,
                     },
                 },
                 ["_contentSize"] = {
@@ -8691,7 +8773,7 @@ local assets = {
                 ["_opacity"] = 255,
                 ["_opacityModifyRGB"] = false,
                 ["_parent"] = {
-                    ["__id__"] = 38,
+                    ["__id__"] = 40,
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
@@ -8699,7 +8781,7 @@ local assets = {
                     ["y"] = -41,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 47,
+                    ["__id__"] = 49,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -8710,7 +8792,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [46] = {
+            [48] = {
                 ["_N$file"] = {
                     ["__uuid__"] = "2c42c621-ff9e-412c-a4fd-796bfeb9d0f2",
                 },
@@ -8729,32 +8811,32 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_useOriginalSize"] = false,
                 ["node"] = {
-                    ["__id__"] = 45,
+                    ["__id__"] = 47,
                 },
-            },
-            [47] = {
-                ["__type__"] = "cc.PrefabInfo",
-                ["asset"] = {
-                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
-                },
-                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
-                ["root"] = {
-                    ["__id__"] = 2,
-                },
-                ["sync"] = false,
-            },
-            [48] = {
-                ["__type__"] = "cc.PrefabInfo",
-                ["asset"] = {
-                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
-                },
-                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
-                ["root"] = {
-                    ["__id__"] = 2,
-                },
-                ["sync"] = false,
             },
             [49] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
+                },
+                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [50] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
+                },
+                ["fileId"] = "d6f70xT8kBIbZkVx3RWXcaP",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [51] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "ca40f875-3da7-4465-809d-ea6d65353d0b",
@@ -8772,6 +8854,12 @@ local assets = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
             ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
+            ["capInsets"] = {
+                [1] = 5,
+                [2] = 5,
+                [3] = 5,
+                [4] = 5,
+            },
             ["name"] = "common_box",
             ["offset"] = {
                 [1] = 0,
@@ -8782,12 +8870,27 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 254,
-                [2] = 411,
+                [1] = 2,
+                [2] = 302,
                 [3] = 50,
                 [4] = 50,
             },
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
+        },
+    },
+    ["d6a2b535-83a2-4112-93ea-e442d9ac8f86"] = {
+        ["__type__"] = "cc.TiledMapAsset",
+        ["_name"] = "map_grass",
+        ["_objFlags"] = 0,
+        ["_rawFiles"] = nil,
+        ["textures"] = {
+            [1] = {
+                ["__uuid__"] = "edede4e4-b818-4428-80f9-80b2dcf5a2c9",
+            },
+        },
+        ["tmxFolderPath"] = "tiledmap/grass01",
+        ["tmxXmlStr"] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<map version=\"1.0\" orientation=\"orthogonal\" renderorder=\"right-down\" width=\"40\" height=\"20\" tilewidth=\"32\" tileheight=\"32\" nextobjectid=\"1\">\n <tileset firstgid=\"1\" name=\"glass_16_16_96_96\" tilewidth=\"32\" tileheight=\"32\" tilecount=\"9\" columns=\"3\">\n  <image source=\"glass_16_16_96_96.png\" width=\"96\" height=\"96\"/>\n </tileset>\n <layer name=\"layer1\" width=\"40\" height=\"20\">\n  <data encoding=\"csv\">\n1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,\n4,0,0,0,6,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,0,0,0,4,\n7,0,9,7,8,9,7,8,9,7,1,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,9,\n1,0,3,1,2,3,1,2,3,1,1,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,9,4,4,0,4,\n4,5,6,4,5,6,4,5,6,4,1,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,4,9,9,9,9,\n7,8,9,7,8,9,7,8,1,7,1,2,9,8,9,6,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,9,9,9,9,9,\n1,2,3,1,2,3,1,2,3,1,1,2,9,8,9,9,4,5,6,9,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,1,6,4,5,6,\n4,5,6,4,5,6,4,5,6,4,1,1,1,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,\n7,8,9,7,8,9,7,8,9,7,4,4,4,7,8,9,1,2,3,9,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,\n1,2,3,1,2,3,1,2,3,3,7,7,7,7,8,9,1,2,6,9,2,6,1,2,9,1,2,6,1,2,6,1,2,6,1,2,6,1,2,6,\n4,5,6,4,5,6,4,5,3,4,7,8,9,1,2,3,1,2,3,9,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,\n7,8,9,7,8,9,7,8,3,7,4,5,6,4,5,6,4,5,9,4,5,8,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,\n1,2,3,1,2,3,1,2,3,1,7,8,9,7,8,9,7,8,9,7,8,9,9,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,\n4,5,6,4,5,6,4,5,3,4,1,2,3,1,2,3,1,2,9,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,\n7,8,9,7,8,9,7,8,3,7,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,\n1,2,3,1,2,3,1,2,3,1,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,\n4,0,6,4,5,6,4,5,6,4,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,0,2,3,\n7,0,9,7,8,9,7,8,3,7,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,0,5,6,\n1,0,0,0,2,3,1,2,3,1,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,0,0,0,8,9,\n4,5,6,4,5,6,4,5,3,4,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3\n</data>\n </layer>\n</map>\n",
+        ["tsxFiles"] = {
         },
     },
     ["d8738e0c-26bd-4bd0-95cd-efb891641480"] = {
@@ -8826,8 +8929,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 254,
-                [2] = 359,
+                [1] = 149,
+                [2] = 233,
                 [3] = 50,
                 [4] = 50,
             },
@@ -8838,6 +8941,12 @@ local assets = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
             ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
+            ["capInsets"] = {
+                [1] = 20,
+                [2] = 20,
+                [3] = 20,
+                [4] = 20,
+            },
             ["name"] = "hexagon",
             ["offset"] = {
                 [1] = 0,
@@ -9387,7 +9496,7 @@ local assets = {
                 ["_fillRange"] = 0,
                 ["_fillStart"] = 0,
                 ["_fillType"] = 0,
-                ["_isTrimmedMode"] = true,
+                ["_isTrimmedMode"] = false,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
                 ["_sizeMode"] = 0,
@@ -9626,7 +9735,7 @@ local assets = {
                 ["_fillRange"] = 0,
                 ["_fillStart"] = 0,
                 ["_fillType"] = 0,
-                ["_isTrimmedMode"] = true,
+                ["_isTrimmedMode"] = false,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
                 ["_sizeMode"] = 0,
@@ -10135,8 +10244,8 @@ local assets = {
                 [2] = 23,
             },
             ["rect"] = {
-                [1] = 306,
-                [2] = 359,
+                [1] = 124,
+                [2] = 232,
                 [3] = 23,
                 [4] = 23,
             },

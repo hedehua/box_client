@@ -75,17 +75,15 @@ function BattleTeam:update()
 end
 function BattleTeam:init (pos,dir,camp,flag,ctrlId)
 	
-	local p = Vector2.new(pos[1],pos[2])
-	local d = Vector2.new(dir[1],dir[2])
-
-	BattleTeam.super.init(self,nil,p,d,camp)
+	BattleTeam.super.init(self)
 	
 	self._isAlive = true
 	self._ctrlId = ctrlId
 	self._isFollowTarget = flag;
-	self._bornPos = p
-	self._bornDir = d
-	self._curDirection = Utils.arrToDirection(d.x,d.y)
+	self._bornPos = Vector2.new(pos[1],pos[2])
+	self._bornDir = Vector2.new(dir[1],dir[2])
+	self._camp = camp
+	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
 	
 	self:initAi()
 	
@@ -358,7 +356,6 @@ function BattleTeam:removeMember(member)
 	self._memberCountChange = true
 end
 function BattleTeam:die() 
-
 	self:notify("onDie",self,self._dropId)
 
 	if(self._members == nil)then
@@ -485,11 +482,9 @@ function BattleTeam:joinMember(typeId)
 	self:applyMemberPosQue(member,posQue)
 	self:addMember(member);
 	if(member:isLeader())then
-		-- self._typeId = typeId
-		-- self:initConfig()
 		self:setSpeed(member:getBasicSpeed())
 		self:setPos(pos:clone())
-		-- self:setCircleCollider(pos.x,pos.y,member:getRadius())
+		self:setCircleCollider(pos.x,pos.y,member:getRadius())
 		self:moveDir(dir)
 	end
 
@@ -526,11 +521,10 @@ function BattleTeam:isBlock(argument)
 	return false
 end
 function BattleTeam:onTriger(sourceObj,targetObj,skill) 
-
-	if(sourceObj.__cname == "Character" )then
+	if(sourceObj.__cname == "BattleTeam" )then
 
 		-- 人撞到墙
-		if(targetObj:isBlock())then
+		if(targetObj:isBlock())then			
 			if(self._members ~= nil)then
 				for i = 1,#self._members do
 					local m = self._members[i]
@@ -545,7 +539,6 @@ function BattleTeam:onTriger(sourceObj,targetObj,skill)
 
 		-- 人撞到人
 		if( targetObj.__cname ==  "Character" )then
-
 			
 			--/* 自己撞到自己会死的方案
 			local sourcePos = -1
@@ -678,9 +671,17 @@ function BattleTeam:beKnock(member)
 
 	member:die()
 end
+function BattleTeam:recieveKnock(  )
+	return false
+end
+
 function BattleTeam:needCheckCollider()
+	if(self:isBasement()) then
+		return false
+	end
 	return true
 end
+
 function BattleTeam:getKillCount() 
 	return self._killCount
 end

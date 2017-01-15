@@ -16,6 +16,7 @@ local files = {
     ["b3c2a0d9-f4f5-451c-87f0-74100fc697e5"] = "raw-assets/resources/atlas/ui_texture.png",
     ["d4fe731c-5d33-4a0f-abe9-44e7ea352ff1"] = "raw-assets/resources/role",
     ["e133729d-174a-46cf-9c01-ded98d4f04dc"] = "raw-assets/resources/font/number_0.png",
+    ["edede4e4-b818-4428-80f9-80b2dcf5a2c9"] = "raw-assets/tiledmap/grass01/glass_16_16_96_96.png",
     ["ff681333-fa98-4d56-b08c-324e03ac88ee"] = "raw-assets/resources/audio/moon.mp3",
 }
 

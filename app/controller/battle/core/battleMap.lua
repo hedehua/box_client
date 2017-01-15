@@ -33,4 +33,8 @@ function BattleMap:getValidPos()
 	return pos
 end
 
+function BattleMap:isBlock( )
+	return true
+end
+
 return BattleMap

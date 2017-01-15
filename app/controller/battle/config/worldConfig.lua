@@ -1,6 +1,6 @@
 local worldConfig = {
 	defaultUname = math.floor(math.random(201600,920160)*900000),
-	gameInterval=60,
+	gameInterval = 60,
 	battleInterval = 25,  -- 比server略高一点 消除update颗粒问题
 	minStep = 50,
 	minAngle = math.pi /36,
@@ -18,7 +18,7 @@ local worldConfig = {
 	touchAngle = math.pi / 4,
 	touchTime = 40,
 
-	maxTouch = 70,			-- 虚拟摇杆使用
+	maxTouch = 60,			-- 虚拟摇杆使用
 	minTouch = 30,
 
 	hpTime = 0.2,

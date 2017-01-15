@@ -54,7 +54,7 @@ end
 
 function Missile:init(typeId,camp,casterId) 
   
-    BattleObject.super.init(self,typeId,camp,casterId)
+    Missile.super.init(self,typeId,camp,casterId)
 
     self._typeId = typeId
     self._camp = camp
@@ -83,7 +83,7 @@ function Missile:setParentId(parentId)
 end
 function Missile:uninit() 
     self._targetObj = nil
-    BattleObject.super.uninit(self)
+    Missile.super.uninit(self)
 end
 function Missile:update() 
 
@@ -104,7 +104,7 @@ function Missile:update()
     end
 
     -- self._super()
-    BattleObject.supe.update(self)
+    BattleObject.super.update(self)
 end
 function Missile:tryCastSubmissile() 
     if(self._config.subMissile ~= nil and  self._config.subMissile > 0)then

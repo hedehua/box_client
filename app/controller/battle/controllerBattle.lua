@@ -100,6 +100,18 @@ function ControllerBattle:update(dt)
     return
   end
 
+  if(self._renderBattle ~= nil) then
+    self._renderBattle:update(dt)
+  end
+  self._uiTime = self._uiTime + dt
+  
+  if(self._uiTime > 1) then
+    self._uiTime = 0
+    if(self._uiBattle ~= nil) then
+      self._uiBattle:fresh()
+    end
+  end
+
   if(self._curMode == 2) then
     local temp = 0;
     repeat 
@@ -130,18 +142,6 @@ end
 function ControllerBattle:tick(dt) 
   if(self._battle ~= nil) then
     self._battle:update();
-  end
-  if(self._renderBattle ~= nil) then
-    self._renderBattle:update(dt)
-  end
-  
-  self._uiTime = self._uiTime + dt
-  
-  if(self._uiTime > 1) then
-    self._uiTime = 0
-    if(self._uiBattle ~= nil) then
-      self._uiBattle:fresh()
-    end
   end
 end
 
@@ -263,10 +263,11 @@ function ControllerBattle:open(auto,info)
         self._curCamp = self:getMyCamp()
       end
       
-      cc.log("game over")
-      Net:request("battle.battleHandler.leavePlayer",{},function(params) 
-        self:onGameOver(result)
-      end);
+      print("game over")
+      -- Net:request("battle.battleHandler.leavePlayer",{},function(params) 
+      --   self:onGameOver(result)
+      -- end);
+      self:onGameOver(result)
       
     end,
     onTeamDie = function (ctrlId,enableRevive)

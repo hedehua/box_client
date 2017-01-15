@@ -29,9 +29,12 @@ function UILogin:loaded(res)
   self._button2:on(cc.Handler.EVENT_TOUCH_BEGAN, function(event)
       self:onButtonClick(2)
   end);
+
 end
+
 function UILogin:fresh()
 end
+
 function UILogin:onButtonClick(arg1,arg2)
     self:notify("start",arg1,arg2);
 end

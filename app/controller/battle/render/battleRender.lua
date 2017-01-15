@@ -57,7 +57,6 @@ function BattleRender:asyncPos()
         local x,y = self._followObj:getRoot():getPosition()
         local screen = Common.utils.getVisibleSize()
         self._rootNode:setPosition(-x + screen.width/2,-y + screen.height/2)
-        -- print('pos',self._rootNode:getPosition())
     end
 end
 function BattleRender:setQueier(q)

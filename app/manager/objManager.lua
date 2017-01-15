@@ -95,21 +95,13 @@ function ObjManager:load(resName,callback)
         local scene = cc.Director:getInstance():getRunningScene()
         self._objRoot = scene:getChildByName("scene_root")
     end
-    -- asset:move(cc.display.cx, cc.display.cy)
+
     self._objRoot:addChild(asset)
     self:addTo(resName,asset)
 	if(callback ~= nil) then
 		callback(err,asset);
 	end
 
-	-- resManager:getInstance():load(resName, function (err, asset)
-	-- 	self:instantiate(asset,function(newNode) 
-	-- 		self:addTo(resName,newNode)
-	-- 		if(callback ~= nil) then
-	-- 			callback(err,newNode);
-	-- 		end
-	-- 	end)
-	-- end)
 end
 
 function ObjManager:unload(obj) 

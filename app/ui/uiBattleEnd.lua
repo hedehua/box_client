@@ -31,23 +31,25 @@ function UIBattleEnd:loaded(res)
   self.super.loaded(self,res)
 
   local tnode = nil
-  self._rankRoot = res.getChildByName("rank")
-  tnode = self._rankRoot.getChildByName("txt") 
-  self._rankNode = tnode.getComponent("cc.Label")
+  self._rankRoot = res:getChildByName("rank")
+  tnode = self._rankRoot:getChildByName("txt") 
+  self._rankNode = tnode:getComponent("cc.Label")
 
-  self._scoreRoot = res.getChildByName("score")
-  tnode = self._scoreRoot.getChildByName("txt")
-  self._scoreNode = tnode.getComponent("cc.Label")
+  self._scoreRoot = res:getChildByName("score")
+  tnode = self._scoreRoot:getChildByName("txt")
+  self._scoreNode = tnode:getComponent("cc.Label")
 
-  tnode = res.getChildByName("tittle")
-  self._tittleNode = tnode.getComponent("cc.Label")
+  tnode = res:getChildByName("tittle")
+  self._tittleNode = tnode:getComponent("cc.Label")
 
-  self._btnEscape = res.getChildByName("bt_1");
-  self._btnEscape.on(cc.Node.EventType.TOUCH_START, function (event) 
+  local bt1 = res:getChildByName("bt_1");
+  self._btnEscape = bt1:getComponent("cc.Button")
+  self._btnEscape:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
     self:notify("onEscape")
   end);
-  self._btnRetry = res.getChildByName("bt_2");
-  self._btnRetry.on(cc.Node.EventType.TOUCH_START, function (event) 
+  local bt2 = res:getChildByName("bt_2");
+  self._btnRetry = bt2:getComponent("cc.Button")
+  self._btnRetry:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
     self:notify("onRetry")  
   end);
 

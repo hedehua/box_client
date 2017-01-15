@@ -47,12 +47,13 @@ function Battle.new()
 end
 
 function Battle:init()
-	
 end
+
 function Battle:uninit()
 	self:reset();
 	BattleObject.clearAll();
 end
+
 function Battle:reset()
 	if(self._teams ~= nil) then
 		for i = 1,table.length(self._teams) do
@@ -479,20 +480,23 @@ function Battle:checkOver()
 		}
 		return true
 	end
-	if(self._teams ~= nil )then
-		for i = #self._teams ,1,-1 do
-			local team = self._teams[i]
-			
-			if(team:needRemove() and team:isBasement())then
-				self._result = { 
-					winner=Utils.getOtherCamp(team.getCamp()),
-					endType= Enum.EResult.Succ,
-					scores = self._score.item
-				}
-				return true
-			end
+	if(self._teams == nil )then
+		return true
+	end
+
+	for i = #self._teams ,1,-1 do
+		local team = self._teams[i]
+		
+		if(team:needRemove() and team:isBasement())then
+			self._result = { 
+				winner = Utils.getOtherCamp(team:getCamp()),
+				endType= Enum.EResult.Succ,
+				scores = self._score.item
+			}
+			return true
 		end
 	end
+	
 	return false
 end
 function Battle:gameOver() 
@@ -853,7 +857,7 @@ function Battle:updateScore()
 			
 		end
 		local rankInfo = nil
-		for k = 1,table.length(self._score.item) do
+		for k = 1,#self._score.item do
 			local item = self._score.item[k]
 			if(item.ctrlId == team:getCtrlId())then
 				rankInfo = item

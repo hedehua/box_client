@@ -66,11 +66,11 @@ function UIBase:open()
 	self:fresh();
 
 	if(self:isTweenShow()) then
-		local actionTo1 = cc.scaleTo(0.05, 0.9);
-		local actionTo2 = cc.scaleTo(0.1, 1.05);
-		local actionTo3 = cc.scaleTo(0.05, 1);
-		local seq = cc.sequence(actionTo1, actionTo2,actionTo3);
-		self._resObject:runAction(seq)
+		-- local actionTo1 = cc.scaleTo(0.05, 0.9);
+		-- local actionTo2 = cc.scaleTo(0.1, 1.05);
+		-- local actionTo3 = cc.scaleTo(0.05, 1);
+		-- local seq = cc.sequence(actionTo1, actionTo2,actionTo3);
+		-- self._resObject:runAction(seq)
 	end
 end
 function UIBase:close()

@@ -217,6 +217,10 @@ function BattleObject:isBlock(argument)    -- 是否是阻挡物
 	return true
 end
 
+function BattleObject:recieveKnock(  )
+	return true
+end
+
 function BattleObject:moveForward() 
 	if(self._pos == nil) then
 		cc.log("self._pos == nil.");
@@ -231,30 +235,32 @@ function BattleObject:moveForward()
 	if(self._collider ~=nil) then
 		self._collider:setPos(self._pos.x,self._pos.y)
 	end
+	if(not self:needCheckCollider()) then
+		return
+	end
 
-	if(self:needCheckCollider()) then
-		local targets = objects
-		local targetObjs = nil
-		if(targets ~= nil) then
-			for i = table.length(targets),1,-1 do
-				local target = targets[i]
-				if(target ~= self and self:detect(target)) then
+	local targets = objects
+	local targetObjs = nil
+	if(targets ~= nil) then
+		for i = #targets,1,-1 do
+			local target = targets[i]
+			if(target ~= self and self:detect(target)) then
 
-					if(targetObjs == nil) then
-						targetObjs = {}
-					end
-					table.insert(targetObjs,target)
+				if(targetObjs == nil) then
+					targetObjs = {}
 				end
-			end
-		end
-
-		if(targetObjs ~= nil and table.length(targetObjs) >0) then
-			for i = 1,table.length(targetObjs) do
-				local targetObj = targetObjs[i]
-				self:onTriger(self,targetObj)
+				table.insert(targetObjs,target)
 			end
 		end
 	end
+
+	if(targetObjs ~= nil and #targetObjs >0) then
+		for i = 1,#targetObjs do
+			local targetObj = targetObjs[i]
+			self:onTriger(self,targetObj)
+		end
+	end
+	
 
 	return true
 end

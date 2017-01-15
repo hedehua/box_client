@@ -435,20 +435,20 @@ end
 
 -- 淡入接口 duration:时长
 function ObjectRender:fadeIn(duration) 
-    local action1 = cc.fadeOut(0);
-    local action2 = cc.fadeIn(duration)
-    local fadeIn = cc.sequence(action1,action2)
-    self._avatar:runAction(fadeIn)
+    -- local action1 = cc.fadeOut(0);
+    -- local action2 = cc.fadeIn(duration)
+    -- local fadeIn = cc.sequence(action1,action2)
+    -- self._avatar:runAction(fadeIn)
 end
 
 -- 淡出 duration :时长
 function ObjectRender:fadeOut(duration) 
-    if(self._avatar == nil) then
-        return
-    end
-    self._avatar:stopAllActions();
-    local fadeOut = cc.fadeOut(duration  or  0.1);
-    self._avatar:runAction(fadeOut)
+    -- if(self._avatar == nil) then
+    --     return
+    -- end
+    -- self._avatar:stopAllActions();
+    -- local fadeOut = cc.fadeOut(duration  or  0.1);
+    -- self._avatar:runAction(fadeOut)
     self._valid = false
 end
 -- 闪烁，interval：闪烁周期

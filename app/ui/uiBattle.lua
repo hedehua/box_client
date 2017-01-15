@@ -163,21 +163,42 @@ function UIBattle:loaded(res)
   end, cc.Handler.EVENT_TOUCH_CANCELLED)
 
   cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node);
-  self._listner = listener
+  self._listener = self._listener or {}
+  table.insert(self._listener,listener)
+
+
+  -- keyborad
+  local function onKeyPressed(keyCode, event)  
+    self:onKeyPressed(keyCode)
+  end  
+
+  local function onKeyReleased(keyCode, event)  
+
+  end  
+
+  listener = cc.EventListenerKeyboard:create()  
+  listener:registerScriptHandler(onKeyPressed, cc.Handler.EVENT_KEYBOARD_PRESSED)  
+  listener:registerScriptHandler(onKeyReleased, cc.Handler.EVENT_KEYBOARD_RELEASED)  
+
+  cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node)  
+  table.insert(self._listener,listener)
 end
 
 function UIBattle:onTouchStart(delta,angle)
   self:notify("onStickTouch",delta,angle)
 end
 
-function UIBattle:onTouchEnd(keycode) 
+function UIBattle:onKeyPressed(keycode) 
+  print("-------xxxxxx- keycode",keycode)
 end
 
 function UIBattle:removeListner() 
   local dispatch = cc.Director:getInstance():getEventDispatcher()
-  if(self._listner ~= nil) then
-    dispatch:removeEventListener(self._listner)
-    self._listner = nil
+  if(self._listener ~= nil) then
+    for i,v in ipairs(self._listener) do
+      dispatch:removeEventListener(v)
+    end
+    self._listener = nil
   end
 
 end
