@@ -104,7 +104,6 @@ function ControllerBattle:update(dt)
     self._renderBattle:update(dt)
   end
   self._uiTime = self._uiTime + dt
-  
   if(self._uiTime > 1) then
     self._uiTime = 0
     if(self._uiBattle ~= nil) then
@@ -146,7 +145,6 @@ function ControllerBattle:tick(dt)
 end
 
 function ControllerBattle:requestStart(arg) 
-  
   -- local tos = {
   --   uid = UserModel:getInstance():getUid(),
   --   battleTid = arg,
@@ -315,8 +313,7 @@ function ControllerBattle:open(auto,info)
       end
       return 0
     end,
-    onStickTouch = function(delta,angle) 
-      -- // self.excuteKeycode(delta)
+    onDirectionChange = function(delta,angle) 
       self:excuteTouch(delta,angle)
     end,
     getRank = function()

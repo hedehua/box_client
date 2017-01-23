@@ -32,7 +32,7 @@ function BattleRender:uninit(params)
     self:uninitRoot()
 
     if(self._objects ~= nil) then
-        for i = 1,table.length(self._objects) do
+        for i = 1,#self._objects do
             local obj = self._objects[i]
             if(obj ~= nil) then
                 obj:uninit()
@@ -50,7 +50,7 @@ function BattleRender:update(dt)
         obj:update(dt)
     end
     
-   self:asyncPos()
+   -- self:asyncPos()
 end
 function BattleRender:asyncPos()
     if(self._followObj ~= nil ) then
@@ -88,6 +88,8 @@ function BattleRender:initRoot()
   end
   local scene = cc.Director:getInstance():getRunningScene()
   self._rootNode = scene:getChildByName("scene_root")         
+  local screen = Common.utils.getVisibleSize()
+  self._rootNode:setPosition(screen.width/2,screen.height/2)
 end
 
 function BattleRender:uninitRoot() 
@@ -120,7 +122,7 @@ function BattleRender:removeRender (obj)
         return;
     end
     -- print("removeRender 2",obj)
-    for i = table.length(self._objects),1,-1 do
+    for i = #self._objects,1,-1 do
         local o = self._objects[i]
         if(obj == o) then
 

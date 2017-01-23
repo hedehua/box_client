@@ -7,8 +7,8 @@ print = release_print
 
 require "cocos.init"
 
--- cc.DEBUG = cc.DEBUG_INFO
-cc.DEBUG = cc.DEBUG_VERBOSE
+cc.DEBUG = cc.DEBUG_INFO
+-- cc.DEBUG = cc.DEBUG_VERBOSE
 cc.DEBUG_DISABLE_DUMP_TRACEBACK = true
 
 local function _cleanmem()

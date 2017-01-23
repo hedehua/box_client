@@ -16,12 +16,13 @@
 -- // }
 
 local formatSeconds = function(remainTime)  
-    if not remainTime or remainTime <= 0 then  
+
+    if remainTime == nil or remainTime <= 0 then  
         return "00:00:00"  
     end  
-    local h = math.floor(remainTime/1000/60/60)  
-    local m = math.floor(remainTime/1000/60)%60  
-    local s = math.floor(remainTime/1000)%60  
+    local h = math.floor(remainTime/60/60)  
+    local m = math.floor(remainTime/60)%60  
+    local s = math.floor(remainTime)%60  
     return string.format("%02d:%02d:%02d",h,m,s)  
 end
 

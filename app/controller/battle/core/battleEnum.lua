@@ -44,6 +44,7 @@ local BattleEnums = {
 		FollowTarget 	= 2,
 		ToTarget 		= 3,
 		FollowCaster 	= 4,
+		ToCaster 		= 5,
 	}
 
 }

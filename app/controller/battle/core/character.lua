@@ -169,7 +169,6 @@ function Character:update()
 		end
 	end
 
-	-- self.tryMove();
 	self:tryAi()
 
 	self:updateSkill()
@@ -233,7 +232,6 @@ end
 function Character:setLeader(flag) 
 	self._isLeader = true
 	self._isFollowTarget = flag
-	-- print("vvvvvvvv",flag)
 	if(self._render ~= nil) then
 		self._render:setFollowTarget(self._isFollowTarget)
 	end
@@ -267,8 +265,7 @@ function Character:setHp(value,tween)
 	self._hp = math.max(math.min(self._hp,self._maxHp),0) 
 
 	if(self._render ~= nil) then
-		-- self._render.setHp(self._hp,self._maxHp,tween)
-		self._render:setIcon(self._hp,tween)
+		self._render:setHp(self._hp,self._maxHp,tween)
 	end
 end
 function Character:getHp()
@@ -364,7 +361,6 @@ function Character:inherit(target)
 	self._restMoveTime = target._restMoveTime
 	self._targetPos = target._targetPos
 	self._speedChange = target._speedChange
-	-- self._distCompensate = target._distCompensate
 	self:setPos(target:getPos())
 end
 function Character:meetBlock() 
@@ -386,55 +382,7 @@ end
 	end
 	Character.super.moveDir(self,dir)
 end
---  function Character:tryMove()
 
--- 	if(not self:isAlive()) then
--- 		return
--- 	end
-
--- 	if(self._posQue == nil) then
--- 		return
--- 	end
-
--- 	local frontPos = self:getFrontPos();
-
--- 	if(frontPos == nil) then
--- 		return
--- 	end
-
--- 	-- 当前为定向移动
--- 	if(not self:isMoveT())				
--- 	then
--- 		if(frontPos.cross == nil)then  		-- 改变方向
--- 			if(not self:isMove())then
--- 				self:moveDir(frontPos.dir);
--- 				return
--- 			end
--- 			if(self._moveStateChange) then
--- 				self:moveDir(frontPos.dir);
--- 				self._moveStateChange = false
--- 				return
--- 			end
--- 			return
--- 		end
--- 		self:moveTo(frontPos.cross,true)     -- 切换为定点
--- 		return
--- 	end
-
--- 	-- 当前为定点运动
--- 	if(frontPos.cross == nil)then     -- 切换为定向
--- 		if(not self:isMove())then
--- 			self:moveDir(frontPos.dir);
--- 		end
--- 		return
--- 	end
-
--- 	-- 当前未移动（刚出生时）
--- 	if(not self:isMove())then		
--- 		self:moveTo(frontPos.cross)
--- 	end
-	
--- end
 function Character:initSkill() 
 	if(self._config == nil or self._config.skill == nil) then
 		return
@@ -448,7 +396,7 @@ function Character:initSkill()
 		self._skills = {}
 	end
 
-	for i = 1,table.length(self._skillIds) do
+	for i = 1,#self._skillIds do
 		local id = self._skillIds[i]
 		local skill = Skill.new()
 		skill:setQueier({
@@ -467,7 +415,7 @@ function Character:updateSkill()
 	if(self._skills == nil) then
 		return
 	end
-	for i = table.length(self._skills),1,-1 do
+	for i = #self._skills,1,-1 do
 		local skill = self._skills[i]
 		if(skill ~= nil)then
 			skill:update()
@@ -483,7 +431,7 @@ function Character:tryAi()
 	if(self._skills == nil )then
 		return
 	end
-	for i = table.length(self._skills),1,-1 do
+	for i = #self._skills,1,-1 do
 		local skill = self._skills[i]
 		if(skill ~= nil and skill:cast())then
 			self:initAi()

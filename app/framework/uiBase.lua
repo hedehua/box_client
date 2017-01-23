@@ -1,7 +1,8 @@
 -- // 界面管理的基类
-local UIManager = require("app.manager.uiManager")
+local ObjManager = require("app.manager.objManager")
 local Common = require("app.common.include")
 
+local uiRoot = nil
 local UIBase = cc.class("UIBase")
 
 function UIBase:ctor(  )
@@ -90,21 +91,31 @@ function UIBase:load()
 		self:_loaded(err,res);
 	end
 
-	UIManager:getInstance():load(self._resPath,cb);
+	ObjManager:getInstance():load(self._resPath,cb);
 end
 function UIBase:unload() 
 	if(self._resObject == nil) then
 		return
 	end
-	UIManager:getInstance():unload(self._resObject)
+	ObjManager:getInstance():unload(self._resObject)
 	self._resObject = nil
 end
+
 function UIBase:_loaded(err,res)
 
 	if(res == nil) then
 		cc.log("error:load res nil",err,res);
 		return;
 	end
+
+	if(uiRoot == nil) then
+        local scene = cc.Director:getInstance():getRunningScene()
+        uiRoot = scene:getChildByName("ui_root")  
+    end
+    
+    uiRoot:addChild(res)
+    res:setPosition({x=0,y=0,z=0})
+    
 
 	self._resObject = res
 	self:loaded(res);

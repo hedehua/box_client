@@ -166,7 +166,7 @@ end
 
 function BattleObject:uninit()
 
-	-- cc.log("--------------------------------remove --------",self._id)
+	-- print("--------------------------------remove --------",self._id)
 	removeObject(self)
 
 	self._pos = nil
@@ -223,7 +223,7 @@ end
 
 function BattleObject:moveForward() 
 	if(self._pos == nil) then
-		cc.log("self._pos == nil.");
+		print("self._pos == nil.");
 		return false
 	end
 	local x = self._pos.x
@@ -325,7 +325,7 @@ end
 function BattleObject:moveEnd()
 	if(self._targetPos ~= nil) then
 		if(self._pos == nil) then
-			cc.log("self._Pos nil !")
+			print("self._Pos nil !")
 		end
 		local dist = self._pos:dist(self._targetPos)
 		self._pos:setv(self._targetPos.x,self._targetPos.y);
@@ -386,7 +386,7 @@ function BattleObject:setDir(dir)
 end
 function BattleObject:getDir()
 	if(self._dir == nil) then
-		cc.log("exception.")
+		print("exception.")
 		return
 	end
 	return self._dir:clone()
@@ -433,9 +433,11 @@ function BattleObject:getRadius()
 	end
 	return self._collider.r
 end
+
 function BattleObject:getDiameter(value)
 	return self:getRadius() * 2
 end
+
 function BattleObject:getCollider() 
 	return self._collider
 end

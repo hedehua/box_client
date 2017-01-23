@@ -1,13 +1,15 @@
-local AvatarManager = require("app.manager.avatarManager")
+local ObjManager = require("app.manager.objManager")
 local ResManager = require("app.manager.resManager")
 local AudioManager = require("app.manager.audioManager")
 local EffectManager = require("app.manager.effectManager")
+local SpriteFrameManager = require("app.manager.spriteFrameManager")
 
 local CharConfig = require("app.controller.battle.config.characterConfig")
 local WorldConfig = require("app.controller.battle.config.worldConfig")
 local Utils = require("app.controller.battle.core.battleUtils")
 local Common = require("app.common.include")
 
+local objRoot = nil
 local CampIcon = {
     [1] = "circle_mian",
     [2] = "circle_blue",
@@ -71,8 +73,9 @@ function ObjectRender.new()
     obj._resPath = nil
     obj._avatar = nil
 
-    obj._bloodBarNode = nil
+    obj._bloodBarSprite = nil
     obj._iconSprite = nil
+    obj._textNode = nil
 
     obj._speedX = nil
     obj._speedY = nil
@@ -85,9 +88,6 @@ function ObjectRender.new()
     obj._disableDynamic = false
 
     obj._config = nil
-
-    obj._hpTweenTime = 0
-    obj._hpTweenVal = 0
 
     obj._campNode = nil
     obj._campSprite = nil
@@ -170,7 +170,8 @@ function ObjectRender:destroyAvatar()
     end
 
     if(self._avatar ~= nil) then
-        AvatarManager:getInstance():unload(self._avatar);
+        objRoot:removeChild(self._avatar)
+        ObjManager:getInstance():unload(self._avatar);
         self._avatar = nil
     end
 end
@@ -185,6 +186,7 @@ function ObjectRender:setParent(parent)
     end
     self._avatar:setParent(parent)
 end
+
 function ObjectRender:loadAvatar(resPath) 
 
     if(resPath == nil)then
@@ -200,11 +202,6 @@ function ObjectRender:loadAvatar(resPath)
         resPath = self._config.res
     end
 
-    -- if(not inScreen(self._x,self._y,self._sizeX,self._sizeY)) then
-    --     self._resPath = resPath
-    --     return;
-    -- end
-
     if(self._isLoading) then
         print("there is a loading task,new task cant get in.")
         return;
@@ -216,7 +213,15 @@ function ObjectRender:loadAvatar(resPath)
     end
     
     self._isLoading = true
-    AvatarManager:getInstance():load(resPath,function(err,res)
+    ObjManager:getInstance():load(resPath,function(err,res)
+
+        local scene = cc.Director:getInstance():getRunningScene()
+        
+        if(objRoot == nil) then
+            objRoot = scene:getChildByName("scene_root")
+        end
+        
+        objRoot:addChild(res)
 
         self._avatar = res
         self._isLoading = false
@@ -255,30 +260,17 @@ function ObjectRender:updatePos(pos,dir,enableRot)           -- 为战斗使用�
         setCenterPos(x,y)
     end
 
-    local preVisible = self._visible
-    if(not self._disableDynamic) then
-        self:setVisible(inScreen(self._x,self._y,self._sizeX,self._sizeY))
+    if(self._pos == nil) then
+        self._pos = cc.p(x,y)
+        self:setPos(x,y)
+    else
+        self._pos.x = x
+        self._pos.y = y
+        self:tweenPos(x,y,tweenTime)
     end
-    
-    if(not self._visible)then
-        return
-    end
-    
-    local stateChange = (pos~= nil and not pos.equals(self._pos))  or  preVisible == false
-    if(stateChange)then
-        if(not preVisible ) then
-            self:setPos(x,y);
-        else
-            self:tweenPos(x,y,tweenTime)
-        end
 
-        if(self._pos == nil)then
-            self._pos = pos:clone()
-        end
-        self._pos:setv(pos.x,pos.y)
-    end
-    if(not enableRot or dir == nil )then
-        return;
+    if(not enableRot) then
+        return
     end
 
     local s = cc.p(dir.x,dir.y)
@@ -352,8 +344,8 @@ function ObjectRender:setSize(x,y)
         self:addFunc(self.setSize,self,x,y)
         return
     end
-    local contentSize = self._avatar:getContentSize()
-    -- self:setScale(x/contentSize.width,y/contentSize.height)    
+    local contentSize = self._avatar.contentSize
+    self:setScale(x/contentSize.width,y/contentSize.height)    
 end
 
 function ObjectRender:setIcon(icon) 
@@ -375,45 +367,39 @@ function ObjectRender:setIcon(icon)
     if(self._iconSprite == nil)then
         return
     end
-    ResManager:getInstance():load(Common.assetPathTable.AtlasIcon,function(err,atlas) 
-        local sp = atlas:getSpriteFrame (icon)
-        self._iconSprite.spriteFrame = sp
-    end)
-end
-function ObjectRender:setName(name)
-
-    if(not inScreen(self._x,self._y,self._sizeX,self._sizeY)) then
+    
+    local sp = SpriteFrameManager:getInstance():getSpriteFrame(icon)
+    if(sp == nil) then
+        print("no sprite",icon)
         return
     end
+    self._iconSprite.node:setSpriteFrame(sp) 
+end
+
+function ObjectRender:setText(name)
+
     if(self._avatar == nil)then
+        self:addFunc(self.setText,self,name)
         return
     end
-    if(self._nameNode == nil)then
-        self:initNameNode()
+
+    if(self._textNode == nil)then
+        local node = self._avatar:getChildByName("txt");
+        if(node ~= nil)then
+            self._textNode = node:getComponent("cc.Label") 
+        end
     end
-    if(self._nameNode ~= nil)then
-        self._nameNode:setString(name or '')
+    if(self._textNode ~= nil)then
+        self._textNode.node:setString(name or '')
     end
 end
 
-function ObjectRender:initNameNode()
-    if(self._nameNode ~= nil)then
-        return
-    end
-    local node = self._avatar:getChildByName("name");
-    if(node ~= nil)then
-        self._nameNode = node:getComponent("cc.Label") 
-    end
-end
-function ObjectRender:initBloodNode()
-    if(self._bloodBarSprite ~= nil)then
-        return
-    end
-    self._bloodBarNode = self._avatar:getChildByName("bloodBar");
-    if(self._bloodBarNode ~= nil) then
-        self._bloodBarSprite = self._bloodBarNode:getComponent("cc.Sprite") 
-    end
-end
+local sprefs = {
+    [0] = "circle_mian",
+    [1] = "circle_blue",
+    [2] = "circle_green",
+    [3] = "circle_orange",   
+}
 function ObjectRender:setCamp(camp)  
     if(self._avatar == nil) then
         self:addFunc(self.setCamp,self,camp)
@@ -425,9 +411,27 @@ function ObjectRender:setCamp(camp)
     end
 
     if(self._campSprite ~= nil)then
-        -- TODO::
+        local icon = sprefs[camp]
+        local sp = SpriteFrameManager:getInstance():getSpriteFrame(icon)
+        if(sp == nil) then
+            print("no sprite",icon)
+            return
+        end
+        self._campSprite.node:setSpriteFrame(sp)
     end
 end
+
+function ObjectRender:initCampNode()
+    if(self._campNode ~= nil) then
+        return
+    end
+    self._campNode = self._avatar:getChildByName("camp")
+    if(self._campNode == nil) then
+        return
+    end
+    self._campSprite = self._campNode:getComponent("cc.Sprite")
+end
+
 
 function ObjectRender:getId()
     return self._id
@@ -490,44 +494,39 @@ function ObjectRender:setHpPercent(percent)
         self:initBloodNode();
     end
 
-    self._bloodBarSprite.fillRange =  percent
+    if(self._bloodBarSprite == nil) then
+        return
+    end
+
+    -- local size = self._bloodBarSprite.node:getContentSize()
+    self._bloodBarSprite.node:setContentSize({width=100*percent,height=15})
+    -- self._bloodBarSprite.node:setScale(percent,1)
 end
+
+
+function ObjectRender:initBloodNode()
+    if(self._bloodBarSprite ~= nil)then
+        return
+    end
+    local node = self._avatar:getChildByName("bloodBar");
+    if(node == nil) then
+        return
+    end
+
+    local bar = node:getChildByName("bar")
+    if(bar ~= nil) then
+        self._bloodBarSprite = bar:getComponent("cc.Sprite") 
+    end
+end
+
+
 -- 设置血条
 function ObjectRender:setHp(cur,max,tween) 
     
     local percent = math.min(cur/max,1)
 
-    if(not tween or cur == 0) then
-        self:setHpPercent(percent)
-        return
-    end
+    self:setHpPercent(percent)
 
-    if(self._avatar  == nil) then
-        self:addFunc(self.setHp,self,cur,max,tween)
-        return
-    end
-
-    self._hpTweenTime = WorldConfig.hpTime
-    self._hpTweenVal = (percent-self._bloodPercent) * 0.01/self._hpTweenTime
-    
-    self._bloodBarSprite:schedule(function() 
-        self._hpTweenTime = self._hpTweenTime - 0.01
-        if(self._hpTweenTime > 0) then
-            self:setHpPercent(math.max(self._bloodPercent + self._hpTweenVal,0))  
-        else 
-            self.setHpPercent(percent)
-        end
-    end,0.01,self._hpTweenTime/0.01)
-end
-function ObjectRender:initCampNode()
-    if(self._campNode ~= nil) then
-        return
-    end
-    self._campNode = self._avatar:getChildByName("camp")
-    if(self._campNode == nil) then
-        return
-    end
-    self._campSprite = self._campNode:getComponent("cc.Sprite")
 end
 
 function ObjectRender:playAudio(path) 
@@ -538,10 +537,8 @@ function ObjectRender:playEffect(effectPath,pos,duration)
     if(self._avatar == nil)then
         return
     end
-    if(not inScreen(self._x,self._y,self._sizeX,self._sizeY)) then
-        return
-    end
-    local p = cc.Vec2(pos.x/rate,pos.y/rate)
+    
+    local p = cc.p(pos.x/rate,pos.y/rate)
     EffectManager:getInstance():playEffect(effectPath,p,duration)
 end
 function ObjectRender:playEffectByName(effectName,pos,duration) 

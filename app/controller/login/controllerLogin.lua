@@ -82,6 +82,7 @@ function ControllerLogin:loginToServer(func)
     --     },func)
     --   end);
     -- end);
+
     func()
 end
 return ControllerLogin

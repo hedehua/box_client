@@ -83,16 +83,25 @@ function UIBattle:loaded(res)
   local node = res;
   self._stickNode = res:getChildByName("stick")
   self._touchNode = self._stickNode:getChildByName("touch")
+  self:setStickActive(false)
 
   local _onTouchBegan = function (touch, event) 
+
+      local pos = res:convertTouchToNodeSpaceAR (touch)
+      if(pos.x > 0 or pos.y > 0) then
+        return true
+      end
       self:setStickActive(true)
-      self:setStickPos(res:convertTouchToNodeSpaceAR (touch))
+      self:setStickPos(pos)
       self._touchPos = self._stickNode:convertTouchToNodeSpaceAR (touch)
       self:setTouchPos(self._touchPos) 
       return true; 
   end
   local _onTouchMoved = function (touch, event) 
-  
+    if(self._touchPos == nil) then
+      return
+    end
+
     local originPos = self._touchPos
     local curPos = self._stickNode:convertTouchToNodeSpaceAR (touch)
 
@@ -185,11 +194,23 @@ function UIBattle:loaded(res)
 end
 
 function UIBattle:onTouchStart(delta,angle)
-  self:notify("onStickTouch",delta,angle)
+  self:notify("onDirectionChange",delta,angle)
 end
 
-function UIBattle:onKeyPressed(keycode) 
-  print("-------xxxxxx- keycode",keycode)
+function UIBattle:onKeyPressed(keyCode) 
+
+  local pos = nil
+  if(keyCode == 127) then     -- right
+    pos = cc.p(1,0)
+  elseif(keyCode == 124) then -- left
+    pos = cc.p(-1,0)
+  elseif(keyCode == 146) then -- up
+    pos = cc.p(0,1)
+  elseif(keyCode == 142) then -- down
+    pos = cc.p(0,-1)
+  end
+  if(pos == nil) then return end
+  self:notify("onDirectionChange",pos,cc.pGetAngle(pos,cc.p(1,0)))
 end
 
 function UIBattle:removeListner() 
@@ -236,12 +257,12 @@ function UIBattle:fresh()
 end
 function UIBattle:freshTime()
   if(self._timeNode ~= nil) then
-    -- self._timeNode:setString(Common.utils.formatSeconds(self.request("getRestTime")))
+    self._timeNode.node:setString(Common.utils.formatSeconds(self:request("getRestTime")))
   end
 end
 function UIBattle:freshKillCount()
   if(self._killNode ~= nil) then
-   -- self._killNode:setString(self:request("getKillCount"))
+   self._killNode.node:setString(self:request("getKillCount"))
   end
 end
 
@@ -284,13 +305,13 @@ function UIBattle:freshRank()
    if(lb == nil) then
      break
    end
-   lb.string = getName(info.ctrlId).." "..info.score
+   lb.node:setString(getName(info.ctrlId).." "..info.score)
  end
  if(self._myRankRoot == nil or myRankInfo == nil) then
    return
  end
- -- self._myRankNode:setString(Common.stringTable.Rank..''..myRankInfo.rank)
- -- self._myContextNode:setString(getName(myRankInfo.ctrlId).." "..myRankInfo.score)
+ self._myRankNode.node:setString(Common.stringTable.Rank..''..myRankInfo.rank)
+ self._myContextNode.node:setString(getName(myRankInfo.ctrlId).." "..myRankInfo.score)
 end
 function UIBattle:freshBasementHp()
  
@@ -309,7 +330,7 @@ function UIBattle:freshBasementHp()
 
  self:setBasementActive(true)
 
- -- self._basementHpNode:setString(hp)
+ self._basementHpNode.node:setString(hp)
  self._basementHp = hp
 end
 function UIBattle:setRankActive(active)

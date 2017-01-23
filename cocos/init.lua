@@ -24,9 +24,9 @@ THE SOFTWARE.
 
 require "cocos.cocos2d.Cocos2d"
 require "cocos.cocos2d.Cocos2dConstants"
+require "cocos.cocos2d.functions"
 require "cocos.framework.init"
 
-require "cocos.cocos2d.functions"
 require "cocos.framework.package_support"
 require "cocos.framework.extends.LayerEx"
 require "cocos.framework.extends.MenuEx"

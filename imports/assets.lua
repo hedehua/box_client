@@ -19,29 +19,8 @@ local assets = {
                 [3] = 250,
                 [4] = 176,
             },
+            ["rotated"] = 1,
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
-        },
-    },
-    ["042228ac-209e-4971-a68d-a7080088f746"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "14",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1252,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
     },
     ["045bdbb4-370a-480a-ba87-1624782ea317"] = {
@@ -49,10 +28,10 @@ local assets = {
         ["content"] = {
             ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
             ["capInsets"] = {
-                [1] = 10,
-                [2] = 10,
-                [3] = 10,
-                [4] = 10,
+                [1] = 80,
+                [2] = 0,
+                [3] = 80,
+                [4] = 0,
             },
             ["name"] = "ui_button_bg",
             ["offset"] = {
@@ -60,14 +39,14 @@ local assets = {
                 [2] = 0,
             },
             ["originalSize"] = {
-                [1] = 30,
-                [2] = 50,
+                [1] = 325,
+                [2] = 106,
             },
             ["rect"] = {
-                [1] = 124,
-                [2] = 180,
-                [3] = 30,
-                [4] = 50,
+                [1] = 180,
+                [2] = 146,
+                [3] = 325,
+                [4] = 106,
             },
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
@@ -240,28 +219,6 @@ local assets = {
         },
         ["__type__"] = "__js_array__",
     },
-    ["0e5b4d2d-6c48-494f-98c5-89e4014d8630"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "21",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1044,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
     ["14677e77-1104-41f3-99cd-8fce8cf64acb"] = {
         ["__js_array__"] = {
             [1] = {
@@ -386,12 +343,11 @@ local assets = {
                 [2] = 79,
             },
             ["rect"] = {
-                [1] = 158,
-                [2] = 180,
+                [1] = 444,
+                [2] = 2,
                 [3] = 51,
                 [4] = 79,
             },
-            ["rotated"] = 1,
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
     },
@@ -600,6 +556,9 @@ local assets = {
                     [4] = {
                         ["__id__"] = 93,
                     },
+                    [5] = {
+                        ["__id__"] = 104,
+                    },
                 },
                 ["_color"] = {
                     ["__type__"] = "cc.Color",
@@ -629,7 +588,7 @@ local assets = {
                     ["y"] = 0,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 104,
+                    ["__id__"] = 110,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -687,7 +646,7 @@ local assets = {
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
                     ["x"] = -428,
-                    ["y"] = -172,
+                    ["y"] = -191,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 9,
@@ -798,7 +757,7 @@ local assets = {
             [7] = {
                 ["__type__"] = "cc.Widget",
                 ["_alignFlags"] = 20,
-                ["_bottom"] = 113,
+                ["_bottom"] = 94,
                 ["_enabled"] = true,
                 ["_horizontalCenter"] = -428,
                 ["_isAbsBottom"] = true,
@@ -906,7 +865,7 @@ local assets = {
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
                     ["x"] = 0,
-                    ["y"] = 287,
+                    ["y"] = 360,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 25,
@@ -963,8 +922,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = 117,
-                    ["y"] = 0,
+                    ["x"] = 130,
+                    ["y"] = -80,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 16,
@@ -1152,7 +1111,7 @@ local assets = {
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
                     ["x"] = -68.97500000000001,
-                    ["y"] = 0,
+                    ["y"] = -80,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 23,
@@ -1206,7 +1165,7 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = -77,
+                    ["x"] = -97,
                     ["y"] = 2,
                 },
                 ["_prefab"] = {
@@ -1336,7 +1295,7 @@ local assets = {
                 ["_originalHeight"] = 0,
                 ["_originalWidth"] = 0,
                 ["_right"] = 400,
-                ["_top"] = 73,
+                ["_top"] = 0,
                 ["_verticalCenter"] = 0,
                 ["isAlignOnce"] = true,
                 ["node"] = {
@@ -1400,8 +1359,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = 232,
-                    ["y"] = -232,
+                    ["x"] = 640,
+                    ["y"] = 360,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 92,
@@ -1461,8 +1420,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = 242,
-                    ["y"] = 368,
+                    ["x"] = -150,
+                    ["y"] = -240,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 79,
@@ -3081,8 +3040,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = 242,
-                    ["y"] = 520,
+                    ["x"] = -150,
+                    ["y"] = -80,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 90,
@@ -3394,8 +3353,8 @@ local assets = {
                 ["_objFlags"] = 0,
                 ["_originalHeight"] = 0,
                 ["_originalWidth"] = 0,
-                ["_right"] = 408,
-                ["_top"] = 592,
+                ["_right"] = 0,
+                ["_top"] = 0,
                 ["_verticalCenter"] = 0,
                 ["isAlignOnce"] = true,
                 ["node"] = {
@@ -3456,8 +3415,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = -570,
-                    ["y"] = 287,
+                    ["x"] = -640,
+                    ["y"] = 360,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 103,
@@ -3514,8 +3473,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = 0,
-                    ["y"] = 0,
+                    ["x"] = 80,
+                    ["y"] = -80,
                 },
                 ["_prefab"] = {
                     ["__id__"] = 101,
@@ -3728,13 +3687,13 @@ local assets = {
                 ["_isAbsRight"] = true,
                 ["_isAbsTop"] = true,
                 ["_isAbsVerticalCenter"] = true,
-                ["_left"] = 70,
+                ["_left"] = 0,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
                 ["_originalHeight"] = 0,
                 ["_originalWidth"] = 0,
                 ["_right"] = 0,
-                ["_top"] = 73,
+                ["_top"] = 0,
                 ["_verticalCenter"] = 0,
                 ["isAlignOnce"] = true,
                 ["node"] = {
@@ -3753,6 +3712,194 @@ local assets = {
                 ["sync"] = false,
             },
             [104] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                    [1] = {
+                        ["__id__"] = 105,
+                    },
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 167,
+                    ["g"] = 167,
+                    ["r"] = 167,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 108,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 0,
+                    ["width"] = 0,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "",
+                ["_localZOrder"] = 0,
+                ["_name"] = "bottom_right",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 2,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 640,
+                    ["y"] = -360,
+                },
+                ["_prefab"] = {
+                    ["__id__"] = 109,
+                },
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [105] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 106,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 150,
+                    ["width"] = 150,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "",
+                ["_localZOrder"] = 0,
+                ["_name"] = "skill",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 104,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = -150,
+                    ["y"] = 150,
+                },
+                ["_prefab"] = {
+                    ["__id__"] = 107,
+                },
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [106] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = {
+                    ["__uuid__"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
+                },
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 0,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "fa7639bf-0ab0-4cb4-b5bd-dc8c6a5402cb",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 105,
+                },
+            },
+            [107] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "19ed886e-42f4-4593-a624-7d8c9757cb40",
+                },
+                ["fileId"] = "893e4FUM4xC5oRzcA8ZVm4s",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [108] = {
+                ["__type__"] = "cc.Widget",
+                ["_alignFlags"] = 9,
+                ["_bottom"] = 0,
+                ["_enabled"] = true,
+                ["_horizontalCenter"] = 0,
+                ["_isAbsBottom"] = true,
+                ["_isAbsHorizontalCenter"] = true,
+                ["_isAbsLeft"] = true,
+                ["_isAbsRight"] = true,
+                ["_isAbsTop"] = true,
+                ["_isAbsVerticalCenter"] = true,
+                ["_left"] = 1280,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_originalHeight"] = 0,
+                ["_originalWidth"] = 0,
+                ["_right"] = 0,
+                ["_top"] = 720,
+                ["_verticalCenter"] = 0,
+                ["isAlignOnce"] = true,
+                ["node"] = {
+                    ["__id__"] = 104,
+                },
+            },
+            [109] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "19ed886e-42f4-4593-a624-7d8c9757cb40",
+                },
+                ["fileId"] = "5dd0eN0bVNM8JziZl5S0gBl",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [110] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "19ed886e-42f4-4593-a624-7d8c9757cb40",
@@ -3780,54 +3927,10 @@ local assets = {
                 [2] = 80,
             },
             ["rect"] = {
-                [1] = 248,
+                [1] = 84,
                 [2] = 2,
                 [3] = 80,
                 [4] = 80,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["240180d5-d106-4f84-ab35-c89b4e6758f9"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "15",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1252,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["2a459b35-eb6d-4550-8bc3-ea7c0ad28f43"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "27",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 888,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
@@ -3854,8 +3957,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 106,
-                [2] = 302,
+                [1] = 497,
+                [2] = 2,
                 [3] = 50,
                 [4] = 50,
             },
@@ -5095,28 +5198,6 @@ local assets = {
         },
         ["__type__"] = "__js_array__",
     },
-    ["2e8db8c1-8fe0-4f7f-a03a-f5efb87ee540"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "10",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1356,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
     ["2ee65f22-9bd4-4377-b08a-0bc19e09dd4b"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
@@ -5131,8 +5212,8 @@ local assets = {
                 [2] = 80,
             },
             ["rect"] = {
-                [1] = 412,
-                [2] = 2,
+                [1] = 2,
+                [2] = 84,
                 [3] = 80,
                 [4] = 80,
             },
@@ -5279,28 +5360,6 @@ local assets = {
         ["speed"] = 1,
         ["wrapMode"] = 1,
     },
-    ["32959905-1614-4049-8515-548728ac2275"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "20",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1096,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
     ["37a458b2-588e-4b54-ab25-3bf7fbdf204a"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
@@ -5316,31 +5375,9 @@ local assets = {
             },
             ["rect"] = {
                 [1] = 84,
-                [2] = 2,
+                [2] = 166,
                 [3] = 80,
                 [4] = 80,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["3a203ef4-28bb-4faf-97a8-fca54bd13ff5"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "5",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 680,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
@@ -5351,18 +5388,18 @@ local assets = {
             ["atlas"] = "",
             ["name"] = "icon_texture",
             ["offset"] = {
-                [1] = -7,
-                [2] = 6.5,
+                [1] = -6.5,
+                [2] = 0,
             },
             ["originalSize"] = {
-                [1] = 1460,
-                [2] = 106,
+                [1] = 300,
+                [2] = 248,
             },
             ["rect"] = {
-                [1] = 7,
+                [1] = 2,
                 [2] = 2,
-                [3] = 1432,
-                [4] = 89,
+                [3] = 283,
+                [4] = 244,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
@@ -5503,7 +5540,7 @@ local assets = {
                 ["asset"] = {
                     ["__uuid__"] = "4ac568cd-6610-4a15-b178-42d18a3bf95d",
                 },
-                ["fileId"] = "aa6bcTmcktM0pMBRQK/Wath",
+                ["fileId"] = "9aacaiCRbtLQohDNkBQKGXM",
                 ["root"] = {
                     ["__id__"] = 2,
                 },
@@ -5535,28 +5572,6 @@ local assets = {
         },
         ["__type__"] = "__js_array__",
     },
-    ["4ac8ad22-8460-4445-b9a1-8e9517b967a2"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "28",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 888,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
     ["4c5b62e9-df89-440c-befb-1807dfbb39f1"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
@@ -5571,7 +5586,7 @@ local assets = {
                 [2] = 80,
             },
             ["rect"] = {
-                [1] = 494,
+                [1] = 2,
                 [2] = 2,
                 [3] = 80,
                 [4] = 80,
@@ -5593,34 +5608,12 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 158,
-                [2] = 285,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
-        },
-    },
-    ["4de4f722-ea5c-42fe-b5c1-35e8825e31e3"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "9",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 576,
+                [1] = 548,
                 [2] = 54,
                 [3] = 50,
                 [4] = 50,
             },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
+            ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
     },
     ["4e4f432d-3054-4dc4-98ab-d5a0d27fd717"] = {
@@ -5637,8 +5630,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 201,
-                [2] = 233,
+                [1] = 507,
+                [2] = 187,
                 [3] = 50,
                 [4] = 50,
             },
@@ -5659,7 +5652,7 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 732,
+                [1] = 248,
                 [2] = 2,
                 [3] = 50,
                 [4] = 50,
@@ -5692,13 +5685,16 @@ local assets = {
                         ["__id__"] = 3,
                     },
                     [2] = {
-                        ["__id__"] = 4,
+                        ["__id__"] = 34,
                     },
                     [3] = {
-                        ["__id__"] = 5,
+                        ["__id__"] = 35,
                     },
                     [4] = {
-                        ["__id__"] = 6,
+                        ["__id__"] = 36,
+                    },
+                    [5] = {
+                        ["__id__"] = 37,
                     },
                 },
                 ["_color"] = {
@@ -5724,6 +5720,1288 @@ local assets = {
                 ["autoReleaseAssets"] = false,
             },
             [3] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = false,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                    [1] = {
+                        ["__id__"] = 4,
+                    },
+                    [2] = {
+                        ["__id__"] = 6,
+                    },
+                    [3] = {
+                        ["__id__"] = 8,
+                    },
+                    [4] = {
+                        ["__id__"] = 10,
+                    },
+                    [5] = {
+                        ["__id__"] = 12,
+                    },
+                    [6] = {
+                        ["__id__"] = 14,
+                    },
+                    [7] = {
+                        ["__id__"] = 16,
+                    },
+                    [8] = {
+                        ["__id__"] = 18,
+                    },
+                    [9] = {
+                        ["__id__"] = 20,
+                    },
+                    [10] = {
+                        ["__id__"] = 22,
+                    },
+                    [11] = {
+                        ["__id__"] = 24,
+                    },
+                    [12] = {
+                        ["__id__"] = 26,
+                    },
+                    [13] = {
+                        ["__id__"] = 28,
+                    },
+                    [14] = {
+                        ["__id__"] = 30,
+                    },
+                    [15] = {
+                        ["__id__"] = 32,
+                    },
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 0,
+                    ["width"] = 0,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "fd4bcxJsctA5Yh65L3SPcHH",
+                ["_localZOrder"] = 0,
+                ["_name"] = "sf_cache",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 2,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [4] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 5,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "e13adopTwJKepsG4pb/r9V1",
+                ["_localZOrder"] = 0,
+                ["_name"] = "16",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [5] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "c9dcc5e1-df95-4dbd-aa10-9f2146aec7cb",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 4,
+                },
+            },
+            [6] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 7,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 80,
+                    ["width"] = 80,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "7e50eYFFWRHhb+CK4RcxLgM",
+                ["_localZOrder"] = 0,
+                ["_name"] = "monster",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [7] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "54fc44a0-1fd5-4e4f-97e0-dee0844ef97b",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 6,
+                },
+            },
+            [8] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 9,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 80,
+                    ["width"] = 80,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "fb381zgU8xAa57NHakoe/Hr",
+                ["_localZOrder"] = 0,
+                ["_name"] = "hp",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [9] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "37a458b2-588e-4b54-ab25-3bf7fbdf204a",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 8,
+                },
+            },
+            [10] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 11,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 80,
+                    ["width"] = 80,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "71e21XqXJVMprgyTfpYtU+w",
+                ["_localZOrder"] = 0,
+                ["_name"] = "hexagon",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [11] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "e866c8b3-7f7a-46cf-b439-d2112bd33f66",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 10,
+                },
+            },
+            [12] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 13,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "d115dbsdK9KgqXYsUgrNolc",
+                ["_localZOrder"] = 0,
+                ["_name"] = "eff_impact_slash",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [13] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "a500fcf7-aecf-46f4-8279-04c7310baed7",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 12,
+                },
+            },
+            [14] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 15,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 80,
+                    ["width"] = 80,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "746b5xSjPhGirXWRXtzJzXi",
+                ["_localZOrder"] = 0,
+                ["_name"] = "circle_orange",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [15] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "1e4d6bcb-153b-45a5-9696-fb3244bf7f77",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 14,
+                },
+            },
+            [16] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 17,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 80,
+                    ["width"] = 80,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "4af033dJAJGYozoAhs5LqEK",
+                ["_localZOrder"] = 0,
+                ["_name"] = "circle_mian",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [17] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "6c1d1eab-e5c9-4378-aff7-05fbca8ba3eb",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 16,
+                },
+            },
+            [18] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 19,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 80,
+                    ["width"] = 80,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "0f8d8xksVZOyoFOT5F5hwXO",
+                ["_localZOrder"] = 0,
+                ["_name"] = "circle_green",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [19] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "2ee65f22-9bd4-4377-b08a-0bc19e09dd4b",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 18,
+                },
+            },
+            [20] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 21,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 80,
+                    ["width"] = 80,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "1cf65+rPmdGsbq207utUPAb",
+                ["_localZOrder"] = 0,
+                ["_name"] = "circle_blue",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [21] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "4c5b62e9-df89-440c-befb-1807dfbb39f1",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 20,
+                },
+            },
+            [22] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 23,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "b295bGjuzBEyrlZUZpLrvsY",
+                ["_localZOrder"] = 0,
+                ["_name"] = "8",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [23] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "5fa4c565-afd7-4e10-9e7c-abcc149db034",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 22,
+                },
+            },
+            [24] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 25,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "88a91A7FipPvY3JCNuub2hm",
+                ["_localZOrder"] = 0,
+                ["_name"] = "4",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [25] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "4fcbf525-a11c-483f-ab62-a0cc2d7c68c7",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 24,
+                },
+            },
+            [26] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 27,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "cfa24ZlOkhFboienUHxWIU4",
+                ["_localZOrder"] = 0,
+                ["_name"] = "32",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [27] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "785ecc4a-5eff-4eac-8bb6-911cdefb4b03",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 26,
+                },
+            },
+            [28] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 29,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "0268ck1wihDGKgqrUySiw71",
+                ["_localZOrder"] = 0,
+                ["_name"] = "2",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [29] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "e9a54b4a-60bd-42f4-b175-45339debd3d1",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 28,
+                },
+            },
+            [30] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 31,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "ecda4j384hO/LDNTMuVQL7T",
+                ["_localZOrder"] = 0,
+                ["_name"] = "1",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [31] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "817d740c-b1a2-4d45-a346-bd8385fabe20",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 30,
+                },
+            },
+            [32] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 33,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 50,
+                    ["width"] = 50,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "536b9INGxhAOKyhr3miOQOt",
+                ["_localZOrder"] = 0,
+                ["_name"] = "16",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 3,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = nil,
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [33] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = {
+                    ["__uuid__"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
+                },
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 1,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "c9dcc5e1-df95-4dbd-aa10-9f2146aec7cb",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 32,
+                },
+            },
+            [34] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -5773,7 +7051,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [4] = {
+            [35] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -5823,7 +7101,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [5] = {
+            [36] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -5845,8 +7123,8 @@ local assets = {
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
-                    ["height"] = 1280,
-                    ["width"] = 720,
+                    ["height"] = 720,
+                    ["width"] = 1280,
                 },
                 ["_globalZOrder"] = 0,
                 ["_id"] = "08376jULylFXql+mEGXovLE",
@@ -5860,8 +7138,8 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = 360,
-                    ["y"] = 640,
+                    ["x"] = 640,
+                    ["y"] = 360,
                 },
                 ["_prefab"] = nil,
                 ["_rotationX"] = 0,
@@ -5873,7 +7151,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [6] = {
+            [37] = {
                 ["__type__"] = "cc.Node",
                 ["_active"] = true,
                 ["_anchorPoint"] = {
@@ -5893,7 +7171,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 7,
+                        ["__id__"] = 38,
                     },
                 },
                 ["_contentSize"] = {
@@ -5926,7 +7204,7 @@ local assets = {
                 ["_tag"] = -1,
                 ["groupIndex"] = 0,
             },
-            [7] = {
+            [38] = {
                 ["__type__"] = "cc.Canvas",
                 ["_designResolution"] = {
                     ["__type__"] = "cc.Size",
@@ -5939,7 +7217,7 @@ local assets = {
                 ["_name"] = "",
                 ["_objFlags"] = 0,
                 ["node"] = {
-                    ["__id__"] = 6,
+                    ["__id__"] = 37,
                 },
             },
         },
@@ -5959,8 +7237,8 @@ local assets = {
                 [2] = 120,
             },
             ["rect"] = {
-                [1] = 2,
-                [2] = 180,
+                [1] = 322,
+                [2] = 2,
                 [3] = 120,
                 [4] = 120,
             },
@@ -5981,32 +7259,10 @@ local assets = {
                 [2] = 80,
             },
             ["rect"] = {
-                [1] = 2,
+                [1] = 166,
                 [2] = 2,
                 [3] = 80,
                 [4] = 80,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["58fd3b3e-ab8d-429f-b5ef-a86e4a53d2fc"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "29",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 836,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
@@ -6038,56 +7294,40 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 628,
-                [2] = 2,
+                [1] = 218,
+                [2] = 136,
                 [3] = 50,
                 [4] = 50,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
     },
-    ["63791144-d49c-4566-8000-531a729b14e0"] = {
+    ["67e68bc9-dad5-4ad9-a2d8-7e03d458e32f"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "24",
+            ["atlas"] = "",
+            ["capInsets"] = {
+                [1] = 5,
+                [2] = 0,
+                [3] = 5,
+                [4] = 0,
+            },
+            ["name"] = "default_progressbar",
             ["offset"] = {
                 [1] = 0,
                 [2] = 0,
             },
             ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
+                [1] = 30,
+                [2] = 15,
             },
             ["rect"] = {
-                [1] = 992,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["6899e76a-3ed9-44b8-99ba-3c34722cd0ee"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "18",
-            ["offset"] = {
                 [1] = 0,
                 [2] = 0,
+                [3] = 30,
+                [4] = 15,
             },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1148,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
+            ["texture"] = "cfef78f1-c8df-49b7-8ed0-4c953ace2621",
         },
     },
     ["6c1d1eab-e5c9-4378-aff7-05fbca8ba3eb"] = {
@@ -6104,54 +7344,10 @@ local assets = {
                 [2] = 80,
             },
             ["rect"] = {
-                [1] = 330,
-                [2] = 2,
+                [1] = 2,
+                [2] = 166,
                 [3] = 80,
                 [4] = 80,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["6c4cf6c4-a6ac-49c2-9d5d-a2f4212edb93"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "6",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 680,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["75e692e9-c51e-4541-967d-ed3a116d1605"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "13",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1304,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
             },
             ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
@@ -6170,8 +7366,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 732,
-                [2] = 54,
+                [1] = 218,
+                [2] = 84,
                 [3] = 50,
                 [4] = 50,
             },
@@ -6192,30 +7388,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 1408,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["83131526-1d5d-45a9-9df6-67c1ce911d35"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "12",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1304,
-                [2] = 54,
+                [1] = 166,
+                [2] = 84,
                 [3] = 50,
                 [4] = 50,
             },
@@ -6328,26 +7502,32 @@ local assets = {
         },
         ["__type__"] = "__js_array__",
     },
-    ["84ed73c1-0a98-41a9-a08f-eda807e992d6"] = {
+    ["88e79fd5-96b4-4a77-a1f4-312467171014"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "31",
+            ["atlas"] = "",
+            ["capInsets"] = {
+                [1] = 5,
+                [2] = 0,
+                [3] = 5,
+                [4] = 0,
+            },
+            ["name"] = "default_progressbar_bg",
             ["offset"] = {
                 [1] = 0,
                 [2] = 0,
             },
             ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
+                [1] = 60,
+                [2] = 15,
             },
             ["rect"] = {
-                [1] = 784,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
+                [1] = 0,
+                [2] = 0,
+                [3] = 60,
+                [4] = 15,
             },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
+            ["texture"] = "99170b0b-d210-46f1-b213-7d9e3f23098a",
         },
     },
     ["8d7629a7-cade-443f-84d7-c5f37890d1a5"] = {
@@ -6356,18 +7536,18 @@ local assets = {
             ["atlas"] = "",
             ["name"] = "ui_texture",
             ["offset"] = {
-                [1] = 0,
-                [2] = -0.5,
+                [1] = 5.5,
+                [2] = 6,
             },
             ["originalSize"] = {
-                [1] = 254,
-                [2] = 354,
+                [1] = 600,
+                [2] = 254,
             },
             ["rect"] = {
-                [1] = 2,
-                [2] = 3,
-                [3] = 250,
-                [4] = 349,
+                [1] = 16,
+                [2] = 2,
+                [3] = 579,
+                [4] = 238,
             },
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
@@ -6399,6 +7579,9 @@ local assets = {
                     [2] = {
                         ["__id__"] = 6,
                     },
+                    [3] = {
+                        ["__id__"] = 9,
+                    },
                 },
                 ["_color"] = {
                     ["__type__"] = "cc.Color",
@@ -6428,7 +7611,7 @@ local assets = {
                     ["y"] = 0,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 9,
+                    ["__id__"] = 15,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -6628,6 +7811,193 @@ local assets = {
                 ["sync"] = false,
             },
             [9] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0.5,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                    [1] = {
+                        ["__id__"] = 10,
+                    },
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 13,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 15,
+                    ["width"] = 100,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "",
+                ["_localZOrder"] = 0,
+                ["_name"] = "bloodBar",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 2,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = -40,
+                },
+                ["_prefab"] = {
+                    ["__id__"] = 14,
+                },
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [10] = {
+                ["__type__"] = "cc.Node",
+                ["_active"] = true,
+                ["_anchorPoint"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0.5,
+                },
+                ["_cascadeOpacityEnabled"] = true,
+                ["_children"] = {
+                },
+                ["_color"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["_components"] = {
+                    [1] = {
+                        ["__id__"] = 11,
+                    },
+                },
+                ["_contentSize"] = {
+                    ["__type__"] = "cc.Size",
+                    ["height"] = 15,
+                    ["width"] = 100,
+                },
+                ["_globalZOrder"] = 0,
+                ["_id"] = "",
+                ["_localZOrder"] = 0,
+                ["_name"] = "bar",
+                ["_objFlags"] = 0,
+                ["_opacity"] = 255,
+                ["_opacityModifyRGB"] = false,
+                ["_parent"] = {
+                    ["__id__"] = 9,
+                },
+                ["_position"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = -50,
+                    ["y"] = 0,
+                },
+                ["_prefab"] = {
+                    ["__id__"] = 12,
+                },
+                ["_rotationX"] = 0,
+                ["_rotationY"] = 0,
+                ["_scaleX"] = 1,
+                ["_scaleY"] = 1,
+                ["_skewX"] = 0,
+                ["_skewY"] = 0,
+                ["_tag"] = -1,
+                ["groupIndex"] = 0,
+            },
+            [11] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 1,
+                ["_fillStart"] = -0.3000000000000004,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 0,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "67e68bc9-dad5-4ad9-a2d8-7e03d458e32f",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 2,
+                ["node"] = {
+                    ["__id__"] = 10,
+                },
+            },
+            [12] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "8de1a095-0080-45f2-9c24-d5407ca49ae8",
+                },
+                ["fileId"] = "9dffbcBiNxDhY/1lrrf+/7a",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [13] = {
+                ["__type__"] = "cc.Sprite",
+                ["_atlas"] = nil,
+                ["_dstBlendFactor"] = 771,
+                ["_enabled"] = true,
+                ["_fillCenter"] = {
+                    ["__type__"] = "cc.Vec2",
+                    ["x"] = 0,
+                    ["y"] = 0,
+                },
+                ["_fillRange"] = 0,
+                ["_fillStart"] = 0,
+                ["_fillType"] = 0,
+                ["_isTrimmedMode"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["_sizeMode"] = 0,
+                ["_spriteFrame"] = {
+                    ["__uuid__"] = "88e79fd5-96b4-4a77-a1f4-312467171014",
+                },
+                ["_srcBlendFactor"] = 770,
+                ["_type"] = 0,
+                ["node"] = {
+                    ["__id__"] = 9,
+                },
+            },
+            [14] = {
+                ["__type__"] = "cc.PrefabInfo",
+                ["asset"] = {
+                    ["__uuid__"] = "8de1a095-0080-45f2-9c24-d5407ca49ae8",
+                },
+                ["fileId"] = "2b4f8NofYpK8ZbKfZdCj3f8",
+                ["root"] = {
+                    ["__id__"] = 2,
+                },
+                ["sync"] = false,
+            },
+            [15] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "8de1a095-0080-45f2-9c24-d5407ca49ae8",
@@ -6669,116 +8039,6 @@ local assets = {
             ["texture"] = "56ea92b5-7c38-43cc-a1e8-b3982ad76876",
         },
     },
-    ["947d59cf-eade-4668-89fc-792022865f7f"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "11",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1356,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["953a709f-6b60-48b3-addd-28a179aef946"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "19",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1148,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["9540f8ec-28ee-4172-8ac9-c146251ba43f"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "23",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 992,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["9c4dde3f-fc09-47de-939c-bab194bf698a"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "22",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1044,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["9cbca9ea-6f77-4424-809c-0b30d930d29c"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "17",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 1200,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
     ["a500fcf7-aecf-46f4-8279-04c7310baed7"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
@@ -6793,8 +8053,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 576,
-                [2] = 2,
+                [1] = 218,
+                [2] = 188,
                 [3] = 50,
                 [4] = 50,
             },
@@ -6821,8 +8081,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 54,
-                [2] = 302,
+                [1] = 496,
+                [2] = 83,
                 [3] = 50,
                 [4] = 50,
             },
@@ -6859,6 +8119,9 @@ local assets = {
             ["logo"] = {
                 ["__uuid__"] = "027dd505-6f26-4982-a23f-bd0fb5a63ed6",
             },
+            ["skill"] = {
+                ["__uuid__"] = "fa7639bf-0ab0-4cb4-b5bd-dc8c6a5402cb",
+            },
             ["stick_bg"] = {
                 ["__uuid__"] = "53a5094a-8d17-4f93-8c9c-67352a4dc793",
             },
@@ -6870,28 +8133,6 @@ local assets = {
             },
         },
     },
-    ["b15130f0-57af-409c-84cb-a24f26977958"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "7",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 628,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
     ["b7c7126e-6132-4852-9564-9ed0806d9fb3"] = {
         ["__type__"] = "cc.SpriteAtlas",
         ["_name"] = "icon_atlas.plist",
@@ -6901,77 +8142,11 @@ local assets = {
             ["1"] = {
                 ["__uuid__"] = "817d740c-b1a2-4d45-a346-bd8385fabe20",
             },
-            ["10"] = {
-                ["__uuid__"] = "2e8db8c1-8fe0-4f7f-a03a-f5efb87ee540",
-            },
-            ["11"] = {
-                ["__uuid__"] = "947d59cf-eade-4668-89fc-792022865f7f",
-            },
-            ["12"] = {
-                ["__uuid__"] = "83131526-1d5d-45a9-9df6-67c1ce911d35",
-            },
-            ["13"] = {
-                ["__uuid__"] = "75e692e9-c51e-4541-967d-ed3a116d1605",
-            },
-            ["14"] = {
-                ["__uuid__"] = "042228ac-209e-4971-a68d-a7080088f746",
-            },
-            ["15"] = {
-                ["__uuid__"] = "240180d5-d106-4f84-ab35-c89b4e6758f9",
-            },
             ["16"] = {
                 ["__uuid__"] = "c9dcc5e1-df95-4dbd-aa10-9f2146aec7cb",
             },
-            ["17"] = {
-                ["__uuid__"] = "9cbca9ea-6f77-4424-809c-0b30d930d29c",
-            },
-            ["18"] = {
-                ["__uuid__"] = "6899e76a-3ed9-44b8-99ba-3c34722cd0ee",
-            },
-            ["19"] = {
-                ["__uuid__"] = "953a709f-6b60-48b3-addd-28a179aef946",
-            },
             ["2"] = {
                 ["__uuid__"] = "e9a54b4a-60bd-42f4-b175-45339debd3d1",
-            },
-            ["20"] = {
-                ["__uuid__"] = "32959905-1614-4049-8515-548728ac2275",
-            },
-            ["21"] = {
-                ["__uuid__"] = "0e5b4d2d-6c48-494f-98c5-89e4014d8630",
-            },
-            ["22"] = {
-                ["__uuid__"] = "9c4dde3f-fc09-47de-939c-bab194bf698a",
-            },
-            ["23"] = {
-                ["__uuid__"] = "9540f8ec-28ee-4172-8ac9-c146251ba43f",
-            },
-            ["24"] = {
-                ["__uuid__"] = "63791144-d49c-4566-8000-531a729b14e0",
-            },
-            ["25"] = {
-                ["__uuid__"] = "ecf3bd34-18bd-4211-9bad-6ffdc45863e7",
-            },
-            ["26"] = {
-                ["__uuid__"] = "c09c0e81-3a85-4eca-9af6-ca643381fbf8",
-            },
-            ["27"] = {
-                ["__uuid__"] = "2a459b35-eb6d-4550-8bc3-ea7c0ad28f43",
-            },
-            ["28"] = {
-                ["__uuid__"] = "4ac8ad22-8460-4445-b9a1-8e9517b967a2",
-            },
-            ["29"] = {
-                ["__uuid__"] = "58fd3b3e-ab8d-429f-b5ef-a86e4a53d2fc",
-            },
-            ["3"] = {
-                ["__uuid__"] = "d8738e0c-26bd-4bd0-95cd-efb891641480",
-            },
-            ["30"] = {
-                ["__uuid__"] = "ea11ba2c-9198-4d85-822b-763cf0b46cb2",
-            },
-            ["31"] = {
-                ["__uuid__"] = "84ed73c1-0a98-41a9-a08f-eda807e992d6",
             },
             ["32"] = {
                 ["__uuid__"] = "785ecc4a-5eff-4eac-8bb6-911cdefb4b03",
@@ -6979,20 +8154,8 @@ local assets = {
             ["4"] = {
                 ["__uuid__"] = "4fcbf525-a11c-483f-ab62-a0cc2d7c68c7",
             },
-            ["5"] = {
-                ["__uuid__"] = "3a203ef4-28bb-4faf-97a8-fca54bd13ff5",
-            },
-            ["6"] = {
-                ["__uuid__"] = "6c4cf6c4-a6ac-49c2-9d5d-a2f4212edb93",
-            },
-            ["7"] = {
-                ["__uuid__"] = "b15130f0-57af-409c-84cb-a24f26977958",
-            },
             ["8"] = {
                 ["__uuid__"] = "5fa4c565-afd7-4e10-9e7c-abcc149db034",
-            },
-            ["9"] = {
-                ["__uuid__"] = "4de4f722-ea5c-42fe-b5c1-35e8825e31e3",
             },
             ["circle_blue"] = {
                 ["__uuid__"] = "4c5b62e9-df89-440c-befb-1807dfbb39f1",
@@ -7056,8 +8219,8 @@ local assets = {
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
-                    ["height"] = 80,
-                    ["width"] = 80,
+                    ["height"] = 100,
+                    ["width"] = 100,
                 },
                 ["_globalZOrder"] = 0,
                 ["_id"] = "",
@@ -7109,8 +8272,8 @@ local assets = {
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
-                    ["height"] = 80,
-                    ["width"] = 80,
+                    ["height"] = 100,
+                    ["width"] = 100,
                 },
                 ["_globalZOrder"] = 0,
                 ["_id"] = "",
@@ -7157,9 +8320,9 @@ local assets = {
                 ["_isTrimmedMode"] = true,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
-                ["_sizeMode"] = 1,
+                ["_sizeMode"] = 0,
                 ["_spriteFrame"] = {
-                    ["__uuid__"] = "6c1d1eab-e5c9-4378-aff7-05fbca8ba3eb",
+                    ["__uuid__"] = "37a458b2-588e-4b54-ab25-3bf7fbdf204a",
                 },
                 ["_srcBlendFactor"] = 770,
                 ["_type"] = 0,
@@ -7191,28 +8354,6 @@ local assets = {
             },
         },
         ["__type__"] = "__js_array__",
-    },
-    ["c09c0e81-3a85-4eca-9af6-ca643381fbf8"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "26",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 940,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
     },
     ["c71c2c23-0ba8-4b15-a62f-fa18727c60de"] = {
         ["__type__"] = "cc.SpriteFrame",
@@ -7250,8 +8391,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 1200,
-                [2] = 54,
+                [1] = 166,
+                [2] = 136,
                 [3] = 50,
                 [4] = 50,
             },
@@ -8870,8 +10011,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 2,
-                [2] = 302,
+                [1] = 444,
+                [2] = 83,
                 [3] = 50,
                 [4] = 50,
             },
@@ -8889,30 +10030,8 @@ local assets = {
             },
         },
         ["tmxFolderPath"] = "tiledmap/grass01",
-        ["tmxXmlStr"] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<map version=\"1.0\" orientation=\"orthogonal\" renderorder=\"right-down\" width=\"40\" height=\"20\" tilewidth=\"32\" tileheight=\"32\" nextobjectid=\"1\">\n <tileset firstgid=\"1\" name=\"glass_16_16_96_96\" tilewidth=\"32\" tileheight=\"32\" tilecount=\"9\" columns=\"3\">\n  <image source=\"glass_16_16_96_96.png\" width=\"96\" height=\"96\"/>\n </tileset>\n <layer name=\"layer1\" width=\"40\" height=\"20\">\n  <data encoding=\"csv\">\n1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,\n4,0,0,0,6,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,0,0,0,4,\n7,0,9,7,8,9,7,8,9,7,1,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,9,\n1,0,3,1,2,3,1,2,3,1,1,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,9,4,4,0,4,\n4,5,6,4,5,6,4,5,6,4,1,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,4,9,9,9,9,\n7,8,9,7,8,9,7,8,1,7,1,2,9,8,9,6,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,9,9,9,9,9,\n1,2,3,1,2,3,1,2,3,1,1,2,9,8,9,9,4,5,6,9,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,1,6,4,5,6,\n4,5,6,4,5,6,4,5,6,4,1,1,1,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,\n7,8,9,7,8,9,7,8,9,7,4,4,4,7,8,9,1,2,3,9,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,\n1,2,3,1,2,3,1,2,3,3,7,7,7,7,8,9,1,2,6,9,2,6,1,2,9,1,2,6,1,2,6,1,2,6,1,2,6,1,2,6,\n4,5,6,4,5,6,4,5,3,4,7,8,9,1,2,3,1,2,3,9,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,\n7,8,9,7,8,9,7,8,3,7,4,5,6,4,5,6,4,5,9,4,5,8,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,\n1,2,3,1,2,3,1,2,3,1,7,8,9,7,8,9,7,8,9,7,8,9,9,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,\n4,5,6,4,5,6,4,5,3,4,1,2,3,1,2,3,1,2,9,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,\n7,8,9,7,8,9,7,8,3,7,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,\n1,2,3,1,2,3,1,2,3,1,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,\n4,0,6,4,5,6,4,5,6,4,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,0,2,3,\n7,0,9,7,8,9,7,8,3,7,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,4,5,6,0,5,6,\n1,0,0,0,2,3,1,2,3,1,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,8,9,7,0,0,0,8,9,\n4,5,6,4,5,6,4,5,3,4,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3\n</data>\n </layer>\n</map>\n",
+        ["tmxXmlStr"] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<map version=\"1.0\" orientation=\"orthogonal\" renderorder=\"right-down\" width=\"40\" height=\"20\" tilewidth=\"32\" tileheight=\"32\" nextobjectid=\"1\">\n <tileset firstgid=\"1\" name=\"glass_16_16_96_96\" tilewidth=\"32\" tileheight=\"32\" tilecount=\"9\" columns=\"3\">\n  <image source=\"glass_16_16_96_96.png\" trans=\"ff00ff\" width=\"96\" height=\"96\"/>\n </tileset>\n <layer name=\"layer1\" width=\"40\" height=\"20\">\n  <data encoding=\"csv\">\n7,8,1,1,7,8,9,4,7,1,2,3,2,3,1,2,3,1,1,1,1,1,1,1,1,1,1,1,4,4,4,1,1,1,1,1,1,1,2,3,\n8,9,1,4,7,8,9,7,7,1,2,3,2,3,1,1,2,3,4,4,4,4,4,4,4,4,4,1,2,3,7,4,4,4,4,4,4,1,2,3,\n9,1,4,7,8,9,2,7,1,2,3,6,3,6,4,1,2,3,7,7,7,7,7,7,7,7,1,2,3,6,9,1,1,1,1,2,3,2,3,3,\n9,1,7,8,9,1,2,3,1,2,3,9,3,9,1,2,3,6,2,3,2,3,3,1,1,1,2,3,3,9,1,4,4,4,1,2,3,3,3,6,\n1,4,7,8,9,2,3,1,2,3,6,3,6,1,2,3,3,9,2,3,2,3,3,1,2,3,1,2,3,9,4,7,7,7,1,2,3,3,6,9,\n1,7,8,9,1,2,3,1,2,3,9,6,9,2,3,6,6,1,2,3,2,3,3,4,1,1,2,3,3,7,7,8,9,3,1,2,1,1,1,1,\n4,7,8,9,2,3,1,2,3,6,6,9,3,3,6,9,9,2,3,6,2,3,3,7,4,1,2,3,2,3,8,9,6,1,1,1,4,4,4,4,\n7,8,9,1,2,3,1,2,3,9,9,3,6,6,9,1,2,3,6,9,3,3,3,3,7,1,2,3,2,3,9,6,1,4,4,4,7,7,7,7,\n7,8,9,2,3,1,2,3,6,9,3,6,9,9,1,2,3,3,9,2,3,3,6,1,1,1,1,2,3,3,9,9,4,7,1,1,1,1,2,3,\n8,9,2,3,1,2,3,6,9,3,6,9,8,1,2,3,6,6,9,2,3,3,9,4,4,4,1,1,2,3,1,1,1,2,3,4,4,4,1,2,\n8,9,3,6,1,2,3,9,3,6,9,1,2,3,3,6,9,9,2,3,6,3,9,7,7,1,1,2,3,6,3,4,1,2,3,7,7,7,4,1,\n8,9,3,1,2,3,1,2,3,9,9,2,3,3,6,9,8,9,2,3,9,3,9,3,1,1,2,3,3,9,3,7,1,2,3,9,6,1,7,1,\n8,9,1,2,3,1,1,2,3,8,9,3,3,6,9,8,9,2,3,6,6,6,9,6,3,3,3,6,6,2,3,1,2,3,6,6,9,1,2,4,\n9,1,2,3,3,4,1,1,2,3,9,3,6,9,7,8,9,2,3,9,9,9,9,9,6,6,6,9,9,2,3,2,3,6,9,9,7,1,2,7,\n9,1,2,3,1,1,4,1,2,3,9,6,9,1,7,8,9,3,6,8,9,7,8,9,9,9,9,2,3,3,6,3,6,9,1,1,1,2,3,2,\n1,2,1,1,1,1,7,1,2,3,9,9,8,4,7,8,9,3,9,9,9,6,6,4,7,8,9,3,3,6,9,6,9,4,4,1,2,3,3,1,\n2,1,4,1,1,4,1,2,3,1,1,1,2,3,8,9,3,6,8,9,2,3,9,7,8,9,3,3,6,9,9,9,1,2,3,3,3,6,6,1,\n1,1,1,1,4,7,1,2,1,4,4,1,2,3,8,9,6,9,8,9,3,3,3,7,8,9,6,6,9,3,3,3,3,3,6,6,6,9,9,2,\n4,4,1,4,7,1,2,1,4,7,1,2,3,3,8,9,9,6,6,6,6,6,6,3,7,8,9,9,3,6,6,6,6,6,9,9,9,3,3,3,\n7,1,4,7,8,1,1,4,7,8,4,5,6,6,8,9,8,9,9,9,9,9,9,6,6,6,6,6,6,9,9,9,9,9,6,6,6,6,6,6\n</data>\n </layer>\n</map>\n",
         ["tsxFiles"] = {
-        },
-    },
-    ["d8738e0c-26bd-4bd0-95cd-efb891641480"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "3",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 836,
-                [2] = 2,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
         },
     },
     ["e7b8b2b8-d100-4b6c-89d3-e88451651087"] = {
@@ -8929,8 +10048,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 149,
-                [2] = 233,
+                [1] = 507,
+                [2] = 135,
                 [3] = 50,
                 [4] = 50,
             },
@@ -8957,8 +10076,8 @@ local assets = {
                 [2] = 80,
             },
             ["rect"] = {
-                [1] = 166,
-                [2] = 2,
+                [1] = 84,
+                [2] = 84,
                 [3] = 80,
                 [4] = 80,
             },
@@ -8979,30 +10098,8 @@ local assets = {
                 [2] = 50,
             },
             ["rect"] = {
-                [1] = 1096,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
-            },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
-        },
-    },
-    ["ea11ba2c-9198-4d85-822b-763cf0b46cb2"] = {
-        ["__type__"] = "cc.SpriteFrame",
-        ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "30",
-            ["offset"] = {
-                [1] = 0,
-                [2] = 0,
-            },
-            ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
-            },
-            ["rect"] = {
-                [1] = 784,
-                [2] = 54,
+                [1] = 166,
+                [2] = 188,
                 [3] = 50,
                 [4] = 50,
             },
@@ -9099,9 +10196,9 @@ local assets = {
                 ["_color"] = {
                     ["__type__"] = "cc.Color",
                     ["a"] = 255,
-                    ["b"] = 255,
-                    ["g"] = 149,
-                    ["r"] = 0,
+                    ["b"] = 191,
+                    ["g"] = 98,
+                    ["r"] = 43,
                 },
                 ["_components"] = {
                     [1] = {
@@ -9363,8 +10460,8 @@ local assets = {
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
-                    ["height"] = 150,
-                    ["width"] = 300,
+                    ["height"] = 106,
+                    ["width"] = 325,
                 },
                 ["_globalZOrder"] = 0,
                 ["_id"] = "",
@@ -9504,7 +10601,7 @@ local assets = {
                     ["__uuid__"] = "045bdbb4-370a-480a-ba87-1624782ea317",
                 },
                 ["_srcBlendFactor"] = 770,
-                ["_type"] = 1,
+                ["_type"] = 0,
                 ["node"] = {
                     ["__id__"] = 10,
                 },
@@ -9602,8 +10699,8 @@ local assets = {
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
-                    ["height"] = 150,
-                    ["width"] = 300,
+                    ["height"] = 106,
+                    ["width"] = 325,
                 },
                 ["_globalZOrder"] = 0,
                 ["_id"] = "",
@@ -10244,34 +11341,34 @@ local assets = {
                 [2] = 23,
             },
             ["rect"] = {
-                [1] = 124,
-                [2] = 232,
+                [1] = 497,
+                [2] = 54,
                 [3] = 23,
                 [4] = 23,
             },
             ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
     },
-    ["ecf3bd34-18bd-4211-9bad-6ffdc45863e7"] = {
+    ["fa7639bf-0ab0-4cb4-b5bd-dc8c6a5402cb"] = {
         ["__type__"] = "cc.SpriteFrame",
         ["content"] = {
-            ["atlas"] = "b7c7126e-6132-4852-9564-9ed0806d9fb3",
-            ["name"] = "25",
+            ["atlas"] = "ace5d903-71a3-46ae-b31e-9c1e6992eeb4",
+            ["name"] = "skill",
             ["offset"] = {
                 [1] = 0,
                 [2] = 0,
             },
             ["originalSize"] = {
-                [1] = 50,
-                [2] = 50,
+                [1] = 140,
+                [2] = 142,
             },
             ["rect"] = {
-                [1] = 940,
-                [2] = 54,
-                [3] = 50,
-                [4] = 50,
+                [1] = 180,
+                [2] = 2,
+                [3] = 140,
+                [4] = 142,
             },
-            ["texture"] = "7bad064c-7e73-4eed-be46-bd0dd8ae7f6a",
+            ["texture"] = "b3c2a0d9-f4f5-451c-87f0-74100fc697e5",
         },
     },
 }

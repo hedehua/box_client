@@ -207,6 +207,10 @@ factory["cc.Widget"] = function(asset)
     return WidgetComponent.new(asset)
 end
 
+factory["cc.PrefabInfo"] = function( asset )
+    return nil
+end
+
 local _M = {}
 
 function _M.create(objtype, asset, id, assets)

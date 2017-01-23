@@ -5,10 +5,9 @@ local StateResUpdate = require "app.state.stateResUpdate"
 -- // normal type manager
 local ResManager = require "app.manager.resManager"
 local AudioManager = require "app.manager.audioManager"
-local UIManager = require "app.manager.uiManager"
-local AvatarManager = require "app.manager.avatarManager"
 local EffectManager = require "app.manager.effectManager"
 local ConfigureManager = require "app.manager.configureManager"
+local SpriteFrameManager = require "app.manager.spriteFrameManager"
 
 -- // component type manager
 local WorldConfig = require "app.controller.battle.config.worldConfig"
@@ -55,11 +54,9 @@ function Game:uninit()
 	end
 
 	ResManager:getInstance():uninit();
-	UIManager:getInstance():uninit();
-	AvatarManager:getInstance():uninit()
 	EffectManager:getInstance():uninit();
 	ConfigureManager:getInstance():uninit()
-	
+	SpriteFrameManager:getInstance():uninit()
 end
 function Game:reset()
 	if(self._curState ~= nil) then
@@ -81,8 +78,6 @@ function Game:update (dt)
 		self._curState:update(dt);
 	end
 
-	AvatarManager:getInstance():update();
-	EffectManager:getInstance():update();
 	ResManager:getInstance():update();
 end
 
@@ -143,10 +138,9 @@ function Game:initStates()
 end
 function Game:initManagers()
 	ResManager:getInstance():init();
-	UIManager:getInstance():init();
-	AvatarManager:getInstance():init()
 	EffectManager:getInstance():init();
 	ConfigureManager:getInstance():init()
+	SpriteFrameManager:getInstance():init()
 end
 
 function Game:initModels() 

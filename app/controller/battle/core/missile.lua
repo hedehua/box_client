@@ -27,8 +27,8 @@ function Missile.new()
     obj._casterId = -1         -- 施法Id （不可为空）
     obj._parentId = -1         -- 父Id   (子弹触发子弹的情况使用)
 
-    obj._hitsObjs = nil
-    obj._hitsCount = 0
+    obj._hitObjs = nil
+    obj._hitCount = 0
 
     return obj
 end
@@ -61,7 +61,7 @@ function Missile:init(typeId,camp,casterId)
     self._casterId = casterId
     self._config = Utils.getConfig(MissileConfig,self._typeId)
     self._timeOut = self._config.timeOut
-    self.setSpeed(self._config.speed)
+    self:setSpeed(self._config.speed)
     self._enableRot = self._config.dir >=0 
     
     if(self._render ~= nil) then
@@ -103,8 +103,7 @@ function Missile:update()
         self:moveTo(self._targetObj:getPos(),true)
     end
 
-    -- self._super()
-    BattleObject.super.update(self)
+    Missile.super.update(self)
 end
 function Missile:tryCastSubmissile() 
     if(self._config.subMissile ~= nil and  self._config.subMissile > 0)then
@@ -147,24 +146,26 @@ function Missile:cast()
             local dir = self:getDir()
             self:moveDir(dir)
         end,
-        [Enum.EMoveType.FollowTarget]  = function(  )
-            local dir = self:getDir()
-            dir = dir:rotate(self._config.dir)   -- 朝向旋转
-            self:moveDir(dir)
-        end,
-        [Enum.EMoveType.ToTarget] = function(  )
-            self._targetObj = self:findObjectById(self._targetId)
-        end,
-        [Enum.EMoveType.FollowCaster] = function(  )
+        [Enum.EMoveType.ToTarget]  = function(  )
+            -- local dir = self:getDir()
+            -- dir = dir:rotate(self._config.dir)   -- 朝向旋转
             local obj = self:findObjectById(self._targetId)
-            if(obj == nil)then
-                cc:log("target missing")
-                return false
-            end
             local dir = obj:getPos():sub(self:getPos()):norm()
             self:moveDir(dir)
         end,
+        [Enum.EMoveType.FollowTarget] = function(  )
+            self._targetObj = self:findObjectById(self._targetId)
+        end,
         [Enum.EMoveType.ToCaster] = function(  )
+            local obj = self:findObjectById(self._targetId)
+            if(obj == nil)then
+                print("target missing")
+                return false
+            end
+            local dir = self:getPos():sub(obj:getPos()):norm()
+            self:moveDir(dir)
+        end,
+        [Enum.EMoveType.FollowCaster] = function(  )
             self._targetObj = self:findObjectById(self._casterId)
         end
     }
@@ -193,20 +194,19 @@ function Missile:setLocation()
     local cooderate = refs[self._config.start]()
 
     if(cooderate == nil)then
-        cc:log("can't find caster")
+        print("can't find cooderate",self._casterId)
         return
     end
     local pos = cooderate:getPos()
     if(pos == nil)then
-        cc:log("error pos")
+        print("error pos")
         return
     end
 
     if(self._config.startPos ~= nil)then
         local dx = self._config.startPos[1]
         local dy = self._config.startPos[2]
-        local d = Vector2.new()
-        d:setv(dx,dy)
+        local d = Vector2.new(dx,dy)
         d:cross(cooderate:getDir())    
         pos:add(d)
     end
@@ -222,7 +222,7 @@ function Missile:setLocation()
     end    
 end
 function Missile:findObjectById(id)
-    return BattleObject:getObjectById(id)
+    return BattleObject.getObjectById(id)
 end
 function Missile:getCamp(params) 
     return self._camp  
@@ -238,9 +238,9 @@ function Missile:tryHitTarget(target)
     if(self:needRemove())then
         return false
     end
-    if(self._hitsObjs ~= nil)then
-        for i = 1,table.length(self._hitsObjs) do   -- 一个子弹只撞一次
-            local objId = self._hitsObjs[i]
+    if(self._hitObjs ~= nil)then
+        for i = 1,#self._hitObjs do   -- 一个子弹只撞一次
+            local objId = self._hitObjs[i]
             if(objId == target._id)then
                 return false
             end
@@ -251,11 +251,11 @@ function Missile:tryHitTarget(target)
         return false
     end
 
-    if(self._hitsObjs == nil)then
-        self._hitsObjs = {}
+    if(self._hitObjs == nil)then
+        self._hitObjs = {}
     end
 
-    table.insert(self,_hitsObjs,target._id)
+    table.insert(self._hitObjs,target._id)
     self:tryCastCollidermissile()
 
     if(self._config.hitEffect ~= nil)then

@@ -13,6 +13,15 @@ function ObjManager:ctor( ... )
 
 end
    
+local _instance = nil
+function ObjManager:getInstance(  )
+	if(_instance ~= nil) then
+		return _instance
+	end
+	_instance = ObjManager.new()
+	return _instance
+end
+
 function ObjManager:init()
 end
 
@@ -24,21 +33,25 @@ function ObjManager:uninit()
 	self:reset()
 end
 function ObjManager:update()
+    
     if(self._dirty ~= nil) then
         return
     end
+
     if(self._tasks == nil) then
         return
     end
     
-    -- local item = self._tasks.shift();
-    -- if(item == nil) then
-    --     return
-    -- end
-    -- item.cb(cc.instantiate(item.asset))
-    -- if(table.length(self._tasks) == 0) then
-    --     self._dirty = false
-    -- end
+    local item = self._tasks[1];
+    if(item == nil) then
+        return
+    end
+    table.remove(self._tasks,1)
+
+    item.cb(self:instantiateImm(item.asset))
+    if(#self._tasks == 0) then
+        self._dirty = false
+    end
 end
 function ObjManager:hasTask() 
 	return self._tasks ~= nil and table.length(self._tasks) > 0  
@@ -53,6 +66,11 @@ function ObjManager:addTask(asset,cb)
     self._dirty = true
     return item.id
 end
+
+function ObjManager:instantiateImm( asset )
+
+end
+
 function ObjManager:instantiate(asset,cb) 
     if(asset == nil or cb == nil)then
         cc.error("instantiate arguments error")
@@ -60,6 +78,7 @@ function ObjManager:instantiate(asset,cb)
     end
     return self:addTask(asset,cb)
 end
+
 function ObjManager:destroyObject(id) 
     if(id == nil or id < 0) then
         return
@@ -91,12 +110,6 @@ function ObjManager:load(resName,callback)
     local assets = creator.getAssets()
     local asset = assets:createPrefab(resName)
 
-    if(self._objRoot == nil) then
-        local scene = cc.Director:getInstance():getRunningScene()
-        self._objRoot = scene:getChildByName("scene_root")
-    end
-
-    self._objRoot:addChild(asset)
     self:addTo(resName,asset)
 	if(callback ~= nil) then
 		callback(err,asset);
@@ -111,13 +124,13 @@ function ObjManager:unload(obj)
 	for i = #self._objectsArr,1,-1 do
 		local info = self._objectsArr[i]
 		if(info ~= nil and info.res == obj) then
+			-- self:addToCache(info)  -- TODO::
 			table.remove(self._objectsArr,i)
-			self:addToCache(info)
 			return true
 		end
 	end
 
-	cc.log("unload error")
+	print("unload error")
 	return false		
 end
 
@@ -125,14 +138,13 @@ function ObjManager:addTo(resName,obj)
 	if(obj == nil) then
 		return
 	end
-	obj.parent = self._objRoot
 
 	table.insert(self._objectsArr,{res = obj,path = resName})
 end
 
 function ObjManager:addToCache(info)
 	if(info == nil) then
-		cc.log("add to cache failure")
+		print("add to cache failure")
 		return
 	end
 	if(self._objectsCache == nil) then
@@ -144,14 +156,14 @@ function ObjManager:addToCache(info)
 end
 function ObjManager:getFromCache(resName)
 	if(resName == nil) then
-		cc.log("argument nil")
+		print("argument nil")
 		return nil
 	end
 	if(self._objectsCache == nil) then
 		return nil
 	end
 
-	for i = table.length(self._objectsCache),1,-1 do
+	for i = #self._objectsCache,1,-1 do
 		local info = self._objectsCache[i]
 		if(info.path == resName) then
 			table.remove(self._objectsCache,i)

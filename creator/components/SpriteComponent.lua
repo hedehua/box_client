@@ -22,7 +22,6 @@ function SpriteComponent:onLoad(target)
     node:setColor(target:getColor())
 
     if self.capInsets and target.contentSize then
-    -- if target.contentSize then
         node:setContentSize(target.contentSize)
         self.contentSize = target.contentSize -- used in ButtonComponent
     end

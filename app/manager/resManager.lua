@@ -51,7 +51,7 @@ function ResManager:update()
     table.remove(self,_tasks,1)
     
 	self:loadImm(item.resName,item.callback)
-   	if(table.length(self._tasks) == 0) then
+   	if(#self._tasks == 0) then
         self._dirty = false
     end
 end
@@ -63,7 +63,6 @@ function ResManager:addTask(resName,callback)
         self._tasks = {}
     end
     self._taskSeq = self._taskSeq + 1
-    -- print("addTask",resName,callback)
     local item = {id = self._taskSeq,resName=resName,callback=callback}
     table.insert(self._tasks,item)
     self._dirty = true
@@ -82,12 +81,13 @@ function ResManager:load(resName,callback)
 		callback(nil,asset)
 		return nil
 	end
-	-- print("load",resName,callback)
 	return self:addTask(resName,callback)
 end
+
 function ResManager:loadImm(resName,callback)
-	
+	callback(nil,Assets:getFile(resName))
 end
+
 function ResManager:addToCache(resName,res)
 	if(self._cache == nil) then
 		self._cache = {}

@@ -64,7 +64,6 @@ function BattleTeam:update()
 	end
 
 	if(not self._isAlive)then
-		print("team",self._id,'no isAlive')
 		return;
 	end
 	
@@ -280,7 +279,7 @@ function BattleTeam:updateMember()
 	local length = #self._paths
 	for i = 1,#self._members do
 		local member = self._members[i];
-		local index = length - i  * step
+		local index = length - (i-1)* step
 		local pos = self._paths[index] 
 		if(pos == nil)then
 			pos = self:getNextPos(preMember)
@@ -637,7 +636,7 @@ function BattleTeam:onTriger(sourceObj,targetObj,skill)
 				return
 			end
 			local caster = BattleObject.getObjectById(sourceObj:getCasterId())
-			if(targetObj:behit(caster,skill.getAttack()))then
+			if(targetObj:behit(caster,skill:getAttack()))then
 				if(targetObj:isLeader()) then				-- 击杀队长
 					self:notify("onLeaderKilled",targetObj)
 				end

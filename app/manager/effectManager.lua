@@ -1,7 +1,7 @@
 local TimerManager = require("app.manager.timerManager")
 local ObjManager = require("app.manager.objManager")
 local Common = require("app.common.include")
-local EffectManager = cc.class("EffectManager",ObjManager)
+local EffectManager = cc.class("EffectManager")
 
 local _instance = nil
 function EffectManager:getInstance(  )
@@ -12,18 +12,16 @@ function EffectManager:getInstance(  )
 	return _instance
 end
 
+function EffectManager:init( ... )
+	-- body
+end
+
 function EffectManager:playEffect(resName,pos,duration)
 
-	self:load(resName,function(err,newNode) 
-		newNode.position = pos
-		-- // var comps = newNode.getComponentsInChildren("cc.Animation")
-		-- // if(comps ~= null) then
-		-- // 	for i = 1,comps.length do
-		-- // 		comps[i].play()
-		-- // 	end
-		-- // end
+	ObjManager:getInstance():load(resName,function(err,newNode) 
+		newNode:setPosition(pos.x,pos.y)
 		TimerManager:getInstance():runOnce(function() 
-			self:unload(newNode)
+			ObjManager:getInstance():unload(newNode)
 		end, duration);
 	end)
 
