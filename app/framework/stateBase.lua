@@ -112,6 +112,9 @@ function StateBase:onSystemOpen (sys,auto,arg1,arg2)
 	local last = self._activeSystemArr[#self._activeSystemArr]
 
 	if(last ~= nil) then
+		if(last.sys == sys) then
+			return
+		end
 		last.sys:close(true)
 	end
 
@@ -124,10 +127,11 @@ function StateBase:onSystemClose(sys,auto)
 	end
 
 	if(self._activeSystemArr ~= nil)then
-		for  i = table.length(self._activeSystemArr),1,-1 do
+		for  i = #self._activeSystemArr,1,-1 do
 			local item = self._activeSystemArr[i]
 			if(item.sys == sys) then
-				table.remove(self._activeSystemArr,1)
+				table.remove(self._activeSystemArr,i)
+				print("rm size",#self._activeSystemArr)
 			end
 			break;
 		end

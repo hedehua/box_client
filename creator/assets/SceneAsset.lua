@@ -163,7 +163,7 @@ end
 function SceneAsset:_update(dt)
     self._time = self._time + dt
     if self._time >= 3.0 then
-        cc.printinfo("[Scene] tracking object count: %d", #self._tracking)
+        -- cc.printinfo("[Scene] tracking object count: %d", #self._tracking)
         self._time = 0
     end
 

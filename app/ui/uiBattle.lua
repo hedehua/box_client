@@ -250,6 +250,9 @@ function UIBattle:setTouchPos(pos)
   self._touchNode:setPosition(pos)
 end
 function UIBattle:fresh()
+  if(not self._active) then
+    return
+  end
   self:freshTime()
   self:freshKillCount()
   self:freshRank()

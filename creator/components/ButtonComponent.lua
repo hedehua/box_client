@@ -72,20 +72,32 @@ function ButtonComponent:onLoad(target)
     local listener = cc.EventListenerTouchOneByOne:create()
     listener:setSwallowTouches(true)
     listener:registerScriptHandler(function(touch, event)
-        self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_BEGAN)
-        return _onTouchBegan(self, touch)
+        if(_onTouchBegan(self, touch)) then
+            self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_BEGAN)
+            return true
+        end
+        return false
     end, cc.Handler.EVENT_TOUCH_BEGAN)
     listener:registerScriptHandler(function(touch, event)
-        self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_MOVED)
-        return _onTouchMoved(self, touch)
+        if(_onTouchMoved(self, touch))then
+            self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_MOVED)
+            return true
+        end
+        return false
     end, cc.Handler.EVENT_TOUCH_MOVED)
     listener:registerScriptHandler(function(touch, event)
-        self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_ENDED)
-        return _onTouchEnded(self, touch)
+        if(_onTouchEnded(self, touch)) then
+            self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_ENDED)
+            return true
+        end
+        return false
     end, cc.Handler.EVENT_TOUCH_ENDED)
     listener:registerScriptHandler(function(touch, event)
-        self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_CANCELLED)
-        return _onTouchCancelled(self, touch)
+        if(_onTouchCancelled(self, touch)) then
+            self:dispatcherTouchEvent(cc.Handler.EVENT_TOUCH_CANCELLED)
+            return true
+        end
+        return false
     end, cc.Handler.EVENT_TOUCH_CANCELLED)
 
     local eventDispatcher = sprite.node:getEventDispatcher()
@@ -119,6 +131,12 @@ function ButtonComponent:off( eventType,func )
     if(events == nil) then
         return
     end
+
+    if(func == nil) then
+        self._touchEvents[eventType] = nil
+        return
+    end
+
     for i =#events,1,-1 do
         if(events[i] == func) then
             table.remove(events,i)
@@ -177,7 +195,6 @@ end
 
 _onTouchBegan = function(self, touch)
     if self.state ~= _STATE_IDLE then return false end
-
     local p = touch:getLocation()
     local rect = _getRect(self._sprite.node)
     if not _inRect(rect, p) then return false end

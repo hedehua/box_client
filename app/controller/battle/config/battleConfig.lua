@@ -1,26 +1,26 @@
 local battleConfig = {
+	-- {
+	-- 	id = 1,
+	-- 	name = "mode1",
+	-- 	res = "resources/scene/plane_box1.prefab",
+	-- 	rank = true,
+	-- 	revive = false,
+	-- 	bornPos = {0,-100},
+	-- 	bornDir = {1,0},
+	-- 	width =  1280, 
+	-- 	height = 640,
+	-- 	drop = -1,						-- dropConfig
+	-- 	dropInterval = 20,      		
+	-- 	playerDrop = 1003,
+	-- 	monster = 1001,					-- monsterFreshConfig
+	-- 	monsterInterval = 1000,
+	-- 	monsterDelay = 50, 				-- 延迟多久刷第一波怪（通常为1即） 		
+	-- 	timeOut = 22500,			
+	-- 	maxMonsterCount = 20, 			-- 怪物数量上限
+	-- },
 	{
 		id = 1,
-		name = "mode1",
-		res = "resources/scene/plane_box1.prefab",
-		rank = true,
-		revive = false,
-		bornPos = {0,-100},
-		bornDir = {1,0},
-		width =  1280, 
-		height = 640,
-		drop = -1,						-- dropConfig
-		dropInterval = 20,      		
-		playerDrop = 1003,
-		monster = 2001,					-- monsterFreshConfig
-		monsterInterval = 1000,
-		monsterDelay = 50, 				-- 延迟多久刷第一波怪（通常为1即） 		
-		timeOut = 22500,			
-		maxMonsterCount = 20, 			-- 怪物数量上限
-	},
-	{
-		id = 2,
-		name = "mode2",
+		name = "mode",
 		res = "resources/scene/plane_box1.prefab",
 		rank = false,
 		revive = true,
@@ -28,13 +28,13 @@ local battleConfig = {
 		bornDir = {0,1},
 		width =  1280, 
 		height = 640,
-		drop = -1,						-- dropConfig
-		dropInterval = 100,      		
+		drop = 2001,						-- dropConfig
+		dropInterval = 1000,      		
 		playerDrop = 2003,
 		monster = 1001,					-- monsterFreshConfig
 		monsterInterval = 1000,
 		monsterDelay = 50, 				-- 延迟多久刷第一波怪（通常为1即） 		
-		timeOut = 6000,			
+		timeOut = 300,			
 		maxMonsterCount = 20, 			-- 怪物数量上限
 
 		camp1 = 6001,   				-- 塔1

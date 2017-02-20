@@ -40,7 +40,7 @@ function ControllerLogin:open(arg1)
           end)
       end,
       onLoaded = function(name)
-        LoadingManager:getInstance():stop();
+          LoadingManager:getInstance():stop();
       end
   });
 

@@ -20,128 +20,132 @@ local ControllerBattle = cc.class("ControllerBattle",ControllerBase)
 
 local _instance = nil
 function ControllerBattle:getInstance( ... )
-  if(_instance == nil) then
-    _instance = ControllerBattle.new();
-  end
-  return _instance
+
+    if(_instance == nil) then
+      _instance = ControllerBattle.new();
+    end
+  
+    return _instance
 end
 
 function ControllerBattle:ctor( ... )
-  self._battle = nil
-  self._players = nil
-  self._cmds = nil
-  self._uiBattle = nil
-  self._uiBattleEnd = nil
-  self._running = false
-  self._waiting = false
-  self._frameCount = 0
-  self._renderBattle = nil
-  self._curDirection = nil
-  self._lastTouchTime = 0
-  self._lastDir = nil
+    self._battle = nil
+    self._players = nil
+    self._cmds = nil
+    self._uiBattle = nil
+    self._uiBattleEnd = nil
+    self._running = false
+    self._waiting = false
+    self._frameCount = 0
+    self._renderBattle = nil
+    self._curDirection = nil
+    self._lastTouchTime = 0
+    self._lastDir = nil
 
-  self._curId = -1
-  self._curCamp = nil
+    self._curId = -1
+    self._curCamp = nil
 
-  self._totalTime = 0
-  self._battleTick = -1
+    self._totalTime = 0
+    self._battleTick = -1
 
-  self._uiTime = 0
+    self._uiTime = 0
 
-  self._curMode = nil
-  self._curBattleId = nil
+    self._curMode = nil
+    self._curBattleId = nil
 end
 
 function ControllerBattle:init()
-  self.super:init(self);
-  -- self:initNet();
+    self.super:init(self);
+    -- self:initNet();
 end
 
 function ControllerBattle:reset()
   
-  self.super.reset(self)
+    self.super.reset(self)
 
-  if(self._uiBattle ~= nil) then
-    self._uiBattle:uninit()
-    self._uiBattle = nil
-  end
+    if(self._uiBattle ~= nil) then
+        self._uiBattle:uninit()
+        self._uiBattle = nil
+    end
 
-  if(self._uiBattleEnd ~= nil) then
-    self._uiBattleEnd:uninit()
-    self._uiBattleEnd = nil
-  end
+    if(self._uiBattleEnd ~= nil) then
+        self._uiBattleEnd:uninit()
+        self._uiBattleEnd = nil
+    end
 
-  if(self._battle ~= nil) then
-    self._battle:uninit()
-    self._battle = nil
-  end
+    if(self._battle ~= nil) then
+        self._battle:uninit()
+        self._battle = nil
+    end
 
-  self._running = false
-  self._curDirection = nil
-  self._curId = nil
-  self._frameCount = 0
-  self._battleTick = 0
+    self._running = false
+    self._curDirection = nil
+    self._curId = nil
+    self._frameCount = 0
+    self._battleTick = 0
 end
 
 function ControllerBattle:uninit()
   
-  if(self._running) then
-    self:close();
-  end
-  
-  self.super.uninit(self)
+    if(self._running) then
+        self:close();
+    end
+    
+    self.super.uninit(self)
 end
+
+local frame = 0
+local second = 0
 
 function ControllerBattle:update(dt)
   
-  self.super.update(self,dt)
+    self.super.update(self,dt)
 
-  if(self._battle == nil) then
-    return
-  end
-
-  if(self._renderBattle ~= nil) then
-    self._renderBattle:update(dt)
-  end
-  self._uiTime = self._uiTime + dt
-  if(self._uiTime > 1) then
-    self._uiTime = 0
-    if(self._uiBattle ~= nil) then
-      self._uiBattle:fresh()
-    end
-  end
-
-  if(self._curMode == 2) then
-    local temp = 0;
-    repeat 
-      temp = temp + 1
-      if(temp < 100) then
-        temp = 0
-        break
-      end
-      self.tick()
-    until (self._frameCount > self._battle.getFrame())
-    return
-  end
-
-  if(self._curMode == 1) then
-    self._totalTime = self._totalTime + dt;
-
-    if(self._totalTime < self._battleTick) then 
-      return
+    if(self._battle == nil) then
+        return
     end
 
-    self._totalTime = 0
-    self:tick(dt)
-    return
-  end
+    if(self._renderBattle ~= nil) then
+        self._renderBattle:update(dt)
+    end
+    self._uiTime = self._uiTime + dt
+    if(self._uiTime > 1) then
+        self._uiTime = 0
+
+        if(self._uiBattle ~= nil) then
+            self._uiBattle:fresh()
+        end
+    end
+
+    if(self._curMode == 2) then
+        local temp = 0;
+        repeat 
+            temp = temp + 1
+            if(temp < 100) then
+              temp = 0
+              break
+            end
+            self.tick()
+        until (self._frameCount > self._battle.getFrame())
+        return
+    end
+
+    if(self._curMode == 1) then
+        self._totalTime = self._totalTime + dt;
+        if(self._totalTime < self._battleTick) then 
+            return
+        end
+        self._totalTime = 0
+        self:tick(dt)
+        return
+    end
 
 end
 
 function ControllerBattle:tick(dt) 
-  if(self._battle ~= nil) then
-    self._battle:update();
-  end
+    if(self._battle ~= nil) then
+        self._battle:update();
+    end    
 end
 
 function ControllerBattle:requestStart(arg) 
@@ -160,35 +164,37 @@ function ControllerBattle:requestStart(arg)
   --    self:open(false,data.battleInfo)
   -- end)
   self:open(false,{
-    ctrlId = 1,
-    mode = 1,
-    battleTid = arg,
-    players = {
-      { ctrlId = 1,typeId = 1000 ,camp = Enum.ECamp.Blue ,isAi = false}
-    },
-    seed = 2016,
-    frame = 0,
+      ctrlId = 1,
+      mode = 1,
+      battleTid = arg,
+      players = {
+        { ctrlId = 1,typeId = 1000 ,camp = Enum.ECamp.Blue ,isAi = false}
+      },
+      seed = 2016,
+      frame = 0,
   })
 end
 
 function ControllerBattle:wait()
-  TipsManager:getInstance():playBlink(Common.stringTable.WaitPlayer)
+    TipsManager:getInstance():playBlink(Common.stringTable.WaitPlayer)
 end
 
 function ControllerBattle:waitEnd()
-  TipsManager:getInstance():stopBlink();
-  TipsManager:getInstance():playCd(3);
+    TipsManager:getInstance():stopBlink();
+    TipsManager:getInstance():playCd(3);
 end
 
 function ControllerBattle:getMyCamp()
-  if(self._battle == nil) then
-    return nil
-  end
-  local team = self._battle:getTeamByCtrId(self._curId)
-  if(team == nil) then
-    return
-  end
-  return team:getCamp()
+    if(self._battle == nil) then
+        return nil
+    end
+
+    local team = self._battle:getTeamByCtrId(self._curId)
+    if(team == nil) then
+        return
+    end
+    
+    return team:getCamp()
 end
 
 function ControllerBattle:open(auto,info)
@@ -288,7 +294,7 @@ function ControllerBattle:open(auto,info)
   }
 
   if(info.cmds ~= nil) then
-    for i = 1,info.cmds.length do
+    for i = 1,#info.cmds do
       local data = info.cmds[i]
       self:cacheCmd(data);
     end
@@ -449,6 +455,10 @@ function ControllerBattle:onGameOver(result)
 
     self._uiBattleEnd:setResult(tittle,rank,score)
     self._uiBattleEnd:open()
+
+    if(self._uiBattle ~= nil) then
+      self._uiBattle:close()
+    end
   end
   self:stopMusic()
 end

@@ -9,7 +9,7 @@ local battleUtils = {
 		if(tb == nil) then
 			return nil;
 		end
-		for i = 1,table.length(tb) do
+		for i = 1,#tb do
 			local item = tb[i]
 			if(item ~= nil and item.id == id) then
 				return item

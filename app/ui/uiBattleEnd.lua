@@ -26,6 +26,10 @@ function UIBattleEnd:init( ... )
   self:setResPath(Common.assetPathTable.uiBattleEnd)
 end
 
+function UIBase:useStack( ... )
+  return false
+end
+
 function UIBattleEnd:loaded(res)
       
   self.super.loaded(self,res)
@@ -47,6 +51,7 @@ function UIBattleEnd:loaded(res)
   self._btnEscape:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
     self:notify("onEscape")
   end);
+
   local bt2 = res:getChildByName("bt_2");
   self._btnRetry = bt2:getComponent("cc.Button")
   self._btnRetry:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
@@ -56,23 +61,23 @@ function UIBattleEnd:loaded(res)
 end
 function UIBattleEnd:fresh()
       
-  if(self._rankRoot ~= nil) then
-    self._rankRoot.active = (self._rank ~= nil)
-  end
-  if(self._rankNode ~= nil and self._rank ~= nil) then
-    self._rankNode.string =  self._rank
-  end
+  -- if(self._rankRoot ~= nil) then
+  --   self._rankRoot.active = (self._rank ~= nil)
+  -- end
+  -- if(self._rankNode ~= nil and self._rank ~= nil) then
+  --   self._rankNode.string =  self._rank
+  -- end
 
-  if(self._scoreRoot ~= nil) then
-    self._scoreRoot.active = (self._score ~= nil)
-  end
-  if(self._scoreNode ~= nil and self._score ~= nil) then
-    self._scoreNode.string =  self._score 
-  end
+  -- if(self._scoreRoot ~= nil) then
+  --   self._scoreRoot.active = (self._score ~= nil)
+  -- end
+  -- if(self._scoreNode ~= nil and self._score ~= nil) then
+  --   self._scoreNode.string =  self._score 
+  -- end
 
-  if(self._tittleNode ~= nil) then
-    self._tittleNode.string = self._tittle
-  end
+  -- if(self._tittleNode ~= nil) then
+  --   self._tittleNode.string = self._tittle
+  -- end
 
 end
 
@@ -80,6 +85,10 @@ function UIBattleEnd:setResult(tittle,rank,score)
     self._tittle = tittle
     self._rank = rank
     self._score = score
+end
+
+function UIBattleEnd:unload( )
+  UIBase.unload(self)
 end
 
 function UIBattleEnd:isTweenShow() 

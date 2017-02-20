@@ -95,7 +95,7 @@ function ObjManager:destroyObject(id)
     end
 end
 function ObjManager:load(resName,callback) 				
-	-- print('ObjManager load',resName)
+
 	local info = self:getFromCache(resName)
 
 	if(info ~= nil) then
@@ -150,8 +150,7 @@ function ObjManager:addToCache(info)
 	if(self._objectsCache == nil) then
 		self._objectsCache = {}
 	end
-	
-	info.res:setVisible(false)  
+	-- info.res:setVisible(false)  
 	table.insert(self._objectsCache,info)
 end
 function ObjManager:getFromCache(resName)

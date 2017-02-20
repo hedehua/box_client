@@ -20,16 +20,15 @@ function UILogin:loaded(res)
   local mode1 = bottom:getChildByName("mode_1");
   self._button1 = mode1:getComponent("cc.Button")
 
-  self._button1:on(cc.Handler.EVENT_TOUCH_BEGAN,function()
+  self._button1:on(cc.Handler.EVENT_TOUCH_BEGAN,function(  )
     self:onButtonClick(1)
   end)
 
-  local mode2 = bottom:getChildByName("mode_2");
-  self._button2 = mode2:getComponent("cc.Button")
-  self._button2:on(cc.Handler.EVENT_TOUCH_BEGAN, function(event)
-      self:onButtonClick(2)
-  end);
+end
 
+function UILogin:unload( )
+  self._button1:off(cc.Handler.EVENT_TOUCH_BEGAN,self._onStart)
+  UIBase.unload(self)
 end
 
 function UILogin:fresh()

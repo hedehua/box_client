@@ -777,6 +777,10 @@ function Battle:removeMissile(obj)
 end
 
 -- out interface
+function Battle:isRunning(  )
+	return self._running
+end
+
 function Battle:getRestTime() 
 	if(self._config == nil)then
 		return 0

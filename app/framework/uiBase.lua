@@ -35,9 +35,15 @@ function UIBase:setQueier(q)
 	self._queier = q
 end
 function UIBase:request(eventType,arg1,arg2,arg3)
+	
 	if(self._queier == nil) then
 		return nil;
 	end
+
+	if(not self._active) then
+		return
+	end
+
 	local r = self._queier[eventType]
 	if(r ~= nil)then
 		return r(arg1,arg2,arg3);
@@ -45,19 +51,27 @@ function UIBase:request(eventType,arg1,arg2,arg3)
 	return nil;
 end
 function UIBase:notify(eventType,arg1,arg2,arg3)
+	
 	if(self._queier == nil)then
 		return nil;
 	end
+	
+	if(not self._active) then
+		return
+	end
+
 	local r = self._queier[eventType]
 	if(r ~= nil) then
 		r(arg1,arg2,arg3);
 	end
 end
+
 function UIBase:isTweenShow() 
 	return false
 end
+
 function UIBase:open()
-	-- // 打开界面
+
 	self._active = true;
 	if(self._resObject == nil) then
 		self:load()
@@ -83,7 +97,9 @@ function UIBase:close()
 	self._resObject:setVisible(self._active);
 end
 function UIBase:fresh()
-	-- // 刷新界面
+	if(not self._active) then
+		return
+	end
 end
 function UIBase:load()
 	-- // 加载资源
@@ -94,11 +110,18 @@ function UIBase:load()
 	ObjManager:getInstance():load(self._resPath,cb);
 end
 function UIBase:unload() 
+	self._queier = nil
+
 	if(self._resObject == nil) then
 		return
 	end
+
+	if(uiRoot ~= nil) then
+		uiRoot:removeChild(self._resObject)
+	end
 	ObjManager:getInstance():unload(self._resObject)
 	self._resObject = nil
+
 end
 
 function UIBase:_loaded(err,res)

@@ -21,7 +21,7 @@ function SpriteComponent:onLoad(target)
     node:setAnchorPoint(ap)
     node:setColor(target:getColor())
 
-    if self.capInsets and target.contentSize then
+    if target.contentSize then --self.capInsets and
         node:setContentSize(target.contentSize)
         self.contentSize = target.contentSize -- used in ButtonComponent
     end
