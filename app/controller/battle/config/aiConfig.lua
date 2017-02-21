@@ -1,7 +1,7 @@
 local aiConfig = {
         {
                 id = 1,
-                interval = 10,          -- 600
+                interval = 2,          -- 600
                 maxPercent = 100,       -- 决定是百分比/千分比/万分比
                 fov     = 300,          -- 视野范围
                 activity= 30,           -- 活跃度，用于反应idle状态是否频繁调整朝向

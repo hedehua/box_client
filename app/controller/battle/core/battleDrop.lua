@@ -34,7 +34,7 @@ function BattleDrop:init(typeId,camp,pos)
 	self._camp = camp
 	self._enableRot = false
 
-	self._config = Utils:getConfig(DropConfig,self._typeId)
+	self._config = Utils.getConfig(DropConfig,self._typeId)
 
 	if(self._config == nil)then
 		return

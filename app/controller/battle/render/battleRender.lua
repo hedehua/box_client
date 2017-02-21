@@ -50,15 +50,24 @@ function BattleRender:update(dt)
         obj:update(dt)
     end
     
-   -- self:asyncPos()
+   self:asyncPos()
 end
+-- -1024 1024
+-- -1024+screen.width/2
 function BattleRender:asyncPos()
     if(self._followObj ~= nil ) then
         local x,y = self._followObj:getRoot():getPosition()
         local screen = Common.utils.getVisibleSize()
-        self._rootNode:setPosition(-x + screen.width/2,-y + screen.height/2)
+        local width,height = self:request("getSize")
+        if(width ~= nil) then
+            x = math.max(-width/2 + screen.width/2,x)
+            x = math.min(width/2 - screen.width/2,x)
+        end
+        self._rootNode:setPositionX(-x + screen.width/2)
+        -- self._rootNode:setPosition(-x + screen.width/2,-y + screen.height/2)
     end
 end
+
 function BattleRender:setQueier(q)
 	self._queier = q
 end

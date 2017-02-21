@@ -777,6 +777,14 @@ function Battle:removeMissile(obj)
 end
 
 -- out interface
+
+function Battle:getSize(  )
+	if(self._config == nil) then
+		return nil
+	end
+	return self._config.width,self._config.height
+end
+
 function Battle:isRunning(  )
 	return self._running
 end
@@ -787,9 +795,11 @@ function Battle:getRestTime()
 	end
 	return self._config.timeOut - self._frameCount
 end
+
 function Battle:getFrame() 
 	return self._frameCount
 end
+
 function Battle:getKillCount(ctrlId) 
 	if(ctrlId == nil or ctrlId < 0)then
 		cc:log("getkillcount arguments error")

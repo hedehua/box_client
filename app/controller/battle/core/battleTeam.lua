@@ -230,12 +230,12 @@ function BattleTeam:updateMember()
 	for i = 1,#self._members do
 		local cur = self._members[i]
 		local nxt = self._members[i+1]
-		if(cur:needRemove() or nxt == nil or next:needRemove())then
+		if(cur:needRemove() or nxt == nil or nxt:needRemove())then
 			
 		else		
-			if(cur:getHp() == next:getHp() and cur:getCategory() == next:getCategory())then
+			if(cur:getHp() == nxt:getHp() and cur:getCategory() == nxt:getCategory())then
 				cur:merge(nxt)
-				next:beMerge(cur);
+				nxt:beMerge(cur);
 			end
 		end
 	end

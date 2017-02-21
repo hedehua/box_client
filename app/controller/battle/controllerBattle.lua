@@ -208,7 +208,12 @@ function ControllerBattle:open(auto,info)
   self._renderBattle = BattleRender.new();
   self._renderBattle:init();
   self._renderBattle:setQueier({
-
+    getSize = function(  )
+      if(self._battle == nil) then
+        return nil
+      end
+      return self._battle:getSize()
+    end
   }) 
   self._curId = info.ctrlId
   self._curMode = info.mode

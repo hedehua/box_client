@@ -26,22 +26,22 @@ local battleConfig = {
 		revive = true,
 		bornPos = {0,-100},
 		bornDir = {0,1},
-		width =  1280, 
+		width =  2048, 
 		height = 640,
-		drop = 2001,						-- dropConfig
+		drop = 1001,						-- dropConfig
 		dropInterval = 1000,      		
 		playerDrop = 2003,
 		monster = 1001,					-- monsterFreshConfig
 		monsterInterval = 1000,
 		monsterDelay = 50, 				-- 延迟多久刷第一波怪（通常为1即） 		
-		timeOut = 300,			
+		timeOut = 3000,			
 		maxMonsterCount = 20, 			-- 怪物数量上限
 
 		camp1 = 6001,   				-- 塔1
 		camp2 = 6002,					-- 塔2
 
-		camp1Pos = {-400,0},
-		camp2Pos = {400,0},
+		camp1Pos = {-800,0},
+		camp2Pos = {800,0},
 		camp1Dir = {1,0},
 		camp2Dir = {-1,0},
 	},
