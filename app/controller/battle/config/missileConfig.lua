@@ -28,7 +28,7 @@ local missileConfig = {
 	--o:subMissile 延迟产生子弹，delaytime  并发 或 先后
 
 
-	{id = 1001,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+	{id = 1001,speed = 30,radius = 10,moveType = 2,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
 	-- {id = 10010,speed = 160,radius = 50,moveType = 2,start = 1,startPos = nil,dir = 30, timeOut = 20,subMissile = 10011,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
 	-- {id = 10011,speed = 160,radius = 50,moveType = 2,start = 1,startPos = nil,dir = -30, timeOut = 20,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
 	-- {id = 10012,speed = 160,radius = 50,moveType = 1,start = 1,startPos = nil,dir = 60, timeOut = 20,subMissile = 10013,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},

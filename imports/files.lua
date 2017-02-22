@@ -12,6 +12,7 @@ local files = {
     ["7745264c-80ba-40aa-8f2c-b9f33de19d2e"] = "raw-assets/resources/effect",
     ["7bad064c-7e73-4eed-be46-bd0dd8ae7f6a"] = "raw-assets/resources/atlas/icon_texture.png",
     ["9255d012-a84e-4fd9-aca8-f6805df8d5fc"] = "raw-assets/resources/music",
+    ["9531d4f3-686e-4c8a-9272-c48d0878e4ef"] = "raw-assets/tiledmap/black01/map_01.png",
     ["99170b0b-d210-46f1-b213-7d9e3f23098a"] = "raw-internal/image/default_progressbar_bg.png",
     ["a9eaf9e3-8280-40ee-b088-68b6703be79f"] = "raw-assets/resources/item",
     ["b3c2a0d9-f4f5-451c-87f0-74100fc697e5"] = "raw-assets/resources/atlas/ui_texture.png",
