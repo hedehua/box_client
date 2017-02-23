@@ -21,7 +21,7 @@ local battleConfig = {
 	{
 		id = 1,
 		name = "mode",
-		res = "resources/scene/map_01_01.prefab",
+		res = "resources/scene/map02.prefab",
 		rank = false,
 		revive = true,
 		bornPos = {0,-100},

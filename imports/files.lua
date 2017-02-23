@@ -16,6 +16,7 @@ local files = {
     ["99170b0b-d210-46f1-b213-7d9e3f23098a"] = "raw-internal/image/default_progressbar_bg.png",
     ["a9eaf9e3-8280-40ee-b088-68b6703be79f"] = "raw-assets/resources/item",
     ["b3c2a0d9-f4f5-451c-87f0-74100fc697e5"] = "raw-assets/resources/atlas/ui_texture.png",
+    ["bfe70086-8bc9-47db-a572-f80937f04cb2"] = "raw-assets/tiledmap/map02/map_02.png",
     ["cfef78f1-c8df-49b7-8ed0-4c953ace2621"] = "raw-internal/image/default_progressbar.png",
     ["d4fe731c-5d33-4a0f-abe9-44e7ea352ff1"] = "raw-assets/resources/role",
     ["e133729d-174a-46cf-9c01-ded98d4f04dc"] = "raw-assets/resources/font/number_0.png",

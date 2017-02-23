@@ -20,7 +20,7 @@ end
 	self:setBoxCollider(0,0,width,height)
 
 	if(self._render ~= nil ) then
-		self._render:setSize(width,height)
+		-- self._render:setSize(width,height)
 		self._render:setVisible(true)
 		self._render:disableDynamic(true)
 		self._render:loadAvatar(res)

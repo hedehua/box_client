@@ -126,28 +126,29 @@ function UIBattle:loaded(res)
    
     
     -- if(angle > -WorldConfig.touchAngle and angle < WorldConfig.touchAngle) then
-    --   self.onTouchStart(cc.KEY.right)
+    --   self.onTouchBegin(cc.KEY.right)
     --   return
     -- end
 
     -- if(angle > Math.PI/2 -WorldConfig.touchAngle and angle < Math.PI/2 + WorldConfig.touchAngle) then
-    --   self.onTouchStart(cc.KEY.up)
+    --   self.onTouchBegin(cc.KEY.up)
     --   return
     -- end
 
     -- if(angle > -Math.PI/2 -WorldConfig.touchAngle and angle < -Math.PI/2 + WorldConfig.touchAngle)then
-    --   self.onTouchStart(cc.KEY.down)
+    --   self.onTouchBegin(cc.KEY.down)
     --   return
     -- end
 
     -- if(angle > Math.PI - WorldConfig.touchAngle or angle < -Math.PI + WorldConfig.touchAngle) then
-    --   self.onTouchStart(cc.KEY.left)
+    --   self.onTouchBegin(cc.KEY.left)
     --   return
     -- end
-    self:onTouchStart(cc.pNormalize(pos),angle) 
+    self:onTouchBegin(cc.pNormalize(pos),angle) 
   end
   local _onTouchEnded = function (touch, event) 
       self:setStickActive(false)
+      self:onTouchEnd()
       self._touchPos = nil
   end
   local _onTouchCancelled = function (touch, event) 
@@ -182,7 +183,7 @@ function UIBattle:loaded(res)
   end  
 
   local function onKeyReleased(keyCode, event)  
-
+    self:onKeyReleased(keyCode)
   end  
 
   listener = cc.EventListenerKeyboard:create()  
@@ -193,8 +194,12 @@ function UIBattle:loaded(res)
   table.insert(self._listener,listener)
 end
 
-function UIBattle:onTouchStart(delta,angle)
-  self:notify("onDirectionChange",delta,angle)
+function UIBattle:onTouchBegin(delta,angle)
+  self:notify("onTouchBegin",delta,angle)
+end
+
+function UIBattle:onTouchEnd(  )
+  self:notify("onTouchEnd")
 end
 
 function UIBattle:onKeyPressed(keyCode) 
@@ -210,7 +215,11 @@ function UIBattle:onKeyPressed(keyCode)
     pos = cc.p(0,-1)
   end
   if(pos == nil) then return end
-  self:notify("onDirectionChange",pos,cc.pGetAngle(pos,cc.p(1,0)))
+  self:notify("onTouchBegin",pos,cc.pGetAngle(pos,cc.p(1,0)))
+end
+
+function UIBattle:onKeyReleased( keyCode )
+  self:notify("onTouchEnd")
 end
 
 function UIBattle:removeListner() 

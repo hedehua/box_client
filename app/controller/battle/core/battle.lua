@@ -135,20 +135,23 @@ function Battle:exec(cmd,arg1,arg2,arg3,arg4,arg5)
 		return
 	end
 	local refs = {
-		[Enum.CMD.ChangeDir] = function( ... )
+		[Enum.CMD.ChangeDir] = function(  )
 			self:changeTeamDir(arg1,arg2,arg3)
 		end,
-		[Enum.CMD.Move] = function( ... )
+		[Enum.CMD.Move] = function(  )
 			self:move(arg1,arg2,arg3)
 		end,
-		[Enum.CMD.Join] = function( ... )
+		[Enum.CMD.Join] = function(  )
 			self:joinPlayer(arg1,arg2,arg3,arg4)
 		end,
-		[Enum.CMD.Leave] = function( ... )
+		[Enum.CMD.Leave] = function(  )
 			self:leaveTeam(arg1)
 		end,
-		[Enum.CMD.SetAI] = function( ... )
+		[Enum.CMD.SetAI] = function(  )
 			self:setAi(arg1,arg2)
+		end,
+		[Enum.CMD.StopMove] = function(  )
+			self:stopMove(arg1)
 		end
 	}
 	local func = refs[cmd];
@@ -663,20 +666,30 @@ function Battle:getTeamByCtrlId(ctrlId)
 		end
 	end
 end
--- 4 direction
-function Battle:move(ctrlId,dir)
-	if(ctrlId < 0)then
-		cc:log("invalid ctrlId");
-		return;
+
+function Battle:stopMove( ctrlId )
+	if(ctrlId < 0) then
+		return
 	end
-	if(self._teams == nil)then
-		cc:log("no team");
-		return;
-	end
+
 	local team = self:getTeamByCtrId(ctrlId)
 
 	if(team == nil)then
-		cc:log('nil team')
+		return;
+	end
+
+	team:stopMove();
+end
+
+-- 4 direction
+function Battle:move(ctrlId,dir)
+	if(ctrlId < 0)then
+		return;
+	end
+	
+	local team = self:getTeamByCtrId(ctrlId)
+
+	if(team == nil)then
 		return;
 	end
 

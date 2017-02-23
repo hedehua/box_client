@@ -324,8 +324,11 @@ function ControllerBattle:open(auto,info)
       end
       return 0
     end,
-    onDirectionChange = function(delta,angle) 
-      self:excuteTouch(delta,angle)
+    onTouchBegin = function(delta,angle) 
+      self:touchIn(delta,angle)
+    end,
+    onTouchEnd = function(  )
+      self:touchOut()
     end,
     getRank = function()
       if(self._battle == nil) then
@@ -467,7 +470,7 @@ function ControllerBattle:onGameOver(result)
   end
   self:stopMusic()
 end
-function ControllerBattle:excuteTouch(delta,angle)
+function ControllerBattle:touchIn(delta,angle)
   if(self._battle == nil)then
     return
   end
@@ -482,8 +485,16 @@ function ControllerBattle:excuteTouch(delta,angle)
  
   local x = math.floor(delta.x * WorldConfig.vectorPrecision) 
   local y = math.floor(delta.y * WorldConfig.vectorPrecision)
-  -- print(Enum.CMD.ChangeDir,self:getCtrlId(),x,y)
+
   self._battle:DoCMD(Enum.CMD.ChangeDir,self:getCtrlId(),x,y)
+end
+
+function ControllerBattle:touchOut(  )
+  if(self._battle == nil) then
+    return
+  end
+  self._curDirection = nil
+  self._battle:DoCMD(Enum.CMD.StopMove,self:getCtrlId())
 end
 
 function ControllerBattle:excuteKeycode(keyCode) 

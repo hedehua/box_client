@@ -484,7 +484,7 @@ function BattleTeam:joinMember(typeId)
 		self:setSpeed(member:getBasicSpeed())
 		self:setPos(pos:clone())
 		self:setCircleCollider(pos.x,pos.y,member:getRadius())
-		self:moveDir(dir)
+		-- self:moveDir(dir)
 	end
 
 	if(self._memberOriData == nil)then
@@ -504,9 +504,11 @@ function BattleTeam:changeTeamDir(dx,dy)
 	self:moveDir(dir)
 	self._tickTime = 0
 end
+
 function BattleTeam:getDirection() 
 	return self._curDirection
 end
+
 function BattleTeam:applyMemberPosQue(member,posQue) 
 	if(posQue ~= nil and #posQue > 1)then
 		for i = 1, #posQue do

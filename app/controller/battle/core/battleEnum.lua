@@ -7,6 +7,7 @@ local BattleEnums = {
 		Leave		= 3,
 		SetAI 		= 4,
 		ChangeDir 	= 5,
+		StopMove	= 6,
 	},
 	Direction = {
 		None = 0,
