@@ -80,7 +80,6 @@ function Battle:reset()
 end
 function Battle:start(params) 
 
-	-- cc.log("[user]battle start");
 	Utils.setSeed(self:getSeed())
 	self._typeId = self:getTypeId()
 	self._config = Utils.getConfig(BattleConfig,self._typeId)
@@ -92,51 +91,24 @@ function Battle:start(params)
 
 	self._running = true
 
-	--*/
-	--BattleObject.setNeedRender(false)
-	--self.recvHistory();
-	-- BattleObject.setNeedRender(true)
-	--self.recvAtatar();
-	--*/
 end
--- Battle:recvHistory = function() {
--- 	local frame = self.getBasicFrame();
--- 	if(frame == nil || frame == 0){
--- 		return false
--- 	end
-
--- 	while(self._frameCount < frame){
--- 		self.update();
--- 	end
--- 	return true
--- end
--- Battle:recvAtatar = function(){
--- 	if(self._teams ~= nil){
--- 		for(local i = 0;i<self._teams.length;i++){
--- 			self._teams[i].loadAvatar()
--- 		end
--- 	end
--- 	if(self._drops ~= nil){
--- 		for(local i = 0;i<self._drops.length;i++){
--- 			self._drops[i].loadAvatar()
--- 		end
--- 	end
--- end
 
 function Battle:pause(params) 
 	cc:log("[user] battle pause ");
 end
+
 function Battle:stop(params) 
 	self._isOver = true
 end
+
 function Battle:exec(cmd,arg1,arg2,arg3,arg4,arg5) 
 
 	if(self:isOver())then
 		return
 	end
 	local refs = {
-		[Enum.CMD.ChangeDir] = function(  )
-			self:changeTeamDir(arg1,arg2,arg3)
+		[Enum.CMD.MoveEx] = function(  )
+			self:moveEx(arg1,arg2,arg3)
 		end,
 		[Enum.CMD.Move] = function(  )
 			self:move(arg1,arg2,arg3)
@@ -152,6 +124,9 @@ function Battle:exec(cmd,arg1,arg2,arg3,arg4,arg5)
 		end,
 		[Enum.CMD.StopMove] = function(  )
 			self:stopMove(arg1)
+		end,
+		[Enum.CMD.Skill] = function(  )
+			self:castSkill(arg1)
 		end
 	}
 	local func = refs[cmd];
@@ -196,7 +171,7 @@ function Battle:getChars()
 	end
 	return self._mode.getChars()
 end
- function Battle:update()
+function Battle:update()
 
 	if(not self._running)then
 		return
@@ -227,12 +202,12 @@ end
 
 	self:tryGenerateDrop()
 	self:tryGenerateMonster()
-
 	self:updateTeam()
 	self:updateDrop()
 	self:updateMissile()
 	self:updateScore()
 end
+
 function Battle:updateMissile() 
 		if(self._missiles ~= nil)then
 		for i = table.length(self._missiles),1,-1 do
@@ -645,13 +620,11 @@ function Battle:joinTeam(data)
 		end
 		
 	})
-	team:init(pos,dir,camp,flag,ctrlId);            
-
-	for i = 1,#chars do
-		local ch = chars[i]
-		team:joinMember(ch.typeId);
-	end
-
+      
+	local typeId = chars[1].typeId
+	local vpos = Vector2.new(pos[1],pos[2])
+	local vdir = Vector2.new(dir[1],pos[2])
+	team:init(typeId,vpos,vdir,camp,flag,ctrlId); 
 	self:addTeam(team);
 	return team
 end
@@ -665,6 +638,19 @@ function Battle:getTeamByCtrlId(ctrlId)
 			return team.id;
 		end
 	end
+end
+
+function Battle:castSkill( ctrlId )
+	if(ctrlId < 0) then
+		return
+	end
+	
+	local team = self:getTeamByCtrId(ctrlId)
+	if(team == nil) then
+		return
+	end
+
+	team:castSkill()
 end
 
 function Battle:stopMove( ctrlId )
@@ -696,7 +682,7 @@ function Battle:move(ctrlId,dir)
 	team:move(dir);
 end
 -- any direction
-function Battle:changeTeamDir(ctrlId,dirX,dirY)
+function Battle:moveEx(ctrlId,dirX,dirY)
 
 	if(ctrlId < 0)then
 		cc:log("invalid ctrlId");
@@ -713,7 +699,7 @@ function Battle:changeTeamDir(ctrlId,dirX,dirY)
 		return;
 	end
 
-	team:changeTeamDir(dirX,dirY);
+	team:moveEx(dirX,dirY);
 end
 function Battle:getTeamCount() 
 	if(self._teams == nil) then

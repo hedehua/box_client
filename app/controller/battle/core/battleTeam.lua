@@ -1,6 +1,5 @@
-local BattleObject = require("app.controller.battle.core.battleObject")
-local Missile = require("app.controller.battle.core.missile")
 local Character = require("app.controller.battle.core.character")
+local Missile = require("app.controller.battle.core.missile")
 local BattleDrop = require("app.controller.battle.core.battleDrop")
 local Enum = require("app.controller.battle.core.battleEnum")
 local Vector2 = require("app.controller.battle.core.vector2")
@@ -10,23 +9,21 @@ local Ai = require("app.controller.battle.core.ai")
 local maxSize = 100
 
 local BattleTeam = {}
-BattleTeam.super = BattleObject
+BattleTeam.super = Character
 BattleTeam.__cname = "BattleTeam"
 
-setmetatable( BattleTeam,{__index = BattleObject})
+setmetatable( BattleTeam,{__index = Character})
 function BattleTeam.new()
 
-	local obj = BattleObject.new()
+	local obj = Character.new()
 	setmetatable(obj,{__index = BattleTeam})
 	obj._ctrlId 	= nil
-	-- obj._typeId = nil	-- same with leader
-	obj._isFollowTarget = false
-	obj._isAlive = nil
+
 	obj._members = nil
 	obj._curDirection = nil
 	obj._bornPos = nil
 	obj._bornDir = nil
-	obj._needRemove = false
+
 	obj._isAi = false
 	obj._queier = nil
 	obj._ai = nil
@@ -35,7 +32,6 @@ function BattleTeam.new()
 	obj._paths = nil
 
 	obj._reviveTime = -1
-	obj._frameCount = 0
 	obj._memberOriData = nil
 	obj._waitJoinMember = nil
 
@@ -49,44 +45,38 @@ function BattleTeam.new()
 	return obj
 end
 
+-- function BattleTeam:update()
 
-function BattleTeam:update()
+-- 	BattleTeam.super.update(self)
 
-	if(not self:isValid()) then
-		print("team",self._id,'no avalid')
-		return;
-	end
-	self._frameCount = self._frameCount+1;
+-- 	if(self._reviveTime >= 0 and self._frameCount > self._reviveTime)then
+-- 		self:revive()
+-- 		self._reviveTime = -1
+-- 	end
 
-	if(self._reviveTime >= 0 and self._frameCount > self._reviveTime)then
-		self:revive()
-		self._reviveTime = -1
-	end
-
-	if(not self._isAlive)then
-		return;
-	end
+-- 	if(not self._isAlive)then
+-- 		return;
+-- 	end
 	
-	self:updateAi();
-	self:updateMember();
+-- 	self:updateAi();
+-- 	self:updateMember();
 
-	BattleTeam.super.update(self)
-end
-function BattleTeam:init (pos,dir,camp,flag,ctrlId)
+-- end
+
+function BattleTeam:init (typeId,pos,dir,camp,flag,ctrlId)
 	
-	BattleTeam.super.init(self)
+	BattleTeam.super.init(self,typeId,pos,dir,camp)
 	
-	self._isAlive = true
 	self._ctrlId = ctrlId
-	self._isFollowTarget = flag;
-	self._bornPos = Vector2.new(pos[1],pos[2])
-	self._bornDir = Vector2.new(dir[1],dir[2])
+	self._bornPos = self:getPos()
+	self._bornDir = self:getDir()
 	self._camp = camp
 	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
-	
+	self:setLeader(flag)
 	self:initAi()
-	
+
 end
+
 function BattleTeam:uninit()
 
 	BattleTeam.super.uninit(self)
@@ -131,31 +121,11 @@ end
 function BattleTeam:setBasement()
 	self._isBasement = true
 end
-function BattleTeam:setQueier(q)
-	self._queier = q
-end
-function BattleTeam:request(eventType,arg1,arg2,arg3)
-	if(self._queier == nil)then
-		return nil;
-	end
-	local r = self._queier[eventType]
-	if(r ~= nil)then
-		return r(arg1,arg2,arg3);
-	end
-	return nil;
-end
-function BattleTeam:notify(eventType,arg1,arg2,arg3)
-	if(self._queier == nil)then
-		return nil;
-	end
-	local r = self._queier[eventType]
-	if(r ~= nil)then
-		r(arg1,arg2,arg3);
-	end
-end
+
 function BattleTeam:getCamp(argument) 
 	return self._camp
 end
+
 function BattleTeam:needRemove(argument) 
 	return self._needRemove
 end
@@ -165,10 +135,6 @@ function BattleTeam:move(dir)
 		return;
 	end
 
-	-- if(Utils.isReversDirection(dir,self._curDirection)){
-	-- 	return;
-	-- }
-
 	local arr = Utils.directionToArr(dir)
 
 	if(arr == nil)then
@@ -176,28 +142,25 @@ function BattleTeam:move(dir)
 		return;
 	end
 
-	self:changeTeamDir(arr[1],arr[2]);
+	self:moveEx(arr[1],arr[2]);
 
 	self._curDirection = dir;
 end
+
 function BattleTeam:getLeader()
-	if(self._members == nil)then
-		return nil;
-	end
-	if(#self._members == 0)then
-		return nil;
-	end
-	return self._members[1]
+	return self
 end
+
 function BattleTeam:getTail()
 	if(self._members == nil)then
-		return nil;
+		return self;
 	end
 	if(#self._members == 0)then
-		return nil;
+		return self;
 	end
 	return self._members[#self._members]
 end
+
 function BattleTeam:getLeaderPos() 			-- 获取队长的坐标
 	local leader = self:getLeader()
 	if(leader == nil)then
@@ -211,13 +174,6 @@ function BattleTeam:getLeaderHp()
 		return nil;
 	end
 	return leader:getHp()
-end
-function BattleTeam:isAlive()
-	local leader = self:getLeader()
-	if(leader == nil)then
-		return nil;
-	end
-	return leader:isAlive()
 end
 
 function BattleTeam:updateMember()
@@ -240,36 +196,15 @@ function BattleTeam:updateMember()
 		end
 	end
 
-
-	-- 队员死亡重新整理队伍
-	
-	-- for(local i = 0;i<self._members.length;i++){
-	-- 	local member = self._members[i]
-	-- 	if(member.isAlive()){
-	-- 		continue
-	-- 	}
-	-- 	for(local j = self._members.length -1;j >= 0;j--){   
-	-- 		local curmember = self._members[j]
-	-- 		if(member == curmember){
-	-- 			break
-	-- 		}
-	-- 		local k = j - 1
-	-- 		if(k >= 0 ){
-	-- 			local preMember = self._members[k]  
-	-- 			if(preMember ~= nil){
-	-- 				curmember.inherit(preMember);
-	-- 			}			
-	-- 		}
-	-- 	}
-	-- }
-	--*/
-	
 	-- 更新逻辑
 	if(self._paths == nil)then
 		self._paths = {}
 	end
 
-	table.insert(self._paths,self:getPos())
+	if(self:isMove()) then
+		table.insert(self._paths,self:getPos())
+	end
+
 	if(#self._paths > maxSize)then
 		table.remove(self._paths,1)
 	end
@@ -293,20 +228,8 @@ function BattleTeam:updateMember()
 	-- update 后处理
 	for i = #self._members,1,-1 do
 		local member = self._members[i];
-		if(member ~= nil)then
-			if(member:needRemove())then		 -- important
-				if(member:isLeader())then		--  leader die
-					self:die()
-					break;
-				end
-				--/* 中间单位死亡 后面全部死的逻辑
-				--for(local j = self._members.length -1;j >= i;j--){
-				--	self.removeMember(self._members[j])
-				--}
-				--*/
-				self:removeMember(member)
-			end
-			
+		if(member ~= nil and member:needRemove())then		 -- important
+			self:removeMember(member)
 		end
 	end
 
@@ -318,24 +241,14 @@ function BattleTeam:updateMember()
 		self._waitJoinMember = nil
 	end
 
-	
-	-- if(self._memberCountChange){
-	-- 	self.resetSpeed()
-	-- 	self._memberCountChange = false
-	-- }
-
 end
 function BattleTeam:addMember(member)
 	if(self._members == nil)then
 		self._members = {}
 	end
 
-	if(#self._members == 0)then
-		member:setLeader(self._isFollowTarget)
-	end
 	member:setTeam(self._id)
 	table.insert(self._members,member);
-	self._memberCountChange = true
 end
 function BattleTeam:removeMember(member)
 	if(member == nil)then
@@ -352,9 +265,12 @@ function BattleTeam:removeMember(member)
 			break;
 		end
 	end
-	self._memberCountChange = true
 end
+
 function BattleTeam:die() 
+
+	BattleTeam.super.die(self)
+
 	self:notify("onDie",self,self._dropId)
 
 	if(self._members == nil)then
@@ -368,11 +284,11 @@ function BattleTeam:die()
 		end
 	end
 
-	self._isAlive = false
 	if(not self:initRevive())then
 		self._needRemove = true
 	end
 end
+
 function BattleTeam:initRevive() 
 
 	if(not self._isRevive)then
@@ -402,7 +318,7 @@ function BattleTeam:revive()
 	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
 	local leaderId = self._memberOriData[1] 		-- 只复活队长
 	self._memberOriData = nil;
-	self:joinMember(leaderId)
+	-- self:joinMember(leaderId)
 	self._killCount = 0
 	self._isAlive = true
 	
@@ -434,14 +350,7 @@ function BattleTeam:pickItem(data)
 	refs[itemType]()
 	
 end
-function BattleTeam:loadAvatar() 
-	if(self._members == nil)then
-		return
-	end
-	for i = 1,#self._members do
-		self._members[i]:loadAvatar()
-	end
-end
+
 function BattleTeam:getNextPos(ch)
 	if(ch == nil)then
 		return self:getPos()
@@ -480,12 +389,6 @@ function BattleTeam:joinMember(typeId)
 
 	self:applyMemberPosQue(member,posQue)
 	self:addMember(member);
-	if(member:isLeader())then
-		self:setSpeed(member:getBasicSpeed())
-		self:setPos(pos:clone())
-		self:setCircleCollider(pos.x,pos.y,member:getRadius())
-		-- self:moveDir(dir)
-	end
 
 	if(self._memberOriData == nil)then
 		self._memberOriData = {}
@@ -494,13 +397,8 @@ function BattleTeam:joinMember(typeId)
 	table.insert(self._memberOriData,typeId)
 end
 
-function BattleTeam:changeTeamDir(dx,dy)
-	if(self._members == nil)then
-		cc:log("no member");
-		return;
-	end
-	local dir =  Vector2.new();
-	dir:setv(dx,dy);
+function BattleTeam:moveEx(dx,dy)
+	local dir =  Vector2.new(dx,dy);
 	self:moveDir(dir)
 	self._tickTime = 0
 end
@@ -518,9 +416,11 @@ function BattleTeam:applyMemberPosQue(member,posQue)
 		end
 	end
 end
+
 function BattleTeam:isBlock(argument) 
 	return false
 end
+
 function BattleTeam:onTriger(sourceObj,targetObj,skill) 
 	if(sourceObj.__cname == "BattleTeam" )then
 
@@ -661,6 +561,7 @@ function BattleTeam:onTriger(sourceObj,targetObj,skill)
 
 	self:notify("onTriger",sourceObj,targetObj)
 end	
+
 function BattleTeam:beKnock(member) 
 	if(member == nil)then
 		return
@@ -672,6 +573,7 @@ function BattleTeam:beKnock(member)
 
 	member:die()
 end
+
 function BattleTeam:recieveKnock(  )
 	return false
 end

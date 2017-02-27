@@ -27,6 +27,8 @@ function UIBattle:ctor( ... )
   self._stickNode = nil
   self._touchNode = nil
 
+  self._skillButton = nil
+
   self._rankNode = nil
   self._rankGrid = nil
   self._rankItems= nil
@@ -59,6 +61,7 @@ function UIBattle:loaded(res)
   local top = res:getChildByName("top")
   local topRight = res:getChildByName("top_right")
   local topLeft = res:getChildByName("top_left")
+  local bottomRight = res:getChildByName("bottom_right")
 
   local timeNode = top:getChildByName("restTime") 
   local countNode = top:getChildByName("kill_count")
@@ -78,6 +81,12 @@ function UIBattle:loaded(res)
   self._basementRoot = topLeft:getChildByName("info")
   local hpNode = self._basementRoot:getChildByName("hp")
   self._basementHpNode = hpNode:getComponent("cc.Label") 
+
+  local skillNode = bottomRight:getChildByName("skill")
+  self._skillButton = skillNode:getComponent("cc.Button")
+  self._skillButton:on(cc.Handler.EVENT_TOUCH_BEGAN,function(  )
+    self:onSkillButtonClick()
+  end)
 
   -- // keyboard
   local node = res;
@@ -192,6 +201,10 @@ function UIBattle:loaded(res)
 
   cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, node)  
   table.insert(self._listener,listener)
+end
+
+function UIBattle:onSkillButtonClick(  )
+  self:notify("onSkillButtonClick")
 end
 
 function UIBattle:onTouchBegin(delta,angle)

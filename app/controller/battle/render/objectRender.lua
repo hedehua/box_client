@@ -24,7 +24,6 @@ local CampColor = {
     [4] = cc.color(255, 114, 43),
 }
 
-local rate = 1
 local ext = 0.5
 local tweenTime = 0.05
 
@@ -154,8 +153,8 @@ function ObjectRender:disableDynamic( ... )
     self._disableDynamic = true
 end
 
-function ObjectRender:setFollowTarget(flag) 
-    self._isFollowTarget = flag
+function ObjectRender:setFollowTarget() 
+    self._isFollowTarget = true
 end
 
 function ObjectRender:isFollowTarget() 
@@ -220,7 +219,6 @@ function ObjectRender:loadAvatar(resPath)
         if(objRoot == nil) then
             objRoot = scene:getChildByName("scene_root")
         end
-        
         objRoot:addChild(res)
 
         self._avatar = res
@@ -232,6 +230,7 @@ function ObjectRender:loadAvatar(resPath)
             return
         end
         self:callCacheFunc()
+  
     end);
     
     
@@ -250,23 +249,20 @@ function ObjectRender:update(dt)
 end
 function ObjectRender:updatePos(pos,dir,enableRot)           -- 为战斗使用，其他地方不要轻易使用
 
-    local x = pos.x/rate
-    local y = pos.y/rate
-
-    self._x = x
-    self._y = y
+    self._x = pos.x
+    self._y = pos.y
 
     if(self._isFollowTarget)then
         setCenterPos(x,y)
     end
 
     if(self._pos == nil) then
-        self._pos = cc.p(x,y)
-        self:setPos(x,y)
+        self._pos = cc.p(self._x,self._y)
+        self:setPos(self._x,self._y)
     else
-        self._pos.x = x
-        self._pos.y = y
-        self:tweenPos(x,y,tweenTime)
+        self._pos.x = self._x
+        self._pos.y = self._y
+        self:tweenPos(self._x,self._y,tweenTime)
     end
 
     if(not enableRot) then
@@ -537,7 +533,7 @@ function ObjectRender:playEffect(effectPath,pos,duration)
         return
     end
     
-    local p = cc.p(pos.x/rate,pos.y/rate)
+    local p = cc.p(pos.x,pos.y)
     EffectManager:getInstance():playEffect(effectPath,p,duration)
 end
 function ObjectRender:playEffectByName(effectName,pos,duration) 

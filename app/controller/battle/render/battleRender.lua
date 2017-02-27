@@ -130,7 +130,7 @@ function BattleRender:removeRender (obj)
     if(self._objects == nil) then
         return;
     end
-    -- print("removeRender 2",obj)
+
     for i = #self._objects,1,-1 do
         local o = self._objects[i]
         if(obj == o) then

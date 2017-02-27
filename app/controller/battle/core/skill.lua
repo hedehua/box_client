@@ -193,4 +193,8 @@ function Skill:castMissile(typeId,parentId)
     return true
 end
 
+function Skill:getId(  )
+    return self._id
+end
+
 return Skill

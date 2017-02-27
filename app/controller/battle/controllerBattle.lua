@@ -125,7 +125,7 @@ function ControllerBattle:update(dt)
               temp = 0
               break
             end
-            self.tick()
+            self:tick()
         until (self._frameCount > self._battle.getFrame())
         return
     end
@@ -145,7 +145,7 @@ end
 function ControllerBattle:tick(dt) 
     if(self._battle ~= nil) then
         self._battle:update();
-    end    
+    end 
 end
 
 function ControllerBattle:requestStart(arg) 
@@ -163,26 +163,27 @@ function ControllerBattle:requestStart(arg)
   --    end
   --    self:open(false,data.battleInfo)
   -- end)
-  self:open(false,{
-      ctrlId = 1,
-      mode = 1,
-      battleTid = arg,
-      players = {
-        { ctrlId = 1,typeId = 1000 ,camp = Enum.ECamp.Blue ,isAi = false}
-      },
-      seed = 2016,
-      frame = 0,
-  })
+    self:open(false,{
+        ctrlId = 1,
+        mode = 1,
+        battleTid = arg,
+        players = {
+          { ctrlId = 1,typeId = 1000 ,camp = Enum.ECamp.Blue ,isAi = false}
+        },
+        seed = 2016,
+        frame = 0,
+    })
+  
 end
 
-function ControllerBattle:wait()
-    TipsManager:getInstance():playBlink(Common.stringTable.WaitPlayer)
-end
+-- function ControllerBattle:wait()
+--     TipsManager:getInstance():playBlink(Common.stringTable.WaitPlayer)
+-- end
 
-function ControllerBattle:waitEnd()
-    TipsManager:getInstance():stopBlink();
-    TipsManager:getInstance():playCd(3);
-end
+-- function ControllerBattle:waitEnd()
+--     TipsManager:getInstance():stopBlink();
+--     TipsManager:getInstance():playCd(3);
+-- end
 
 function ControllerBattle:getMyCamp()
     if(self._battle == nil) then
@@ -330,6 +331,9 @@ function ControllerBattle:open(auto,info)
     onTouchEnd = function(  )
       self:touchOut()
     end,
+    onSkillButtonClick = function(  )
+      self:onSkillButtonClick()
+    end,
     getRank = function()
       if(self._battle == nil) then
         return nil
@@ -365,7 +369,6 @@ function ControllerBattle:open(auto,info)
   })
 
   self:playMusic();       
-  self:wait();
   self._running = true;
   self._frameCount = info.frame or 0
   self._waiting = true
@@ -470,59 +473,67 @@ function ControllerBattle:onGameOver(result)
   end
   self:stopMusic()
 end
-function ControllerBattle:touchIn(delta,angle)
-  if(self._battle == nil)then
-    return
-  end
 
-  if(self._curDirection ~= nil) then
-    if(math.abs(self._curDirection - angle) < WorldConfig.minAngle) then
-      return
-    end
-  end
-
-  self._curDirection = angle
- 
-  local x = math.floor(delta.x * WorldConfig.vectorPrecision) 
-  local y = math.floor(delta.y * WorldConfig.vectorPrecision)
-
-  self._battle:DoCMD(Enum.CMD.ChangeDir,self:getCtrlId(),x,y)
-end
-
-function ControllerBattle:touchOut(  )
+function ControllerBattle:onSkillButtonClick(  )
   if(self._battle == nil) then
     return
   end
-  self._curDirection = nil
-  self._battle:DoCMD(Enum.CMD.StopMove,self:getCtrlId())
+  self._battle:DoCMD(Enum.CMD.Skill,self:getCtrlId())
+end
+
+function ControllerBattle:touchIn(delta,angle)
+    if(self._battle == nil)then
+      return
+    end
+
+    if(self._curDirection ~= nil) then
+      if(math.abs(self._curDirection - angle) < WorldConfig.minAngle) then
+        return
+      end
+    end
+
+    self._curDirection = angle
+ 
+    local x = math.floor(delta.x * WorldConfig.vectorPrecision) 
+    local y = math.floor(delta.y * WorldConfig.vectorPrecision)
+
+    self._battle:DoCMD(Enum.CMD.MoveEx,self:getCtrlId(),x,y)
+end
+
+function ControllerBattle:touchOut(  )
+    if(self._battle == nil) then
+      return
+    end
+    self._curDirection = nil
+    self._battle:DoCMD(Enum.CMD.StopMove,self:getCtrlId())
 end
 
 function ControllerBattle:excuteKeycode(keyCode) 
-  if(self._battle == nil )then
-    return
-  end
+    if(self._battle == nil )then
+      return
+    end
 
-  local refs = {
-    [cc.KEY.up] = Enum.Direction.Up,
-    [cc.KEY.down] = Enum.Direction.Down,
-    [cc.KEY.left] = Enum.Direction.Left,
-    [cc.KEY.right] = Enum.Direction.Right
-  }
-  local dir = refs[keyCode]
-  if(self._curDirection == dir)then
-    return
-  end
-  self._curDirection = dir
-  self._battle:DoCMD(Enum.CMD.Move,self:getCtrlId(),self._curDirection); 
+    local refs = {
+      [cc.KEY.up] = Enum.Direction.Up,
+      [cc.KEY.down] = Enum.Direction.Down,
+      [cc.KEY.left] = Enum.Direction.Left,
+      [cc.KEY.right] = Enum.Direction.Right
+    }
+    local dir = refs[keyCode]
+    if(self._curDirection == dir)then
+        return
+    end
+    self._curDirection = dir
+    self._battle:DoCMD(Enum.CMD.Move,self:getCtrlId(),self._curDirection); 
     
 end
    
 function ControllerBattle:playMusic()
-  AudioManager:getInstance():playMusic(Common.assetPathTable.musicLogin)
+    AudioManager:getInstance():playMusic(Common.assetPathTable.musicLogin)
 end
 
 function ControllerBattle:stopMusic() 
-  AudioManager:getInstance():stopMusic()
+    AudioManager:getInstance():stopMusic()
 end
 
 return ControllerBattle

@@ -6,8 +6,9 @@ local BattleEnums = {
 		Join 		= 2,
 		Leave		= 3,
 		SetAI 		= 4,
-		ChangeDir 	= 5,
+		MoveEx 	= 5,
 		StopMove	= 6,
+		Skill 		= 7,
 	},
 	Direction = {
 		None = 0,
@@ -42,10 +43,10 @@ local BattleEnums = {
 	-- 1：定向移动，2= 追踪目标，3= 运动至敌人位置，4：跟随发起者
 	EMoveType = {
 		Direction 		= 1,
-		FollowTarget 	= 2,
-		ToTarget 		= 3,
-		FollowCaster 	= 4,
-		ToCaster 		= 5,
+		ToTarget 		= 2,
+		ToTargetPos 	= 3,
+		ToCaster 		= 4,
+		ToCasterPos 	= 5,
 	}
 
 }

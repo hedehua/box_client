@@ -42,7 +42,7 @@ local removeObject = function (obj)
 	if(objects == nil) then
 		return
 	end
-	for i = table.length(objects) ,1,-1 do
+	for i = #objects ,1,-1 do
 		local o = objects[i]
 		if(o == obj) then 
 			table.remove(objects,i)
@@ -86,7 +86,7 @@ BattleObject.getObjectByType = function(classType)
 	if(objects == nil) then 
 		return nil
 	end
-	for  i = table.length(objects),1,-1 do
+	for  i = #objects,1,-1 do
 		local obj = objects[i]
 		if(classType == obj.__cname) then
 			return obj
@@ -100,7 +100,7 @@ BattleObject.getObjectsByType = function()
 		return nil
 	end
 	local arr = {}
-	for i = table.length(objects),1,-1 do
+	for i = #objects,1,-1 do
 		local obj = objects[i]
 		if(classType == obj.__cname) then
 			table.insert(arr,obj)
@@ -151,7 +151,6 @@ function BattleObject:init()
 	
 	if(self._render == nil) then
 		self._render = createRender(self);
-		-- print(self.__cname,self._id,self._render._id,debug.traceback())
 	end
 
 	addObject(self)
@@ -348,7 +347,6 @@ function BattleObject:update()
 	self:updateMoveInfo();
 	
 	if(self:updatePos()) then
-		-- print(self.__cname,self._id,"updatePos",'pos',self._pos.x,self._pos.y)
 		self:updateRenderPos();
 	end
 
@@ -386,8 +384,7 @@ function BattleObject:setDir(dir)
 end
 function BattleObject:getDir()
 	if(self._dir == nil) then
-		print("exception.")
-		return
+		return nil
 	end
 	return self._dir:clone()
 end

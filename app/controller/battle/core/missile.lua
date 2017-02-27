@@ -39,15 +39,10 @@ function Missile.needTarget(typeId)
         cc.log('not init config missile')
         return false
     end
-    -- if(config.start == 2){
-    --     return true
-    -- end
-    -- if(config.moveType == 2){
-    --     return true
-    -- end
-    -- if(config.moveType == 3){
-    --     return true
-    -- end
+    if(config.start == 1) then
+        return false
+    end
+   
     return true
 end 
 -- end
@@ -146,17 +141,17 @@ function Missile:cast()
             local dir = self:getDir()
             self:moveDir(dir)
         end,
-        [Enum.EMoveType.ToTarget]  = function(  )
+        [Enum.EMoveType.ToTargetPos]  = function(  )
             -- local dir = self:getDir()
             -- dir = dir:rotate(self._config.dir)   -- 朝向旋转
             local obj = self:findObjectById(self._targetId)
             local dir = obj:getPos():sub(self:getPos()):norm()
             self:moveDir(dir)
         end,
-        [Enum.EMoveType.FollowTarget] = function(  )
+        [Enum.EMoveType.ToTarget] = function(  )
             self._targetObj = self:findObjectById(self._targetId)
         end,
-        [Enum.EMoveType.ToCaster] = function(  )
+        [Enum.EMoveType.ToCasterPos] = function(  )
             local obj = self:findObjectById(self._targetId)
             if(obj == nil)then
                 print("target missing")
@@ -165,7 +160,7 @@ function Missile:cast()
             local dir = self:getPos():sub(obj:getPos()):norm()
             self:moveDir(dir)
         end,
-        [Enum.EMoveType.FollowCaster] = function(  )
+        [Enum.EMoveType.ToCaster] = function(  )
             self._targetObj = self:findObjectById(self._casterId)
         end
     }
@@ -211,9 +206,8 @@ function Missile:setLocation()
         pos:add(d)
     end
 
-    -- cc.log("------------ set pos -------------",pos.x,pos.y)
-    self:setPos(pos)
-
+    print("Caster",self._casterId)
+    self:setPos(pos)    
     self:setDir(cooderate:getDir())
     self:setCircleCollider(pos.x,pos.y,self._config.radius)
     

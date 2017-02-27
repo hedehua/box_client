@@ -609,7 +609,7 @@ local assets = {
                     ["y"] = 0,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 110,
+                    ["__id__"] = 111,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -1131,7 +1131,7 @@ local assets = {
                 },
                 ["_position"] = {
                     ["__type__"] = "cc.Vec2",
-                    ["x"] = -68.97500000000001,
+                    ["x"] = -73.95,
                     ["y"] = -80,
                 },
                 ["_prefab"] = {
@@ -1274,7 +1274,7 @@ local assets = {
                 ["_isAbsRight"] = true,
                 ["_isAbsTop"] = true,
                 ["_isAbsVerticalCenter"] = true,
-                ["_left"] = -110.39500000000001,
+                ["_left"] = -115.37,
                 ["_name"] = "",
                 ["_objFlags"] = 0,
                 ["_originalHeight"] = 0,
@@ -3755,7 +3755,7 @@ local assets = {
                 },
                 ["_components"] = {
                     [1] = {
-                        ["__id__"] = 108,
+                        ["__id__"] = 109,
                     },
                 },
                 ["_contentSize"] = {
@@ -3779,7 +3779,7 @@ local assets = {
                     ["y"] = -360,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 109,
+                    ["__id__"] = 110,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -3812,6 +3812,9 @@ local assets = {
                     [1] = {
                         ["__id__"] = 106,
                     },
+                    [2] = {
+                        ["__id__"] = 107,
+                    },
                 },
                 ["_contentSize"] = {
                     ["__type__"] = "cc.Size",
@@ -3834,7 +3837,7 @@ local assets = {
                     ["y"] = 150,
                 },
                 ["_prefab"] = {
-                    ["__id__"] = 107,
+                    ["__id__"] = 108,
                 },
                 ["_rotationX"] = 0,
                 ["_rotationY"] = 0,
@@ -3874,6 +3877,57 @@ local assets = {
                 },
             },
             [107] = {
+                ["_N$disabledColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 124,
+                    ["g"] = 124,
+                    ["r"] = 124,
+                },
+                ["_N$disabledSprite"] = nil,
+                ["_N$enableAutoGrayEffect"] = false,
+                ["_N$interactable"] = true,
+                ["_N$normalColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 214,
+                    ["g"] = 214,
+                    ["r"] = 214,
+                },
+                ["_N$normalSprite"] = nil,
+                ["_N$target"] = {
+                    ["__id__"] = 105,
+                },
+                ["__type__"] = "cc.Button",
+                ["_enabled"] = true,
+                ["_name"] = "",
+                ["_objFlags"] = 0,
+                ["clickEvents"] = {
+                },
+                ["duration"] = 0.1,
+                ["hoverColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 255,
+                    ["g"] = 255,
+                    ["r"] = 255,
+                },
+                ["hoverSprite"] = nil,
+                ["node"] = {
+                    ["__id__"] = 105,
+                },
+                ["pressedColor"] = {
+                    ["__type__"] = "cc.Color",
+                    ["a"] = 255,
+                    ["b"] = 211,
+                    ["g"] = 211,
+                    ["r"] = 211,
+                },
+                ["pressedSprite"] = nil,
+                ["transition"] = 0,
+                ["zoomScale"] = 1.2,
+            },
+            [108] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "19ed886e-42f4-4593-a624-7d8c9757cb40",
@@ -3884,7 +3938,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [108] = {
+            [109] = {
                 ["__type__"] = "cc.Widget",
                 ["_alignFlags"] = 9,
                 ["_bottom"] = 0,
@@ -3909,7 +3963,7 @@ local assets = {
                     ["__id__"] = 104,
                 },
             },
-            [109] = {
+            [110] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "19ed886e-42f4-4593-a624-7d8c9757cb40",
@@ -3920,7 +3974,7 @@ local assets = {
                 },
                 ["sync"] = false,
             },
-            [110] = {
+            [111] = {
                 ["__type__"] = "cc.PrefabInfo",
                 ["asset"] = {
                     ["__uuid__"] = "19ed886e-42f4-4593-a624-7d8c9757cb40",

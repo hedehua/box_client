@@ -21,7 +21,7 @@ function Character.new()
 	local obj = BattleObject.new()
 	setmetatable(obj,{__index = Character})
 	obj._typeId = 0  			-- 配置表id
-	obj._isFollowTarget = false
+	obj._isHero = false
 	obj._hp = 0
 	obj._maxHp = 0
 	obj._attack = 0
@@ -69,7 +69,6 @@ function Character:init(typeId,pos,dir,camp)
 	end
 	
 	self._enableRot = false
-
 	if(self._render ~= nil and self._config ~= nil) then
 		self._render:setTypeId(self._typeId);
 		self._render:setCamp(self._camp)
@@ -77,6 +76,7 @@ function Character:init(typeId,pos,dir,camp)
 		self._render:setSize(self._config.radius * 2,self._config.radius * 2)
 		self._render:startBlink()
 		self:loadAvatar(self._config.res)
+		self:updateRenderPos()
 	end
 	
 end
@@ -169,7 +169,7 @@ function Character:update()
 		end
 	end
 
-	self:tryAi()
+	-- self:tryAi()
 
 	self:updateSkill()
 	Character.super.update(self)
@@ -231,9 +231,9 @@ function Character:merge(ch)
 end
 function Character:setLeader(flag) 
 	self._isLeader = true
-	self._isFollowTarget = flag
-	if(self._render ~= nil) then
-		self._render:setFollowTarget(self._isFollowTarget)
+	self._isHero = flag
+	if(self._render ~= nil and flag) then
+		self._render:setFollowTarget()
 	end
 end
 function Character:isLeader(argument) 
@@ -272,8 +272,26 @@ function Character:getHp()
 	return self._hp
 end
 function Character:castSkill(skillId)
-	if(skillId <=0 ) then
+
+	if(self._skills == nil) then
 		return
+	end
+
+	local skill = nil
+	for i = 1,#self._skills do
+		local sk = self._skills[i]
+		if(skillId == nil) then
+			skill = sk
+			break
+		end
+		if(sk:getId() == skillId) then
+			skill = sk
+			break
+		end
+	end
+
+	if(skill ~= nil) then
+		skill:cast()
 	end
 	
 end
