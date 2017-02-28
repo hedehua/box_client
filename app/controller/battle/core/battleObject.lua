@@ -235,31 +235,34 @@ function BattleObject:moveForward()
 		self._collider:setPos(self._pos.x,self._pos.y)
 	end
 	if(not self:needCheckCollider()) then
-		return
+		return true
 	end
 
 	local targets = objects
-	local targetObjs = nil
-	if(targets ~= nil) then
-		for i = #targets,1,-1 do
-			local target = targets[i]
-			if(target ~= self and self:detect(target)) then
-
-				if(targetObjs == nil) then
-					targetObjs = {}
-				end
-				table.insert(targetObjs,target)
-			end
-		end
+	if(targets == nil) then
+		return true
 	end
 
-	if(targetObjs ~= nil and #targetObjs >0) then
-		for i = 1,#targetObjs do
-			local targetObj = targetObjs[i]
-			self:onTriger(self,targetObj)
+	local targetObjs = nil
+	for i = #targets,1,-1 do
+		local target = targets[i]
+		if(target ~= self and self:detect(target)) then
+
+			if(targetObjs == nil) then
+				targetObjs = {}
+			end
+			table.insert(targetObjs,target)
 		end
 	end
 	
+	if(targetObjs == nil or #targetObjs == 0) then
+		return true
+	end
+
+	for i = 1,#targetObjs do
+		local targetObj = targetObjs[i]
+		self:onTriger(self,targetObj)
+	end
 
 	return true
 end
@@ -318,7 +321,6 @@ function BattleObject:moveDir(dir)
 	self._restMoveTime = 0
 	self._isMove = true
 	self._recalcMove = true
-	
 end
 
 function BattleObject:moveEnd()

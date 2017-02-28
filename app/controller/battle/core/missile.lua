@@ -39,7 +39,7 @@ function Missile.needTarget(typeId)
         cc.log('not init config missile')
         return false
     end
-    if(config.start == 1) then
+    if(config.moveType == 1) then
         return false
     end
    
@@ -206,7 +206,6 @@ function Missile:setLocation()
         pos:add(d)
     end
 
-    print("Caster",self._casterId)
     self:setPos(pos)    
     self:setDir(cooderate:getDir())
     self:setCircleCollider(pos.x,pos.y,self._config.radius)

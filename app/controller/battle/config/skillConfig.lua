@@ -3,7 +3,7 @@
 
 local skillConfig = {
 	{id = 1001,script = 1001,missileCount=1,interval = 0,name = "散弹",skillType = 1,target = 1,attackRadius =300,attack = 2,cd = 10},
-	{id = 1002,script = 1002,missileCount=1,interval = 5,name = "目标",skillType = 1,target = 1,attackRadius =300,attack = 1,cd = 30},
+	{id = 1002,script = 1002,missileCount=1,interval = 5,name = "目标",skillType = 1,target = 1,attackRadius =300,attack = 1,cd = 10},
 
 	-- {id = 1003,script = 1003,missileCount=1,interval = 0,name = "闪电",skillType = 1,target = 1,attackRadius =1000,attack = 0,cd = 250},
 	-- {id = 1004,script = 1004,missileCount=1,interval = 0,name = "近战",skillType = 1,target = 1,attackRadius =1000,attack = 0,cd = 250}, 

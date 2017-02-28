@@ -45,23 +45,38 @@ function BattleTeam.new()
 	return obj
 end
 
--- function BattleTeam:update()
+function Character:castSkillEx()
+	if(self._skills == nil) then
+		print('no skill')
+		return
+	end
 
--- 	BattleTeam.super.update(self)
+	local skill = self._skills[1]
+	if(skill == nil) then
+		print("no skill")
+		return
+	end
 
--- 	if(self._reviveTime >= 0 and self._frameCount > self._reviveTime)then
--- 		self:revive()
--- 		self._reviveTime = -1
--- 	end
+	self:castSkill(skill:getId())
+end
 
--- 	if(not self._isAlive)then
--- 		return;
--- 	end
+function BattleTeam:update()
+
+	BattleTeam.super.update(self)
+
+	if(self._reviveTime >= 0 and self._frameCount > self._reviveTime)then
+		self:revive()
+		self._reviveTime = -1
+	end
+
+	if(not self._isAlive)then
+		return;
+	end
 	
--- 	self:updateAi();
--- 	self:updateMember();
+	self:updateAi();
+	self:updateMember();
 
--- end
+end
 
 function BattleTeam:init (typeId,pos,dir,camp,flag,ctrlId)
 	
@@ -73,6 +88,7 @@ function BattleTeam:init (typeId,pos,dir,camp,flag,ctrlId)
 	self._camp = camp
 	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
 	self:setLeader(flag)
+	self:setLayer(1)
 	self:initAi()
 
 end
@@ -108,6 +124,9 @@ function BattleTeam:updateAi()
 	if(self._ai ~= nil)then
 		self._ai:update();
 	end
+
+	self:tryAi()
+
 end
 function BattleTeam:setAi(ai) 
 	self._isAi = ai
@@ -376,18 +395,9 @@ function BattleTeam:joinMember(typeId)
 	end
 
 	local member = Character.new();
-	member:setQueier({
-		onTriger =function (sourceObj,targetObj,skill) 
-			self:onTriger(sourceObj,targetObj,skill)
-		end,
-		castMissile = function(missile) 
-			self:notify("castMissile",missile)
-		end
-	})
 	member:init(typeId,pos,dir,self._camp);
 	member:setLayer(1);
 
-	self:applyMemberPosQue(member,posQue)
 	self:addMember(member);
 
 	if(self._memberOriData == nil)then
@@ -420,147 +430,6 @@ end
 function BattleTeam:isBlock(argument) 
 	return false
 end
-
-function BattleTeam:onTriger(sourceObj,targetObj,skill) 
-	if(sourceObj.__cname == "BattleTeam" )then
-
-		-- 人撞到墙
-		if(targetObj:isBlock())then			
-			if(self._members ~= nil)then
-				for i = 1,#self._members do
-					local m = self._members[i]
-					if(m ~= nil)then
-						m:meetBlock()
-					end
-				end
-			end
-			self:die()
-			return
-		end
-
-		-- 人撞到人
-		if( targetObj.__cname ==  "Character" )then
-			
-			--/* 自己撞到自己会死的方案
-			local sourcePos = -1
-			local targetPos = -1
-
-			for i = 1,#self._members do
-				if(sourceObj == self._members[i])then
-					sourcePos = i
-				end
-				if(targetObj == self._members[i])then
-					targetPos = i
-				end
-			end
-
-
-			if(sourcePos >=0 and targetPos >=0 and math.abs(sourcePos - targetPos) <= 2)then  -- 相邻的2個以內不处理
-				return 
-			end
-			--*/
-
-			if(not targetObj:isAlive() or not sourceObj:isAlive())then
-				return
-			end
-
-			if(not sourceObj:recieveKnock() or not targetObj:recieveKnock())then
-				return
-			end
-
-			if(sourceObj:needRemove()  or targetObj:needRemove())then
-				return
-			end
-			
-			if(sourceObj:getCamp() == targetObj:getCamp())then
-				return
-			end
-
-			if(sourceObj:getTeam() == targetObj:getTeam())then
-				return
-			end
-			
-			-- local teamId = targetObj.getTeam()
-			-- local team = getObjectById(teamId)
-			
-			-- if(team ~= nil){
-			-- 	team.beKnock(targetObj)
-			-- }
-
-			-- self.die()
-
-			sourceObj:beKnock(targetObj,targetObj:getAttack())
-			targetObj:beKnock(sourceObj,sourceObj:getAttack())
-			
-			return
-		end
-
-		-- 人拾取掉落
-		if(targetObj.__cname == "BattleDrop")then
-
-			if(targetObj:needRemove())then
-				return
-			end
-
-			if(self:isMonster())then
-				return
-			end
-			
-			if(self:isBasement())then
-				return
-			end
-
-			local context = targetObj:getDrop()
-
-			local refs={
-				[Enum.DropType.Role]=function ( )
-					self:pickMember(context)
-				end,
-				[Enum.DropType.Item]=function ( )
-					self:pickItem(context)
-				end
-			}
-			refs[context.dropType]()
-		
-			targetObj:bePicked()
-			return
-		end
-		
-	end
-
-	if(sourceObj.__cname == "Missile"  )then
-
-		if( targetObj.__cname == "Character") then 	-- 子弹撞到人
-			if(sourceObj:getCamp() == targetObj:getCamp())then
-				return
-			end
-			if(not sourceObj:tryHitTarget(targetObj))then
-				return
-			end
-			local caster = BattleObject.getObjectById(sourceObj:getCasterId())
-			if(targetObj:behit(caster,skill:getAttack()))then
-				if(targetObj:isLeader()) then				-- 击杀队长
-					self:notify("onLeaderKilled",targetObj)
-				end
-				self._killCount = self._killCount+1
-			end
-			
-			return
-		end
-		if( targetObj.__cname ==  "Missile" ) 	-- 子弹撞到子弹
-		then
-			if(sourceObj:getCamp() == targetObj:getCamp())then
-				return
-			end
-			if(not sourceObj:tryHitTarget(targetObj))then
-				return
-			end
-			return
-		end
-	end
-
-	self:notify("onTriger",sourceObj,targetObj)
-end	
 
 function BattleTeam:beKnock(member) 
 	if(member == nil)then

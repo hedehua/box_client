@@ -114,12 +114,6 @@ function Skill:cast()
         return false
     end
 
-    local t = self:findTarget()   -- 寻敌半径中有人才释放
-
-    if(t == nil) then
-        return false
-    end
-
     if(not self:castMissile()) then
         return false
     end

@@ -598,8 +598,8 @@ function Battle:joinTeam(data)
 	
 	local team = BattleTeam.new();
 	team:setQueier({
-		onTriger = function (sourceObj,targetObj) 
-			-- TODO::
+		onTriger = function (sourceObj,targetObj,skill) 
+			self:dispatchTriger(sourceObj,targetObj,skill)
 		end,
 		castMissile = function(missile) 
 			self:addMissile(missile)
@@ -628,6 +628,83 @@ function Battle:joinTeam(data)
 	self:addTeam(team);
 	return team
 end
+
+local colliderEvents = {
+	BattleTeam = {
+		BattleDrop = function( sourceObj,targetObj,skill )
+			if(targetObj:needRemove())then
+				return
+			end
+
+			if(sourceObj:isMonster())then
+				return
+			end
+			
+			if(sourceObj:isBasement())then
+				return
+			end
+
+			local context = targetObj:getDrop()
+
+			local refs={
+				[Enum.DropType.Role]=function ( )
+					sourceObj:pickMember(context)
+				end,
+				[Enum.DropType.Item]=function ( )
+					sourceObj:pickItem(context)
+				end
+			}
+			refs[context.dropType]()
+		
+			targetObj:bePicked()
+		end
+	},
+	Missile = {
+		BattleTeam = function( sourceObj,targetObj,skill )
+			if(sourceObj:getCamp() == targetObj:getCamp())then
+				return
+			end
+
+			if(not sourceObj:tryHitTarget(targetObj))then
+				return
+			end
+
+			local caster = BattleObject.getObjectById(sourceObj:getCasterId())
+			if(targetObj:behit(caster,skill:getAttack()))then
+				-- self._killCount = self._killCount + 1
+				print('todo')
+			end
+		end,
+		Missile = function( sourceObj,targetObj,skill )
+			if(sourceObj:getCamp() == targetObj:getCamp())then
+				return
+			end
+			if(not sourceObj:tryHitTarget(targetObj))then
+				return
+			end
+		end
+	}
+}
+
+function Battle:dispatchTriger(sourceObj,targetObj,skill)
+
+	local sourceName = sourceObj.__cname
+	local targetName = targetObj.__cname
+
+	local row = colliderEvents[sourceName]
+	if(row == nil) then
+		return
+	end
+
+	local cel = row[targetName]
+	if(cel == nil) then
+		return
+	end
+
+	cel(sourceObj,targetObj,skill);
+	
+end	
+
 function Battle:getTeamByCtrlId(ctrlId) 
 	if(self._teams == nil)then
 		return -1;
@@ -650,7 +727,7 @@ function Battle:castSkill( ctrlId )
 		return
 	end
 
-	team:castSkill()
+	team:castSkillEx()
 end
 
 function Battle:stopMove( ctrlId )

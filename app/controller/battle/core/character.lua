@@ -169,8 +169,6 @@ function Character:update()
 		end
 	end
 
-	-- self:tryAi()
-
 	self:updateSkill()
 	Character.super.update(self)
 	
@@ -450,20 +448,26 @@ function Character:tryAi()
 		return
 	end
 	for i = #self._skills,1,-1 do
+
 		local skill = self._skills[i]
-		if(skill ~= nil and skill:cast())then
+		local target = skill:findTarget()   -- 寻敌半径中有人才释放
+
+		if(target ~= nil and skill:cast())then
 			self:initAi()
 			break
 		end
 	end
 	
 end
+
 function Character:initAi() 
-	-- self._aiInterval = self._frameCount + WorldConfig.aiInterval
+	self._aiInterval = self._frameCount + WorldConfig.aiInterval
 end
+
 function Character:needCheckCollider() 
 	return false
 end
+
 function Character:onTriger(source,target) 
 	self:notify("onTriger",source,target)
 end
