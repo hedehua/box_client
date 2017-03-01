@@ -335,16 +335,16 @@ function Battle:initCamps()
 	if(self._config == nil)then
 		return
 	end
-	if(self._config.camp1 ~= nil and self._config.camp1 > 0)then
-		local team = self:joinTeam({camp = Enum.ECamp.Blue,pos = self._config.camp1Pos,dir = self._config.camp1Dir,chars = {{typeId = self._config.camp1}}})	
+	if(self._config.basement1 ~= nil and self._config.basement1 > 0)then
+		local team = self:joinTeam({camp = Enum.ECamp.Blue,pos = self._config.basement1Pos,dir = self._config.basement1Dir,chars = {{typeId = self._config.basement1}}})	
 		if(team ~= nil)then
 			team:setAi(true)
 			team:setRevive(false)
 			team:setBasement()
 		end
 	end
-	if(self._config.camp2  ~= nil and self._config.camp2 > 0 )then
-		local team = self:joinTeam({camp = Enum.ECamp.Green,pos = self._config.camp2Pos,dir = self._config.camp2Dir,chars = {{typeId = self._config.camp2}}})	
+	if(self._config.basement2  ~= nil and self._config.basement2 > 0 )then
+		local team = self:joinTeam({camp = Enum.ECamp.Green,pos = self._config.basement2Pos,dir = self._config.basement2Dir,chars = {{typeId = self._config.basement2}}})	
 		if(team ~= nil)then
 			team:setAi(true)
 			team:setRevive(false)
@@ -554,9 +554,9 @@ function Battle:joinPlayer(ctrlId,typeId,camp,isAi)
 		flag = self._mode.getCtrlId() == ctrlId
 	end
 
-	local campId = self._config["camp"..camp]
-	local pos = self._config["camp"..camp.."Pos"]
-	local dir = self._config["camp"..camp.."Dir"]
+	local campId = self._config["basement"..camp]
+	local pos = self._config["basement"..camp.."Pos"]
+	local dir = self._config["basement"..camp.."Dir"]
 
 	if(pos == nil)then
 		pos = self._map:getValidPos()
@@ -899,7 +899,7 @@ function Battle:getBasementHp(camp)
 		return nil
 	end
 
-	if(self._config.camp1 == nil)then
+	if(self._config.basement1 == nil)then
 		return nil
 	end
 

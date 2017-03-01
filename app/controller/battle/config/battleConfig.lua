@@ -37,13 +37,13 @@ local battleConfig = {
 		timeOut = 3000,			
 		maxMonsterCount = 20, 			-- 怪物数量上限
 
-		camp1 = 6001,   				-- 塔1
-		camp2 = 6002,					-- 塔2
+		basement1 = 6001,   				-- 塔1
+		basement2 = 6002,					-- 塔2
 
-		camp1Pos = {-800,0},
-		camp2Pos = {800,0},
-		camp1Dir = {1,0},
-		camp2Dir = {-1,0},
+		basement1Pos = {-800,0},
+		basement2Pos = {800,0},
+		basement1Dir = {1,0},
+		basement2Dir = {-1,0},
 	},
 	
 }
