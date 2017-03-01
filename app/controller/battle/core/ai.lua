@@ -13,16 +13,16 @@ function Base:check()
         local leader = self._team:getLeader()
         local circle = leader:getCollider();
         local rect = map:getCollider()
-        if(circle.detectBoundR(rect,self._config.panicDist))then
+        if(circle:detectBoundR(rect,self._config.panicDist))then
             return Enum.Direction.Left
         end
-        if(circle.detectBoundL(rect,self._config.panicDist))then
+        if(circle:detectBoundL(rect,self._config.panicDist))then
             return Enum.Direction.Right
         end
-        if(circle.detectBoundT(rect,self._config.panicDist))then
+        if(circle:detectBoundT(rect,self._config.panicDist))then
             return Enum.Direction.Down
         end
-        if(circle.detectBoundB(rect,self._config.panicDist))then
+        if(circle:detectBoundB(rect,self._config.panicDist))then
             return Enum.Direction.Up
         end
 
@@ -32,6 +32,7 @@ end
 
 -- 随机溜达
 local Idle = {}
+Idle.__cname = "Idle"
 setmetatable(Idle,{__index = Base})
 
 function Idle.new( )
@@ -39,6 +40,7 @@ function Idle.new( )
     obj._team = nil
     obj._config = nil
     setmetatable(obj,{__index = Idle})
+    return obj
 end
 
 function Idle:init(team,conf)
@@ -48,9 +50,11 @@ end
 function Idle:enter()
     
 end
+
 function Idle:leave()
     
 end
+
 function Idle:getNext()
     local r = Utils.random(0,self._config.maxPercent)
     if(r < self._config.search )then
@@ -58,6 +62,7 @@ function Idle:getNext()
     end
     return nil;
 end
+
 function Idle:update()
   
     local d = self:check()
@@ -83,6 +88,7 @@ function Search.new( )
     obj._team = nil
     obj._config = nil
     setmetatable(obj,{__index = Search})
+    return obj
 end
 
 function Search:init(team,conf)
@@ -109,6 +115,7 @@ function Search:getNext()
     
     return "idle";
 end
+
 function Search:enter()
     local leader = self._team:getLeader()
     if(leader == nil)then
@@ -116,12 +123,13 @@ function Search:enter()
     end
     self._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
     self._drop = Utils.getDropByDist(leader._id,self._config.fov)
-    -- cc.log("@",self._team._id,'search',self._enemy,self._drop)
 end
+
 function Search:leave()
     self._enemy = nil
     self._drop = nil
 end
+
 function Search:update()
     
     local d = self:check()
@@ -133,6 +141,7 @@ function Search:update()
 end
 
 local Pursue = {}
+Pursue.__cname = "Pursue"
 setmetatable(Pursue,{__index = Base})
 
 function Pursue.new( )
@@ -140,6 +149,7 @@ function Pursue.new( )
     obj._team = nil
     obj._config = nil
     setmetatable(obj,{__index = Pursue})
+    return obj
 end
 
 function Pursue:init(team,conf)
@@ -163,13 +173,16 @@ function Pursue:getNext()
 
     return nil
 end
+
 function Pursue:enter()
     local leader = self._team:getLeader()    
     self._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
 end
+
 function Pursue:leave()
     self._enemy = nil
 end
+
 function Pursue:update()
     local d = self:check()
     if(d ~= nil)then
@@ -189,11 +202,11 @@ function Pursue:update()
     local angle  = delta:signAngle(Vector2.new(1,0))
 
     d = Utils.angleToDirection(angle)
-    -- cc.log('@',self._team._id,'Pursue move to',d,'angle',angle)
     self._team:move(d)
 end
 
 local Pick = {}
+Pick.__cname = "Pick"
 setmetatable(Pick,{__index = Base})
 
 function Pick.new( )
@@ -201,6 +214,7 @@ function Pick.new( )
     obj._team = nil
     obj._config = nil
     setmetatable(obj,{__index = Pick})
+    return obj
 end
 
 function Pick:init(team,conf)
@@ -252,6 +266,7 @@ function Pick:update()
 end
 
 local Escape = {}
+Escape.__cname = "Escape"
 setmetatable(Escape,{__index = Base})
 
 function Escape.new( )
@@ -259,6 +274,7 @@ function Escape.new( )
     obj._team = nil
     obj._config = nil
     setmetatable(obj,{__index = Escape})
+    return obj
 end
 
 function Escape:init(team,conf)
@@ -276,6 +292,7 @@ function Escape:getNext()
     end
     return nil
 end
+
 function Escape:enter()
      local leader = self._team:getLeader()
      if(leader == nil)then
@@ -283,9 +300,11 @@ function Escape:enter()
      end
      self._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
 end
+
 function Escape:leave()
     self._enemy = nil
 end
+
 function Escape:update()
     local d = self:check()
     if(d ~= nil)then
@@ -341,15 +360,16 @@ function Ai:update()
         if(self._state == nil)then
             self._state = self._fsm["idle"]
         end
+        
         if(self._state ~= nil)then
             local stateName = self._state:getNext();
             if(stateName ~= nil)then
                 local state = self._fsm[stateName]
                 if(state == nil)then
-                    cc.log("can't find state",stateName)
+                    print("can't find state",stateName)
                     return
                 end
-                -- cc.log('@',self._team._id,'switch to',stateName)
+
                 self._state:leave()
                 self._state = state
                 self._state:enter();

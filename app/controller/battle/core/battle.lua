@@ -285,39 +285,31 @@ function Battle:generateDrop(dropId,posCenter,radius)
 		return
 	end
 	
-	local t = {}
-	local sum = 0;
-	for i = 1, table.length(cfgArr) do
-		local cfg = cfgArr[i]
-		if(cfg ~= nil) then
-			sum = sum + cfg.chance
-			table.insert(t,sum)
-		end
+	local i = Utils.getRandomIndexByChance(cfgArr)
+
+	if(i <= 0) then
+		return
 	end
-	local r = Utils.random(0,sum)
-	for i = 1,table.length(t) do
-		if(r < t[i])then
-			for j = 1,cfgArr[i].count do
-				
-				local pos = Vector2.new()
-				if(posCenter == nil)then 				-- map center
-					local posArr = self._map:getValidPos()
-					pos:setv(posArr[1],posArr[2])
-				
-				else
-					local offset = 0
-					if(radius > 0)then
-						offset = Utils.random(0,radius)
-					end
-					pos:setv(posCenter.x + offset,posCenter.y + offset)
-				end
-				
-				self:joinDrop(cfgArr[i].id,Enum.ECamp.None,pos)
+	
+	for j = 1,cfgArr[i].count do
+		
+		local pos = Vector2.new()
+		if(posCenter == nil)then 				-- map center
+			local posArr = self._map:getValidPos()
+			pos:setv(posArr[1],posArr[2])
+		
+		else
+			local offset = 0
+			if(radius > 0)then
+				offset = Utils.random(0,radius)
 			end
-			self:initIntervalDrop()
-			break
+			pos:setv(posCenter.x + offset,posCenter.y + offset)
 		end
+		
+		self:joinDrop(cfgArr[i].id,Enum.ECamp.None,pos)
 	end
+	self:initIntervalDrop()
+	
 end
 
 function Battle:initPlayers( )
@@ -336,7 +328,13 @@ function Battle:initCamps()
 		return
 	end
 	if(self._config.basement1 ~= nil and self._config.basement1 > 0)then
-		local team = self:joinTeam({camp = Enum.ECamp.Blue,pos = self._config.basement1Pos,dir = self._config.basement1Dir,chars = {{typeId = self._config.basement1}}})	
+		local info = {
+			camp = Enum.ECamp.Blue,
+			pos = self:getCampBornPos(Enum.ECamp.Blue),
+			dir = self:getCampBornDir(Enum.ECamp.Blue),
+			chars = {{typeId = self._config.basement1}}
+		}
+		local team = self:joinTeam(info)	
 		if(team ~= nil)then
 			team:setAi(true)
 			team:setRevive(false)
@@ -344,7 +342,13 @@ function Battle:initCamps()
 		end
 	end
 	if(self._config.basement2  ~= nil and self._config.basement2 > 0 )then
-		local team = self:joinTeam({camp = Enum.ECamp.Green,pos = self._config.basement2Pos,dir = self._config.basement2Dir,chars = {{typeId = self._config.basement2}}})	
+		local info = {
+			camp = Enum.ECamp.Green,
+			pos = self:getCampBornPos(Enum.ECamp.Green),
+			dir = self:getCampBornDir(Enum.ECamp.Green),
+			chars = {{typeId = self._config.basement2}}
+		}
+		local team = self:joinTeam(info)	
 		if(team ~= nil)then
 			team:setAi(true)
 			team:setRevive(false)
@@ -377,7 +381,7 @@ function Battle:tryGenerateMonster()
 	local count = 0
 
 	if(self._teams ~= nil)then
-		for i = 1,table.length(self._teams) do
+		for i = 1,#self._teams do
 			local team = self._teams[i]
 			if(team ~= nil and team:isMonster())then
 				count = count + 1;
@@ -395,50 +399,57 @@ function Battle:tryGenerateMonster()
 		return
 	end
 
-	local t = {}
-	local sum = 0;
-	for i = 1,table.length(cfgArr) do
-		local cfg = cfgArr[i]
-		if(cfg ~= nil) then
-			sum = sum + cfg.chance
-			table.insert(t,sum)
-		end
+	local i = Utils.getRandomIndexByChance(cfgArr)
+	if(i <= 0) then
+		return
 	end
-	local r = Utils.random(0,sum)
 
-	local d = Utils.random(Enum.Direction.Up,Enum.Direction.Left)
-	local dir = Utils.directionToArr(d)
+	local cfg = cfgArr[i]
+	local dix = Utils.random(Enum.Direction.Up,Enum.Direction.Left)
+	local dir = Utils.directionToArr(dix)
+	local pos =  self._map:getValidPos()
+	self:generateMonster(cfg,pos,dir,Enum.ECamp.Blue)
 
-	for i = 1, table.length(t) do
-		if(r < t[i])then
-			local cfg = cfgArr[i]
-			if(cfg ~= nil and cfg.monsters ~= nil)then
-				for j = 1,table.length(cfg) do
-					local chars = {};
-					local pos =  self._map:getValidPos()
-					for m = 1,table.length(cfg.monsters) do
-						table.insert(chars,{typeId = cfg.monsters[m]})
-					end
+	dir = self:getCampBornDir(Enum.ECamp.Blue)
+	pos = self:getCampBornPos(Enum.ECamp.Blue)
+	self:generateMonster(cfg,pos,dir,Enum.ECamp.Blue)
 
-					local team = self:joinTeam({camp = Enum.ECamp.Red,pos = pos,dir = dir,chars = chars})
-					
-					if(team ~= nil)then
-						team:setAi(true)
-						team:setRevive(false)
-						team:setDrop(cfg.drop)
-					end
-
-				end
-				self:initIntervalMonster(self._config.monsterInterval)
-				break
-			end
-		end
-	end
+	dir = self:getCampBornDir(Enum.ECamp.Green)
+	pos = self:getCampBornPos(Enum.ECamp.Green)
+	self:generateMonster(cfg,pos,dir,Enum.ECamp.Green)
+	
+	self:initIntervalMonster(self._config.monsterInterval)		
 
 end
+
+function Battle:generateMonster( cfg,pos,dir,camp )
+	if cfg.monsters == nil then
+		print("monsters nil")
+		return
+	end
+
+	for j = 1,cfg.count do
+		local chars = {};
+		
+		for m = 1,#cfg.monsters do
+			table.insert(chars,{typeId = cfg.monsters[m]})
+		end
+
+		local team = self:joinTeam({camp = camp,pos = pos,dir = dir,chars = chars})
+		
+		if(team ~= nil)then
+			team:setAi(true)
+			team:setRevive(false)
+			team:setDrop(cfg.drop)
+		end
+
+	end
+end
+
 function Battle:isOver()
 	return self._isOver
 end
+
 function Battle:getResult()
 	if(self._score == nil) then
 		return nil
@@ -541,6 +552,31 @@ function Battle:setAi(ctrlId,aiId)
 	end
 	team:setAi(aiId > 0)
 end
+
+function Battle:getCampBornPos( camp )
+	if(self._config == nil) then
+		return nil
+	end
+
+	return self._config["basement"..camp.."Pos"]
+end
+
+function Battle:getCampBornDir( camp )
+	if(self._config == nil) then
+		return nil
+	end
+
+	return self._config["basement"..camp.."Dir"]
+end
+
+function Battle:getCampTypeId( camp )
+	if(self._config == nil) then
+		return nil
+	end
+
+	return self._config["basement"..camp]
+end
+
 function Battle:joinPlayer(ctrlId,typeId,camp,isAi) 
 	
 	if(self._map == nil)then
@@ -554,9 +590,9 @@ function Battle:joinPlayer(ctrlId,typeId,camp,isAi)
 		flag = self._mode.getCtrlId() == ctrlId
 	end
 
-	local campId = self._config["basement"..camp]
-	local pos = self._config["basement"..camp.."Pos"]
-	local dir = self._config["basement"..camp.."Dir"]
+	local campId = self:getCampTypeId(camp)
+	local pos = self:getCampBornPos(camp)
+	local dir = self:getCampBornDir(camp)
 
 	if(pos == nil)then
 		pos = self._map:getValidPos()

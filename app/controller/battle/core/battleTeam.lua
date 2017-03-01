@@ -36,6 +36,7 @@ function BattleTeam.new()
 	obj._dropId = nil			-- 死亡時掉落
 
 	obj._killCount = 0
+	obj._aiInterval = 0
 
 	obj._moveInterval = 1
 	obj._tickTime = 0
@@ -116,17 +117,27 @@ end
 
 function BattleTeam:initAi() 
 	self._ai = Ai.new(1,self)
+	self:resetAi()
+end
+
+function BattleTeam:resetAi(  )
+	self._aiInterval = self._frameCount + WorldConfig.aiInterval
 end
 
 function BattleTeam:updateAi() 
 	if(not self._isAi)then
 		return
 	end
+
+	if(self._frameCount < self._aiInterval) then
+		return
+	end
+
 	if(self._ai ~= nil)then
 		self._ai:update();
 	end
 
-	self:tryAi()
+	self:trySkillAi()
 
 end
 
@@ -235,7 +246,7 @@ function BattleTeam:updateMember()
 	end
 
 	-- 更新逻辑
-	
+
 	local preMember = nil
 	local step = math.floor(self:getDiameter() / self:getSpeed()) 
 	local length = #self._paths
@@ -401,6 +412,7 @@ function BattleTeam:moveEx(dx,dy)
 	if(not self:isAlive()) then
 		return
 	end
+
 	local dir =  Vector2.new(dx,dy);
 	self:moveDir(dir)
 	self._tickTime = 0

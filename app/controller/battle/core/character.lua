@@ -61,7 +61,6 @@ function Character:init(typeId,pos,dir,camp)
 	self:setPos(pos)  				-- s设置初始位置
 	self:setDir(dir)				-- 设置初始朝向
 	self:initSkill()
-	self:initAi()
 
 	if(self._config ~= nil) then
 		self:setCircleCollider(pos.x,pos.y,self._config.radius)
@@ -268,12 +267,14 @@ function Character:addHp(character,hp)
 		
 	-- end
 end
+
 function Character:setMaxHp(value)
 	self._maxHp = value
 	if(self._render ~=nil) then
 		self._render:setIcon(tostring(self._maxHp))
 	end
 end
+
 function Character:setHp(value,tween)
 
 	self._hp = value
@@ -455,25 +456,21 @@ function Character:updateSkill()
 		end
 	end
 end
-function Character:tryAi() 
+function Character:trySkillAi() 
 
 	if(not self:isAlive())then
 		return
 	end
 
-	-- if(self._aiInterval < self._frameCount) then
-	-- 	return
-	-- end
-
 	if(self._skills == nil )then
 		return
 	end
+
 	for i = #self._skills,1,-1 do
 
 		local skill = self._skills[i]
 		local target = skill:findTarget()   -- 寻敌半径中有人才释放
 		if(target ~= nil and skill:cast())then
-			self:initAi()
 			break
 		end
 	end
@@ -484,9 +481,6 @@ function Character:isClass( clsName )
 	return Character.super.isClass(self,clsName) or Character.__cname == clsName
 end
 
-function Character:initAi() 
-	self._aiInterval = self._frameCount + WorldConfig.aiInterval
-end
 
 function Character:needCheckCollider() 
 	return false

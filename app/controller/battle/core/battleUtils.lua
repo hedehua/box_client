@@ -53,19 +53,19 @@ local setSeed = function(seed)
 end
 
 local angleToDirection = function(angle) 
-	if(angle >= -math.PI / 4 and angle < math.PI /4) then
+	if(angle >= -math.pi / 4 and angle < math.pi /4) then
 		return Enum.Direction.Right
 	end
 
-	if(angle >= math.PI / 4 and angle < math.PI *3/4 ) then
+	if(angle >= math.pi / 4 and angle < math.pi *3/4 ) then
 		return Enum.Direction.Up
 	end
 
-	if(angle >= math.PI * 3/4 or angle < - math.PI * 3/4)then
+	if(angle >= math.pi * 3/4 or angle < - math.pi * 3/4)then
 		return Enum.Direction.Left
 	end
 
-	if(angle >=  - math.PI * 3/4 and angle < - math.PI *1/4 )then
+	if(angle >=  - math.pi * 3/4 and angle < - math.pi *1/4 )then
 		return Enum.Direction.Down
 	end
 	return nil
@@ -242,33 +242,56 @@ local getOtherCamp = function(camp)
 	if(camp == nil)then
 		return nil
 	end
+
 	if(camp == Enum.ECamp.Blue) then
 		return Enum.ECamp.Green
 	end
+	
 	if(camp == Enum.ECamp.Green)then
 		return Enum.ECamp.Blue
 	end
+	
 	return nil
 end
 
+local getRandomIndexByChance = function( cfgArr )
+	local t = {}
+	local sum = 0;
+	for i = 1, #cfgArr do
+		local cfg = cfgArr[i]
+		if(cfg ~= nil) then
+			sum = sum + cfg.chance
+			table.insert(t,sum)
+		end
+	end
+	local r = random(0,sum)
+	for i = 1,#t do
+		if(r < t[i])then
+			return i
+		end
+	end
+	return -1
+end
+
 local battleUtils = {
-	getConfig = getConfig,
-	getConfigByGroup = getConfigByGroup,
-	getConfigByDrop = getConfigByDrop,
-	random = random,
-	setSeed = setSeed,
-	angleToDirection = angleToDirection,
-	directionToArr = directionToArr,
-	arrToDirection = arrToDirection,
-	TurnLeft = TurnLeft,
-	TurnRight = TurnRight,
-	isReversDirection = isReversDirection,
-	getDropByDist = getDropByDist,
-	getEnemyByDist = getEnemyByDist,
-	getLessHpPartner = getLessHpPartner,
-	getAllPartner = getAllPartner,
-	getObjectByType = getObjectByType,
-	getOtherCamp = getOtherCamp
+	getConfig 			= getConfig,
+	getConfigByGroup 	= getConfigByGroup,
+	getConfigByDrop 	= getConfigByDrop,
+	random 				= random,
+	setSeed 			= setSeed,
+	angleToDirection 	= angleToDirection,
+	directionToArr 		= directionToArr,
+	arrToDirection 		= arrToDirection,
+	TurnLeft 			= TurnLeft,
+	TurnRight 			= TurnRight,
+	isReversDirection 	= isReversDirection,
+	getDropByDist 		= getDropByDist,
+	getEnemyByDist 		= getEnemyByDist,
+	getLessHpPartner 	= getLessHpPartner,
+	getAllPartner 		= getAllPartner,
+	getObjectByType 	= getObjectByType,
+	getOtherCamp 		= getOtherCamp,
+	getRandomIndexByChance = getRandomIndexByChance,
 }
 
 return battleUtils
