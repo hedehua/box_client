@@ -11,6 +11,7 @@ local CharConfig = require("app.controller.battle.config.characterConfig")
 local BattleObject = require("app.controller.battle.core.battleObject")
 local WorldConfig = require("app.controller.battle.config.worldConfig")
 local Skill = require("app.controller.battle.core.skill")
+local Enum = require("app.controller.battle.core.battleEnum")
 
 local Character = {}
 Character.super = BattleObject
@@ -34,9 +35,9 @@ function Character.new()
 	obj._moveStateChange = false
 	obj._isLeader = false
 	obj._teamId= -1  			-- 无队伍
-	obj._isAlive = false
-	obj._needRemove = false
 	obj._moveEndDirty = false
+	obj._enableRevive = false
+	obj._state = Enum.ECharacterState.None
 
 	obj._isBornning = false       -- 出生的缓冲区
 	obj._stopBlinkTime = 0
@@ -51,9 +52,9 @@ function Character:init(typeId,pos,dir,camp)
 	
 	self._typeId = typeId
 	self._camp = camp
-	self._isAlive = true
 	self._isBornning = true
 	self._stopBlinkTime = self._frameCount + WorldConfig.bornTime
+	self._state = Enum.ECharacterState.Init
 
 	self:initConfig()
 	self:setSpeed(self:getBasicSpeed())
@@ -104,9 +105,9 @@ function Character:uninit()
 
 	self._posQue = nil
 	self._skillIds = nil
+	self._state = Enum.ECharacterState.None
 
 	Character.super.uninit(self)
-	-- cc.log("character uninit",self._id)
 end
 
 function Character:initConfig() 
@@ -138,21 +139,23 @@ function Character:getAttack()
 end
 function Character:update()
 
+	self._frameCount = self._frameCount + 1;
+	
 	if(not self:isValid()) then
 		return
 	end
 
 	if(not self:isAlive()) then
-		self._needRemove = true
-		-- return
+		if(self._state ~= Enum.ECharacterState.Revive) then
+			self._state = Enum.ECharacterState.Remove
+			return
+		end
 	end
 	
 	if(self._hp <=0) then
 		self:die()
-		-- return
+		return
 	end
-
-	self._frameCount = self._frameCount + 1;
 	
 	if(self._knockCd ~= nil and self._knockCd > 0) then
 		self._knockCd = self._knockCd - 1;
@@ -174,33 +177,43 @@ function Character:update()
 	
 end
 
+function Character:setRevive(revive)
+	self._enableRevive = revive
+end
+
 function Character:isAlive()
-	return self._isAlive ;
+	return self._state == Enum.ECharacterState.Init ;
 end
+
 function Character:needRemove()
-	return self._needRemove
+	return self._state == Enum.ECharacterState.Remove
 end
+
 function Character:isBlock(argument)
 	return false
 end
+
 function Character:recieveKnock()
 	return not self._isBornning
 end
+
 function Character:die()
 	-- print(self._id,"die",self._hp,debug.traceback())
-	if(self._needRemove) then
+	if(self._state ~= Enum.ECharacterState.Init) then
 		return
 	end
 
 	self:setHp(0,false)
-	self._isAlive = false
+	self._state = Enum.ECharacterState.Die
 	if(self._render ~= nil) then 
 		self._render:fadeOut()
 	end
 	
 end
+
 function Character:revive()
-	
+	self:setHp(self._config.defaultHp,false);
+	self._state = Enum.ECharacterState.Init
 end
 
 -- character: caster
@@ -225,7 +238,8 @@ function Character:beMerge(ch)
 	self:setHp(0,true)
 end
 function Character:merge(ch)
-	self:setHp(self:getHp() * 2,true)
+	self:setMaxHp(self._maxHp * 2)
+	self:setHp(self._maxHp,true)
 end
 function Character:setLeader(flag) 
 	self._isLeader = true
@@ -256,6 +270,9 @@ function Character:addHp(character,hp)
 end
 function Character:setMaxHp(value)
 	self._maxHp = value
+	if(self._render ~=nil) then
+		self._render:setIcon(tostring(self._maxHp))
+	end
 end
 function Character:setHp(value,tween)
 
@@ -444,6 +461,10 @@ function Character:tryAi()
 		return
 	end
 
+	-- if(self._aiInterval < self._frameCount) then
+	-- 	return
+	-- end
+
 	if(self._skills == nil )then
 		return
 	end
@@ -451,13 +472,16 @@ function Character:tryAi()
 
 		local skill = self._skills[i]
 		local target = skill:findTarget()   -- 寻敌半径中有人才释放
-
 		if(target ~= nil and skill:cast())then
 			self:initAi()
 			break
 		end
 	end
 	
+end
+
+function Character:isClass( clsName )
+	return Character.super.isClass(self,clsName) or Character.__cname == clsName
 end
 
 function Character:initAi() 

@@ -30,6 +30,7 @@ local destoryRender = function(obj)
 		return renderDestroy(obj);
 	end
 end
+
 local addObject = function (obj) 
 	if(objects == nil)then
 		objects = {}
@@ -38,6 +39,7 @@ local addObject = function (obj)
 	table.insert(objects,obj)
 	objectsDic[obj._id] = obj
 end
+
 local removeObject = function (obj) 
 	if(objects == nil) then
 		return
@@ -332,6 +334,14 @@ function BattleObject:moveEnd()
 		self._pos:setv(self._targetPos.x,self._targetPos.y);
 	end
 	self:stopMove()
+end
+
+function BattleObject:getClassName(  )
+	return self.__cname
+end
+
+function BattleObject:isClass( clsName )
+	return self.__cname == clsName
 end
 
 function BattleObject:stopMove() 

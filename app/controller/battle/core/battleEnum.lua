@@ -40,6 +40,13 @@ local BattleEnums = {
 		Accomplish = 2,
 		Transit = 3, 		-- 过渡 
 	},
+	ECharacterState = {
+		None = 0,
+		Init = 1,
+		Die = 2,
+		Revive = 3,
+		Remove = 4,  -- todo
+	},
 	-- 1：定向移动，2= 追踪目标，3= 运动至敌人位置，4：跟随发起者
 	EMoveType = {
 		Direction 		= 1,

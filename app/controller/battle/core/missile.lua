@@ -145,7 +145,7 @@ function Missile:cast()
             -- local dir = self:getDir()
             -- dir = dir:rotate(self._config.dir)   -- 朝向旋转
             local obj = self:findObjectById(self._targetId)
-            local dir = obj:getPos():sub(self:getPos()):norm()
+            local dir = obj:getPos():sub(self:getPos())
             self:moveDir(dir)
         end,
         [Enum.EMoveType.ToTarget] = function(  )
@@ -157,7 +157,7 @@ function Missile:cast()
                 print("target missing")
                 return false
             end
-            local dir = self:getPos():sub(obj:getPos()):norm()
+            local dir = self:getPos():sub(obj:getPos())
             self:moveDir(dir)
         end,
         [Enum.EMoveType.ToCaster] = function(  )
@@ -262,6 +262,10 @@ function Missile:tryHitTarget(target)
         self._needRemove = true
     end
     return true
+end
+
+function Missile:isClass( clsName )
+    return Missile.super.isClass(self,clsName) or Missile.__cname == clsName
 end
 
 return Missile

@@ -118,4 +118,9 @@ function BattleDrop:beDetect(character,dist)
 	end
 end
 
+function BattleDrop:isClass( clsName )
+    return BattleDrop.super.isClass(self,clsName) or BattleDrop.__cname == clsName
+end
+
+
 return BattleDrop

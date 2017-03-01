@@ -346,6 +346,7 @@ end
 
 function ObjectRender:setIcon(icon) 
     if(icon == nil) then
+        print('icon nil')
         return
     end
     if(self._avatar == nil) then
@@ -361,12 +362,13 @@ function ObjectRender:setIcon(icon)
     end
    
     if(self._iconSprite == nil)then
+        print("no sprite")
         return
     end
     
     local sp = SpriteFrameManager:getInstance():getSpriteFrame(icon)
     if(sp == nil) then
-        print("no sprite",icon)
+        print("no sprite",icon) -- TODO::
         return
     end
     self._iconSprite.node:setSpriteFrame(sp) 

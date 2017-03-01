@@ -51,7 +51,7 @@ function Vector2:round ()
 end
 function Vector2:add (v)
     if(v == nil)then
-        cc.log("[vector]add vector exception");
+        print("[vector]add vector exception");
         return self;
     end
     self.x = self.x + v.x
@@ -61,12 +61,12 @@ function Vector2:add (v)
 end
 function Vector2:sub (v)
     if(v == nil)then
-        cc.log("[vector]sub vector exception")
+        print("[vector]sub vector exception")
         return self;
     end
 
     self.x = self.x - v.x
-    self.y = self.x - v.y
+    self.y = self.y - v.y
     self:floor()
     return self
 end
@@ -106,7 +106,7 @@ end
 -- 统一在外部处理normalize以减轻此处的计算量
 function Vector2:moveFace (dir,len)
     if(dir == nil)then
-        cc.log("[vector]dir nil")
+        print("[vector]dir nil")
     end
     self.x = self.x + dir.x * len /  self._factor;
     self.y = self.y + dir.y * len / self._factor;

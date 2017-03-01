@@ -21,7 +21,7 @@ local getConfigByGroup = function (tb,groupId)
 		return
 	end
 	local t = {}
-	for i = 1,table.length(tb) do
+	for i = 1,#tb do
 		local item = tb[i]
 		if(item ~= nil and item.groupId == groupId) then
 			table.insert(t,item)
@@ -142,9 +142,9 @@ local getDropByDist = function(casterId,dist)
 
 	local d = dist
 	local t = nil
-	for i =1,table.length(objects) do
+	for i =1,#objects do
 		local obj = objects[i]
-		if(obj.__cname == "BattleDrop")then
+		if(obj:isClass("BattleDrop"))then
 			if(obj:dist(self)<=d and not obj:needRemove())then
 				d = obj:dist(self)
 				t = obj
@@ -167,10 +167,9 @@ local getEnemyByDist= function(casterId,dist)
 
 	local d = dist
 	local t = nil
-	for i =1,table.length(objects) do
+	for i =1,#objects do
 		local obj = objects[i]
-		if(obj.__cname == "Character") then
-			
+		if(obj:isClass("Character")) then
 			if(obj:isAlive() and obj:getCamp() ~= self:getCamp() and obj:dist(self)<=d) then
 				d = obj:dist(self)
 				t = obj
@@ -193,9 +192,9 @@ local getLessHpPartner = function(casterId)
 	end
 
 	local ret = nil
-	for i = 1,table.length(objects) do
+	for i = 1,#objects do
 		local obj = objects[i]
-		if(obj.__cname == "Character")then
+		if(obj:isClass("Character"))then
 			if( obj:getTeam() == self:getTeam())then
 				if(ret == nil)then
 					ret = obj
@@ -224,9 +223,9 @@ local getAllPartner = function(casterId)
 	end
 
 	local ret = {}
-	for i = 1,table.length(objects) do
+	for i = 1,#objects do
 		local obj = objects[i]
-		if(obj.__cname == "Character") then
+		if(obj:isClass("Character")) then
 			if(obj:getTeam() == self:getTeam()) then
 				table.insert(ret,obj)
 			end

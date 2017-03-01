@@ -27,12 +27,10 @@ function BattleTeam.new()
 	obj._isAi = false
 	obj._queier = nil
 	obj._ai = nil
-	obj._isRevive = false
 	obj._isBasement = false 
 	obj._paths = nil
 
 	obj._reviveTime = -1
-	obj._memberOriData = nil
 	obj._waitJoinMember = nil
 
 	obj._dropId = nil			-- 死亡時掉落
@@ -69,10 +67,11 @@ function BattleTeam:update()
 		self._reviveTime = -1
 	end
 
-	if(not self._isAlive)then
+	if(not self:isAlive())then
 		return;
 	end
 	
+	self:updatePath()
 	self:updateAi();
 	self:updateMember();
 
@@ -85,7 +84,6 @@ function BattleTeam:init (typeId,pos,dir,camp,flag,ctrlId)
 	self._ctrlId = ctrlId
 	self._bornPos = self:getPos()
 	self._bornDir = self:getDir()
-	self._camp = camp
 	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
 	self:setLeader(flag)
 	self:setLayer(1)
@@ -111,12 +109,15 @@ function BattleTeam:uninit()
 	self._bornPos = nil
 	self._curDirection = nil
 end
+
 function BattleTeam:isMonster() 
 	return self._camp == Enum.ECamp.Red
 end
+
 function BattleTeam:initAi() 
 	self._ai = Ai.new(1,self)
 end
+
 function BattleTeam:updateAi() 
 	if(not self._isAi)then
 		return
@@ -128,25 +129,21 @@ function BattleTeam:updateAi()
 	self:tryAi()
 
 end
+
+function BattleTeam:isClass( clsName )
+	return BattleTeam.super.isClass(self,clsName) or BattleTeam.__cname == clsName
+end
+
 function BattleTeam:setAi(ai) 
 	self._isAi = ai
 end
-function BattleTeam:setRevive(revive)
-	self._isRevive = revive
-end
+
 function BattleTeam:setDrop(dropId)
 	self._dropId = dropId
 end
+
 function BattleTeam:setBasement()
 	self._isBasement = true
-end
-
-function BattleTeam:getCamp(argument) 
-	return self._camp
-end
-
-function BattleTeam:needRemove(argument) 
-	return self._needRemove
 end
 
 function BattleTeam:move(dir)
@@ -187,6 +184,7 @@ function BattleTeam:getLeaderPos() 			-- 获取队长的坐标
 	end
 	return leader:getPos()
 end
+
 function BattleTeam:getLeaderHp()
 	local leader = self:getLeader()
 	if(leader == nil)then
@@ -195,7 +193,28 @@ function BattleTeam:getLeaderHp()
 	return leader:getHp()
 end
 
+function BattleTeam:updatePath( ... )
+	if(self._paths == nil)then
+		self._paths = {}
+	end
+
+	if(self:isMove()) then
+		table.insert(self._paths,self:getPos())
+	end
+
+	if(#self._paths > maxSize)then
+		table.remove(self._paths,1)
+	end
+end
+
 function BattleTeam:updateMember()
+	-- 新增队员
+	if(self._waitJoinMember ~=nil) then
+		for i = 1,#self._waitJoinMember do
+			self:joinMember(self._waitJoinMember[i])
+		end
+		self._waitJoinMember = nil
+	end
 
 	if(self._members == nil)then
 		return;
@@ -216,24 +235,14 @@ function BattleTeam:updateMember()
 	end
 
 	-- 更新逻辑
-	if(self._paths == nil)then
-		self._paths = {}
-	end
-
-	if(self:isMove()) then
-		table.insert(self._paths,self:getPos())
-	end
-
-	if(#self._paths > maxSize)then
-		table.remove(self._paths,1)
-	end
 	
 	local preMember = nil
 	local step = math.floor(self:getDiameter() / self:getSpeed()) 
 	local length = #self._paths
+
 	for i = 1,#self._members do
 		local member = self._members[i];
-		local index = length - (i-1)* step
+		local index = length - (i)* step
 		local pos = self._paths[index] 
 		if(pos == nil)then
 			pos = self:getNextPos(preMember)
@@ -250,14 +259,6 @@ function BattleTeam:updateMember()
 		if(member ~= nil and member:needRemove())then		 -- important
 			self:removeMember(member)
 		end
-	end
-
-	-- 新增队员
-	if(self._waitJoinMember ~=nil) then
-		for i = 1,#self._waitJoinMember do
-			self:joinMember(self._waitJoinMember[i])
-		end
-		self._waitJoinMember = nil
 	end
 
 end
@@ -286,35 +287,41 @@ function BattleTeam:removeMember(member)
 	end
 end
 
+function BattleTeam:hitOther(  )
+	self._killCount = self._killCount + 1
+end
+
 function BattleTeam:die() 
+
+	if(self._state ~= Enum.ECharacterState.Init) then
+		return
+	end
 
 	BattleTeam.super.die(self)
 
 	self:notify("onDie",self,self._dropId)
 
-	if(self._members == nil)then
-		return
-	end
-
-	for i = #self._members,1, - 1 do
-		local m = self._members[i]
-		if(m ~= nil)then
-			m:die()
+	if(self._members ~= nil)then
+		for i = #self._members,1, - 1 do
+			local m = self._members[i]
+			if(m ~= nil)then
+				m:die()
+			end
 		end
 	end
 
-	if(not self:initRevive())then
-		self._needRemove = true
-	end
+	self:initRevive()
 end
 
 function BattleTeam:initRevive() 
 
-	if(not self._isRevive)then
+	if(not self._enableRevive)then
 		return false
 	end
 
+	self._state = Enum.ECharacterState.Revive
 	self._reviveTime = self._frameCount + WorldConfig.reviewTime
+	print("revive time",self._reviveTime)
 	return true
 
 end
@@ -330,17 +337,12 @@ function BattleTeam:revive()
 		end
 	end
 
-	if(self._memberOriData == nil or #self._memberOriData < 1)then
-		return;
-	end
-
 	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
-	local leaderId = self._memberOriData[1] 		-- 只复活队长
-	self._memberOriData = nil;
-	-- self:joinMember(leaderId)
 	self._killCount = 0
-	self._isAlive = true
-	
+	self:setPos(self._bornPos)
+	self:updateRenderPos()
+
+	BattleTeam.super.revive(self)	
 end
 function BattleTeam:pickMember(data) 
 	local typeId = data.typeId
@@ -384,15 +386,8 @@ end
 function BattleTeam:joinMember(typeId)
 	
 	local lastChar = self:getTail();
-	local pos = self._bornPos:clone()
-	local dir = self._bornDir:clone()
-	local posQue = nil
-
-	if(lastChar ~= nil)then
-		pos =  self:getNextPos(lastChar)
-		dir = lastChar:getDir();
-		posQue = lastChar:cloneQuePos()
-	end
+	local pos =  self:getNextPos(lastChar)
+	local dir = lastChar:getDir();
 
 	local member = Character.new();
 	member:init(typeId,pos,dir,self._camp);
@@ -400,14 +395,12 @@ function BattleTeam:joinMember(typeId)
 
 	self:addMember(member);
 
-	if(self._memberOriData == nil)then
-		self._memberOriData = {}
-	end
-
-	table.insert(self._memberOriData,typeId)
 end
 
 function BattleTeam:moveEx(dx,dy)
+	if(not self:isAlive()) then
+		return
+	end
 	local dir =  Vector2.new(dx,dy);
 	self:moveDir(dir)
 	self._tickTime = 0

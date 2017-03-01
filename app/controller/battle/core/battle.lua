@@ -338,7 +338,7 @@ function Battle:initCamps()
 	if(self._config.camp1 ~= nil and self._config.camp1 > 0)then
 		local team = self:joinTeam({camp = Enum.ECamp.Blue,pos = self._config.camp1Pos,dir = self._config.camp1Dir,chars = {{typeId = self._config.camp1}}})	
 		if(team ~= nil)then
-			team:setAi(false)
+			team:setAi(true)
 			team:setRevive(false)
 			team:setBasement()
 		end
@@ -346,7 +346,7 @@ function Battle:initCamps()
 	if(self._config.camp2  ~= nil and self._config.camp2 > 0 )then
 		local team = self:joinTeam({camp = Enum.ECamp.Green,pos = self._config.camp2Pos,dir = self._config.camp2Dir,chars = {{typeId = self._config.camp2}}})	
 		if(team ~= nil)then
-			team:setAi(false)
+			team:setAi(true)
 			team:setRevive(false)
 			team:setBasement()
 		end
@@ -570,7 +570,7 @@ function Battle:joinPlayer(ctrlId,typeId,camp,isAi)
 		return -1;
 	end
 
-	team:setRevive(self._config.revive or isAi)
+	team:setRevive(self._config.revive)
 	team:setAi(isAi)
 	team:setDrop(self._config.playerDrop)
 	
@@ -671,8 +671,7 @@ local colliderEvents = {
 
 			local caster = BattleObject.getObjectById(sourceObj:getCasterId())
 			if(targetObj:behit(caster,skill:getAttack()))then
-				-- self._killCount = self._killCount + 1
-				print('todo')
+				caster:hitOther(targetObj)
 			end
 		end,
 		Missile = function( sourceObj,targetObj,skill )
@@ -688,8 +687,8 @@ local colliderEvents = {
 
 function Battle:dispatchTriger(sourceObj,targetObj,skill)
 
-	local sourceName = sourceObj.__cname
-	local targetName = targetObj.__cname
+	local sourceName = sourceObj:getClassName()
+	local targetName = targetObj:getClassName()
 
 	local row = colliderEvents[sourceName]
 	if(row == nil) then
@@ -762,17 +761,17 @@ end
 function Battle:moveEx(ctrlId,dirX,dirY)
 
 	if(ctrlId < 0)then
-		cc:log("invalid ctrlId");
+		print("invalid ctrlId");
 		return;
 	end
 	if(self._teams == nil)then
-		cc:log("no team");
+		print("no team");
 		return;
 	end
 	local team = self:getTeamByCtrId(ctrlId)
 
 	if(team == nil)then
-		cc.log('nil team')
+		print('nil team')
 		return;
 	end
 
