@@ -1,6 +1,7 @@
 -- // 界面管理的基类
 local ObjManager = require("app.manager.objManager")
 local Common = require("app.common.include")
+local transition = require "cocos.framework.transition"
 
 local uiRoot = nil
 local UIBase = cc.class("UIBase")
@@ -81,11 +82,11 @@ function UIBase:open()
 	self:fresh();
 
 	if(self:isTweenShow()) then
-		-- local actionTo1 = cc.scaleTo(0.05, 0.9);
-		-- local actionTo2 = cc.scaleTo(0.1, 1.05);
-		-- local actionTo3 = cc.scaleTo(0.05, 1);
-		-- local seq = cc.sequence(actionTo1, actionTo2,actionTo3);
-		-- self._resObject:runAction(seq)
+		local actionTo1 = transition.scaleTo(self._resObject,{scaleX = 1.05, scaleY = 1.05,time = 0.05});
+		local actionTo2 = transition.scaleTo(self._resObject,{scaleX = 0.9, scaleY = 0.9,time = 0.05});
+		local actionTo3 = transition.scaleTo(self._resObject,{scaleX = 1,scaleY = 1,time = 0.1});
+		local seq = transition.sequence({actionTo1,actionTo2,actionTo3});
+		self._resObject:runAction(seq)
 	end
 end
 function UIBase:close()
@@ -127,7 +128,7 @@ end
 function UIBase:_loaded(err,res)
 
 	if(res == nil) then
-		cc.log("error:load res nil",err,res);
+		print("error:load res nil",err,res);
 		return;
 	end
 

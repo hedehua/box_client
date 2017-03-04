@@ -1,6 +1,5 @@
 local ObjManager = require("app.manager.objManager")
 local ResManager = require("app.manager.resManager")
-local AudioManager = require("app.manager.audioManager")
 local EffectManager = require("app.manager.effectManager")
 local SpriteFrameManager = require("app.manager.spriteFrameManager")
 
@@ -8,6 +7,8 @@ local CharConfig = require("app.controller.battle.config.characterConfig")
 local WorldConfig = require("app.controller.battle.config.worldConfig")
 local Utils = require("app.controller.battle.core.battleUtils")
 local Common = require("app.common.include")
+local transition = require "cocos.framework.transition"
+
 
 local objRoot = nil
 local CampIcon = {
@@ -132,6 +133,8 @@ function ObjectRender:uninit()
         self._avatar:stopAllActions()
     end
     self:destroyAvatar()
+    self._valid = false
+
 end
 
 function ObjectRender:setVisible(value)
@@ -437,22 +440,24 @@ end
 
 -- 淡入接口 duration:时长
 function ObjectRender:fadeIn(duration) 
-    -- local action1 = cc.fadeOut(0);
-    -- local action2 = cc.fadeIn(duration)
-    -- local fadeIn = cc.sequence(action1,action2)
-    -- self._avatar:runAction(fadeIn)
+    transition.fadeIn(self._avatar,{time = duration})
 end
 
 -- 淡出 duration :时长
 function ObjectRender:fadeOut(duration) 
-    -- if(self._avatar == nil) then
-    --     return
-    -- end
-    -- self._avatar:stopAllActions();
-    -- local fadeOut = cc.fadeOut(duration  or  0.1);
-    -- self._avatar:runAction(fadeOut)
+    if(self._avatar == nil) then
+        return
+    end
+    if(not self._valid) then
+        return
+    end
+    duration = duration or 0.1
+    self._avatar:stopAllActions();
+    
+    transition.fadeOut(self._avatar,{time = duration});
     self._valid = false
 end
+
 -- 闪烁，interval：闪烁周期
 function ObjectRender:startBlink() 
 
@@ -527,7 +532,8 @@ function ObjectRender:setHp(cur,max,tween)
 end
 
 function ObjectRender:playAudio(path) 
-    AudioManager:getInstance():playEffect(path)  
+    local audio = require "cocos.framework.audio"
+    audio.playSound(path,false)
 end
 
 function ObjectRender:playEffect(effectPath,pos,duration) 

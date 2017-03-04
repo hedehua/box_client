@@ -1,4 +1,3 @@
-local resManager = require("app.manager.resManager")
 local AudioManager = cc.class("AudioManager")
 
 

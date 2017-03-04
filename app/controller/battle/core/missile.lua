@@ -85,12 +85,19 @@ function Missile:update()
     self:tryCastSubmissile();
     self._framecount = self._framecount + 1;
     
-    if(self._timeOut ~=-1 and self._framecount >= self._timeOut) then   -- timeOut 表示不是时间限制
-        if(self._render ~= nil) then
-            self._render:fadeOut()
+    if(self._timeOut ~= -1) then 
+        if(self._framecount >= self._timeOut - 2) then
+            if(self._render ~= nil) then
+                self._render:fadeOut()
+            end
         end
-        self._needRemove = true
-        return
+        if(self._framecount >= self._timeOut) then
+            if(self._render ~= nil) then
+                self._render:clear()
+            end
+            self._needRemove = true
+            return
+        end
     end
 
     -- 跟随

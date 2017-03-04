@@ -218,10 +218,6 @@ end
 -- character: caster
 -- demage : skill atatck
 function Character:behit(character,damage)
-	-- /*
-	-- self:addHp(character,-damage)
-	-- */
-
 	local preHp = self._hp
 	self:setHp(math.floor(self:getHp()-damage),true)
 	return self._hp <= 0 and preHp > 0

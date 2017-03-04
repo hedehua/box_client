@@ -27,15 +27,15 @@ local missileConfig = {
 	--o:collierMissile 碰撞后产生子弹
 	--o:subMissile 延迟产生子弹，delaytime  并发 或 先后
 
-	{id = 1000,speed = 30,radius = 10,moveType = 1,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
-	{id = 1001,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+	{id = 1000,speed = 30,radius = 10,moveType = 1,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="raw-assets/resources/audio/bottle.mp3"},	
+	{id = 1001,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle.mp3"}, 	
 	-- {id = 10010,speed = 160,radius = 50,moveType = 2,start = 1,startPos = nil,dir = 30, timeOut = 20,subMissile = 10011,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
 	-- {id = 10011,speed = 160,radius = 50,moveType = 2,start = 1,startPos = nil,dir = -30, timeOut = 20,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
 	-- {id = 10012,speed = 160,radius = 50,moveType = 1,start = 1,startPos = nil,dir = 60, timeOut = 20,subMissile = 10013,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
 	-- {id = 10013,speed = 160,radius = 50,moveType = 1,start = 1,startPos = nil,dir = -60, timeOut = 20,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
 
 
-	{id = 1002,speed = 25,radius = 10,moveType = 1,start = 1,startPos = nil,dir = 0, timeOut = 12,subMissile = 10020,missileDelayTime=1,collierMissile = -1,hitCount=1,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},
+	{id = 1002,speed = 25,radius = 10,moveType = 1,start = 1,startPos = nil,dir = 0, timeOut = 12,subMissile = 10020,missileDelayTime=1,collierMissile = -1,hitCount=1,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle.mp3"},
 	{id = 10020,speed = 25,radius = 10,moveType = 1,start = 1,startPos = nil,dir = 30, timeOut = 8,subMissile = 10021,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",},
 	{id = 10021,speed = 25,radius = 10,moveType = 1,start = 1,startPos = nil,dir = -30, timeOut = 8,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",},
 
@@ -54,11 +54,10 @@ local missileConfig = {
 	-- {id = 5002,speed = 160,radius = 50,moveType = 1,start = 1,startPos = nil,dir = 0,timeOut = 20,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_yuan"},	
 	-- {id = 5003,speed = 80,radius = 50,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 30,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/p_fire"},	
 
-	{id = 2001,speed = 10,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 15,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+	{id = 2001,speed = 10,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 15,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle.mp3"},  	
 
-	{id = 6001,speed = 50,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
-	{id = 6002,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
-	-- {id = 6003,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+	{id = 6001,speed = 50,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle.mp3"},	
+	{id = 6002,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle.mp3"}, 	
 
 }
 

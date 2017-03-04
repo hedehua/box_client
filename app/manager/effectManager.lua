@@ -16,12 +16,23 @@ function EffectManager:init( ... )
 	-- body
 end
 
+local objRoot = nil
+
 function EffectManager:playEffect(resName,pos,duration)
 
-	ObjManager:getInstance():load(resName,function(err,newNode) 
-		newNode:setPosition(pos.x,pos.y)
+	ObjManager:getInstance():load(resName,function(err,res) 
+		local scene = cc.Director:getInstance():getRunningScene()
+        
+        if(objRoot == nil) then
+            objRoot = scene:getChildByName("scene_root")
+        end
+
+        objRoot:addChild(res)
+
+		res:setPosition(pos.x,pos.y)
 		TimerManager:getInstance():runOnce(function() 
-			ObjManager:getInstance():unload(newNode)
+			objRoot:removeChild(res)
+			ObjManager:getInstance():unload(res)
 		end, duration);
 	end)
 

@@ -697,6 +697,20 @@ local colliderEvents = {
 		end
 	},
 	Missile = {
+		Character = function( sourceObj,targetObj,skill )
+			if(sourceObj:getCamp() == targetObj:getCamp())then
+				return
+			end
+
+			if(not sourceObj:tryHitTarget(targetObj))then
+				return
+			end
+
+			local caster = BattleObject.getObjectById(sourceObj:getCasterId())
+			if(targetObj:behit(caster,skill:getAttack()))then
+				caster:hitOther(targetObj)
+			end
+		end,
 		BattleTeam = function( sourceObj,targetObj,skill )
 			if(sourceObj:getCamp() == targetObj:getCamp())then
 				return

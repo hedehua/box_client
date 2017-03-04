@@ -11,6 +11,7 @@ cc.DEBUG = cc.DEBUG_INFO
 -- cc.DEBUG = cc.DEBUG_VERBOSE
 cc.DEBUG_DISABLE_DUMP_TRACEBACK = true
 
+
 local function _cleanmem()
     for i = 1, 6 do
         collectgarbage()
