@@ -48,16 +48,10 @@ local inScreen = function(x,y,w,h)
     end
     local screenSize = Common.utils.getVisibleSize()
     if(screenSize == nil)then
-        -- print("what's up")
         return false
     end
     return  (x + w/2 > centerPosX - screenSize.width * ext) and (x - w/2 < centerPosX + screenSize.width * ext) 
         and (y + h/2 > centerPosY-screenSize.height * ext) and (y - h/2 < centerPosY + screenSize.height * ext)
-    -- print(debug.traceback())
-    -- print('xywh',x,y,w,h)
-    -- print(r,'#',centerPosX,centerPosY,screenSize.width,screenSize.height)
-    
-    -- return r
 end
 
 local ObjectRender = {}
@@ -532,8 +526,8 @@ function ObjectRender:setHp(cur,max,tween)
 end
 
 function ObjectRender:playAudio(path) 
-    local audio = require "cocos.framework.audio"
-    audio.playSound(path,false)
+    local AudioManager = require "app.manager.audioManager"
+    AudioManager:getInstance():playEffect(path)
 end
 
 function ObjectRender:playEffect(effectPath,pos,duration) 

@@ -5,7 +5,7 @@ local AssetPathTable = {
     uiLogin =  "resources/ui/ui_login.prefab",
    
    -- // 音乐
-    musicLogin = "music/music_01",
+    musicLogin = "raw-assets/resources/music/music_01.mp3",
     -- // musicBattle = "music/music_logo"
 
     -- // 图集

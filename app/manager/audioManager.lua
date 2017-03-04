@@ -15,16 +15,19 @@ function AudioManager:ctor(  )
 	-- body
 end
 
-function AudioManager:playMusic( ... )
-	-- body
+function AudioManager:playMusic( path )
+	local audio = require "cocos.framework.audio"
+	audio.playMusic(path)
 end
 
-function AudioManager:playEffect( ... )
-	-- body
+function AudioManager:playEffect( path )
+	local audio = require "cocos.framework.audio"
+    audio.playSound(path,false)
 end
 
-function AudioManager:stopMusic( ... )
-	-- body
+function AudioManager:stopMusic( path )
+	local audio = require "cocos.framework.audio"
+	audio.stopMusic(path)
 end
 
 return AudioManager

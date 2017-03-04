@@ -92,9 +92,6 @@ function Missile:update()
             end
         end
         if(self._framecount >= self._timeOut) then
-            if(self._render ~= nil) then
-                self._render:clear()
-            end
             self._needRemove = true
             return
         end
