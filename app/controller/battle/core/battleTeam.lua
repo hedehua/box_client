@@ -137,7 +137,7 @@ function BattleTeam:updateAi()
 		self._ai:update();
 	end
 
-	self:trySkillAi()
+	self:resetAi()
 
 end
 

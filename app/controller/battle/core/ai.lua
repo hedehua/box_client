@@ -7,6 +7,11 @@ local Vector2 = require("app.controller.battle.core.vector2")
 local Ai = {}
 local Base = {}
 
+local ExceptLeft = { Enum.Direction.Right,Enum.Direction.Down,Enum.Direction.Up}
+local ExceptRight = { Enum.Direction.Left,Enum.Direction.Down,Enum.Direction.Up}
+local ExceptUp = { Enum.Direction.Left,Enum.Direction.Right,Enum.Direction.Down}
+local ExceptDown = { Enum.Direction.Left,Enum.Direction.Right,Enum.Direction.Up}
+
 function Base:check()
     local map = Utils.getObjectByType("BattleMap")
     if(map ~= nil)then
@@ -14,16 +19,16 @@ function Base:check()
         local circle = leader:getCollider();
         local rect = map:getCollider()
         if(circle:detectBoundR(rect,self._config.panicDist))then
-            return Enum.Direction.Left
+            return ExceptRight[Utils.random(1,3)]
         end
         if(circle:detectBoundL(rect,self._config.panicDist))then
-            return Enum.Direction.Right
+            return ExceptLeft[Utils.random(1,3)]
         end
         if(circle:detectBoundT(rect,self._config.panicDist))then
-            return Enum.Direction.Down
+            return ExceptUp[Utils.random(1,3)]
         end
         if(circle:detectBoundB(rect,self._config.panicDist))then
-            return Enum.Direction.Up
+            return ExceptDown[Utils.random(1,3)]
         end
 
     end
@@ -39,14 +44,17 @@ function Idle.new( )
     local obj = {}
     obj._team = nil
     obj._config = nil
+    obj._ai = nil
     setmetatable(obj,{__index = Idle})
     return obj
 end
 
-function Idle:init(team,conf)
+function Idle:init(ai,team,conf)
     self._team = team
     self._config = conf
+    self._ai = ai
 end
+
 function Idle:enter()
     
 end
@@ -57,7 +65,7 @@ end
 
 function Idle:getNext()
     local r = Utils.random(0,self._config.maxPercent)
-    if(r < self._config.search )then
+    if(r <= self._config.search )then
         return "search"
     end
     return nil;
@@ -70,11 +78,14 @@ function Idle:update()
     if(d == nil)then
 
         if(Utils.random(0,self._config.maxPercent) > self._config.activity)then
+            self._team:stopMove()
             return
         end
 
         d = Utils.random(Enum.Direction.Up,Enum.Direction.Left)
     end
+
+    -- print(self._team._id,"idle",d)
 
     self._team:move(d)
 end
@@ -87,30 +98,32 @@ function Search.new( )
     local obj = {}
     obj._team = nil
     obj._config = nil
+    obj._ai = nil
     setmetatable(obj,{__index = Search})
     return obj
 end
 
-function Search:init(team,conf)
+function Search:init(ai,team,conf)
     self._team = team
     self._config = conf
-    self._enemy = nil
-    self._drop = nil
+    self._ai = ai
 end
 
 function Search:getNext()
-    if(self._enemy ~= nil)then           -- 发现敌人了 有多大概率追击
+    if(self._ai._enemy ~= nil)then           -- 发现敌人了 有多大概率追击
         local r = Utils.random(0,self._config.maxPercent)
-        if(r < self._config.pursue )then
+        if(r <= self._config.pursue )then
             return "pursue"
         end
+        return nil
     end
 
-    if(self._drop ~= nil)then
+    if(self._ai._drop ~= nil)then
         local r = Utils.random(0,self._config.maxPercent)
-        if(r < self._config.pick )then
+        if(r <= self._config.pick )then
             return "pick"
         end
+        return nil
     end
     
     return "idle";
@@ -119,15 +132,17 @@ end
 function Search:enter()
     local leader = self._team:getLeader()
     if(leader == nil)then
+        print("error,no leader")
         return
     end
-    self._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
-    self._drop = Utils.getDropByDist(leader._id,self._config.fov)
+
+    self._ai._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
+    self._ai._drop = Utils.getDropByDist(leader._id,self._config.fov)
+    -- print(self._team.__cname,self._team._typeId,'>',self._ai._enemy.__cname,self._ai._enemy._typeId,'~',self._ai._drop)
 end
 
 function Search:leave()
-    self._enemy = nil
-    self._drop = nil
+
 end
 
 function Search:update()
@@ -148,61 +163,62 @@ function Pursue.new( )
     local obj = {}
     obj._team = nil
     obj._config = nil
+    obj._ai = nil
     setmetatable(obj,{__index = Pursue})
     return obj
 end
 
-function Pursue:init(team,conf)
+function Pursue:init(ai,team,conf)
     self._team = team
     self._config = conf
+    self._ai = ai
 end
 
 function Pursue:getNext()
-    if(self._enemy == nil or not self._enemy:isAlive())then
+    if(self._ai._enemy == nil or not self._ai._enemy:isAlive())then
         return "idle"
     end
 
     local pos = self._team:getLeaderPos();
-    local dist = pos:dist(self._enemy:getPos()) 
+    local dist = pos:dist(self._ai._enemy:getPos()) 
     if(dist < self._config.panicDist) then
         local r = Utils.random(0,self._config.maxPercent)
-        if(r < self._config.escape )then
+        if(r <= self._config.escape )then
             return "escape" 
         end
+        return nil
     end
 
     return nil
 end
 
 function Pursue:enter()
-    local leader = self._team:getLeader()    
-    self._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
+
 end
 
 function Pursue:leave()
-    self._enemy = nil
+
 end
 
 function Pursue:update()
     local d = self:check()
     if(d ~= nil)then
-        self._enemy = nil
         self._team:move(d)
         return
     end
+    if(self._ai._enemy == nil or not self._ai._enemy:isAlive())then
+        return
+    end
+
     local leaderPos = self._team:getLeaderPos()
-    if(leaderPos == nil)then
-        return
-    end
-    if(self._enemy == nil)then
-        return
-    end
-    local enemyPos = self._enemy:getPos();
+    local enemyPos = self._ai._enemy:getPos();
     local delta = enemyPos:sub(leaderPos)
     local angle  = delta:signAngle(Vector2.new(1,0))
 
     d = Utils.angleToDirection(angle)
+    -- print(self._team._id,"pursue",delta.x,delta.y,'@',angle,d)
     self._team:move(d)
+    self._team:tryCastSkill()
 end
 
 local Pick = {}
@@ -213,51 +229,46 @@ function Pick.new( )
     local obj = {}
     obj._team = nil
     obj._config = nil
+    obj._ai = nil
     setmetatable(obj,{__index = Pick})
     return obj
 end
 
-function Pick:init(team,conf)
+function Pick:init(ai,team,conf)
     self._team = team
     self._config = conf
+    self._ai = ai
 end
 
 function Pick:getNext()
-    if(self._drop == nil or self._drop:needRemove() or not self._drop:isValid()) then
+    if(self._ai._drop == nil or self._ai._drop:needRemove() or not self._ai._drop:isValid()) then
+        self._ai._drop = nil
         return "idle"
     end
     return nil;
 end
 
 function Pick:enter()
-    local leader = self._team:getLeader()
-    if(leader == nil) then
-        return
-    end
-    self._drop = Utils.getDropByDist(leader._id,self._config.fov)
+
 end
 
 function Pick:leave()
-    self._drop = nil
+
 end
 
 function Pick:update()
     local d = self:check()
     if(d ~= nil) then
-        self._drop = nil
         self._team:move(d)
         return
     end
 
     local leaderPos = self._team:getLeaderPos()
-    if(leaderPos == nil) then
-        return
-    end
-    if(self._drop == nil)then
+    if(self._ai._drop == nil)then
         return
     end
 
-    local dropPos = self._drop:getPos();
+    local dropPos = self._ai._drop:getPos();
     local delta = dropPos:sub(leaderPos)
     local angle  = delta:signAngle(Vector2.new(1,0))
 
@@ -273,58 +284,55 @@ function Escape.new( )
     local obj = {}
     obj._team = nil
     obj._config = nil
+    obj._ai = nil
     setmetatable(obj,{__index = Escape})
     return obj
 end
 
-function Escape:init(team,conf)
+function Escape:init(ai,team,conf)
     self._team = team
     self._config = conf
+    self._ai = ai
 end
 
 function Escape:getNext()
-    if(self._enemy == nil or not self._enemy:isAlive())then
+    if(self._ai._enemy == nil or not self._ai._enemy:isAlive())then
+        self._ai._enemy = nil
         return "idle"
     end
     local pos = self._team:getLeaderPos();
-    if(pos:dist(self._enemy:getPos()) > self._config.safeDist)then
+    if(pos:dist(self._ai._enemy:getPos()) > self._config.safeDist)then
+        self._ai._enemy = nil
         return "idle"  
     end
     return nil
 end
 
 function Escape:enter()
-     local leader = self._team:getLeader()
-     if(leader == nil)then
-        return
-     end
-     self._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
+
 end
 
 function Escape:leave()
-    self._enemy = nil
+
 end
 
 function Escape:update()
     local d = self:check()
     if(d ~= nil)then
-        self._enemy = nil
         self._team:move(d)
         return
     end
 
     local leaderPos = self._team:getLeaderPos()
-    if(leaderPos == nil)then
+    if(self._ai._enemy == nil)then
         return
     end
-    if(self._enemy == nil)then
-        return
-    end
-    local enemyPos = self._enemy:getPos();
+    local enemyPos = self._ai._enemy:getPos();
     local delta = leaderPos:sub(enemyPos)
     local angle  = delta:signAngle(Vector2.new(1,0))
 
     d = Utils.angleToDirection(angle)
+    -- print(self._team._id,"escape",delta.x,delta.y,'@',angle,d)
     self._team:move(d)
 end
 
@@ -336,6 +344,8 @@ function Ai.new(typeId,team)
     ai._team = team;
     ai._frameCount = 0;
     ai._state = nil;
+    ai._enemy = nil;
+    ai._drop = nil;
     ai:setExcuteTime();
     ai._fsm = {
         idle      = Idle.new(),
@@ -345,7 +355,7 @@ function Ai.new(typeId,team)
         pick      = Pick.new()
     }
     for i,v in pairs(ai._fsm) do
-        v:init(ai._team,ai._config);
+        v:init(ai,ai._team,ai._config);
     end
     return ai
 end
@@ -370,6 +380,7 @@ function Ai:update()
                     return
                 end
 
+                -- print(self._team._id,stateName)
                 self._state:leave()
                 self._state = state
                 self._state:enter();

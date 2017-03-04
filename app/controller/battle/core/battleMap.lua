@@ -33,6 +33,21 @@ function BattleMap:getValidPos()
 	return pos
 end
 
+function BattleMap:clampPos( pos )
+	if(pos == nil) then
+		return
+	end
+
+	local left = self._collider:left()
+	local right = self._collider:right()
+	local top = self._collider:top()
+	local bottom = self._collider:bottom()
+	local x = math.min(math.max(left,pos.x),right)
+	local y = math.min(math.max(bottom,pos.y),top)
+
+	return Vector2.new(x,y)
+end
+
 function BattleMap:isBlock( )
 	return true
 end

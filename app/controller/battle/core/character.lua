@@ -456,7 +456,8 @@ function Character:updateSkill()
 		end
 	end
 end
-function Character:trySkillAi() 
+
+function Character:tryCastSkill() 
 
 	if(not self:isAlive())then
 		return
@@ -470,7 +471,8 @@ function Character:trySkillAi()
 
 		local skill = self._skills[i]
 		local target = skill:findTarget()   -- 寻敌半径中有人才释放
-		if(target ~= nil and skill:cast())then
+		if(target ~= nil)then
+			skill:cast()
 			break
 		end
 	end

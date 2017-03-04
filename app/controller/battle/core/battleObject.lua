@@ -182,6 +182,7 @@ end
 function BattleObject:setQueier(q)
 	self._queier = q
 end
+
 function BattleObject:request(eventType,arg1,arg2,arg3)
 	if(self._queier == nil) then
 		return nil;
@@ -192,6 +193,7 @@ function BattleObject:request(eventType,arg1,arg2,arg3)
 	end
 	return nil;
 end
+
 function BattleObject:notify(eventType,arg1,arg2,arg3)
 	if(self._queier == nil) then
 		return nil;
@@ -231,11 +233,12 @@ function BattleObject:moveForward()
 	local y = self._pos.y 
 
 	local step = self._speed 
-	self._pos:moveFace(self._dir,step)
+	self._pos:moveFace(self._dir,step)	
 
 	if(self._collider ~=nil) then
 		self._collider:setPos(self._pos.x,self._pos.y)
 	end
+
 	if(not self:needCheckCollider()) then
 		return true
 	end

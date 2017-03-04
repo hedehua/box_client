@@ -27,7 +27,7 @@ local missileConfig = {
 	--o:collierMissile 碰撞后产生子弹
 	--o:subMissile 延迟产生子弹，delaytime  并发 或 先后
 
-
+	{id = 1000,speed = 30,radius = 10,moveType = 1,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
 	{id = 1001,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
 	-- {id = 10010,speed = 160,radius = 50,moveType = 2,start = 1,startPos = nil,dir = 30, timeOut = 20,subMissile = 10011,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
 	-- {id = 10011,speed = 160,radius = 50,moveType = 2,start = 1,startPos = nil,dir = -30, timeOut = 20,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile",hitEffect="resources/effect/p_collier.prefab",},
@@ -53,6 +53,13 @@ local missileConfig = {
 	-- {id = 5001,speed = 100,radius = 50,moveType = 2,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_jin_orange"},
 	-- {id = 5002,speed = 160,radius = 50,moveType = 1,start = 1,startPos = nil,dir = 0,timeOut = 20,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_yuan"},	
 	-- {id = 5003,speed = 80,radius = 50,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 30,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/p_fire"},	
+
+	{id = 2001,speed = 10,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 15,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=1,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+
+	{id = 6001,speed = 50,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+	{id = 6002,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+	-- {id = 6003,speed = 30,radius = 10,moveType = 3,start = 1,startPos = nil,dir = 0,timeOut = 10,subMissile = -1,missileDelayTime=0,collierMissile = -1,hitCount=100,res = "resources/effect/missile_1.prefab",hitEffect="resources/effect/p_collier.prefab",audio="resources/audio/bottle"},   -- TODO==	
+
 }
 
 return missileConfig

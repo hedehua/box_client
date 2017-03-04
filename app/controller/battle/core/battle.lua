@@ -667,6 +667,9 @@ end
 
 local colliderEvents = {
 	BattleTeam = {
+		BattleMap = function( sourceObj,targetObj )
+			sourceObj:setPos(targetObj:clampPos(sourceObj:getPos()))
+		end,
 		BattleDrop = function( sourceObj,targetObj,skill )
 			if(targetObj:needRemove())then
 				return

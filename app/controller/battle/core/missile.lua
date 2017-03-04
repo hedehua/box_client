@@ -36,7 +36,7 @@ end
 function Missile.needTarget(typeId) 
     local config = Utils.getConfig(MissileConfig,typeId)
     if(config == nil) then
-        cc.log('not init config missile')
+        print('not init config missile',typeId)
         return false
     end
     if(config.moveType == 1) then

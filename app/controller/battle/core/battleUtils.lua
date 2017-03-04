@@ -162,6 +162,7 @@ local getEnemyByDist= function(casterId,dist)
 	local self = BattleObject.getObjectById(casterId)
 
 	if(self == nil)then
+		print("no casterId")
 		return nil;
 	end
 
