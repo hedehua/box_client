@@ -3,8 +3,8 @@ local charConfig = {
 	{id = 1000,name = "", skill = {1000},speed = 8,collect = nil,radius = 30,maxHp = 4,defaultHp = 4, knockCd = 10,category = 1,attack = 1,res = "resources/role/hero_1.prefab",icon = '4'},
 	
 	{id = 1001,name = "", skill = nil,speed = 8,collect = nil,radius = 30,maxHp = 2,defaultHp = 2, knockCd = 10,category = 1,attack = 1,res = "resources/role/hero_1.prefab",icon = '2'},
-	{id = 1002,name = "", skill = nil,speed = 8,collect = nil,radius = 30,maxHp = 4,defaultHp = 4, knockCd = 10,category = 1,attack = 1,res = "resources/role/hero_1.prefab",icon = '4'},
-	{id = 1003,name = "", skill = nil,speed = 8,collect = nil,radius = 30,maxHp = 8,defaultHp = 8, knockCd = 10,category = 1,attack = 1,res = "resources/role/hero_1.prefab",icon = '8'},
+	-- {id = 1002,name = "", skill = nil,speed = 8,collect = nil,radius = 30,maxHp = 4,defaultHp = 4, knockCd = 10,category = 1,attack = 1,res = "resources/role/hero_1.prefab",icon = '4'},
+	-- {id = 1003,name = "", skill = nil,speed = 8,collect = nil,radius = 30,maxHp = 8,defaultHp = 8, knockCd = 10,category = 1,attack = 1,res = "resources/role/hero_1.prefab",icon = '8'},
 	
 	{id = 2001,name = "", skill = {2001},speed = 4,collect = nil,radius = 30,maxHp = 2,defaultHp = 2, knockCd = 10,category = 1,attack = 1,res = "resources/role/hero_1.prefab",icon = '8'},
 	

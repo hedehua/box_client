@@ -405,19 +405,10 @@ function Battle:tryGenerateMonster()
 	end
 
 	local cfg = cfgArr[i]
-	local dix = Utils.random(Enum.Direction.Up,Enum.Direction.Left)
-	local dir = Utils.directionToArr(dix)
-	local pos =  self._map:getValidPos()
-	self:generateMonster(cfg,pos,dir,Enum.ECamp.Blue)
-
-	dir = self:getCampBornDir(Enum.ECamp.Blue)
-	pos = self:getCampBornPos(Enum.ECamp.Blue)
-	self:generateMonster(cfg,pos,dir,Enum.ECamp.Blue)
-
-	dir = self:getCampBornDir(Enum.ECamp.Green)
-	pos = self:getCampBornPos(Enum.ECamp.Green)
-	self:generateMonster(cfg,pos,dir,Enum.ECamp.Green)
-	
+	local camp = cfg.camp
+	local dir = self:getCampBornDir(camp)
+	local pos = self:getCampBornPos(camp)
+	self:generateMonster(cfg,pos,dir,camp)	
 	self:initIntervalMonster(self._config.monsterInterval)		
 
 end
@@ -558,7 +549,11 @@ function Battle:getCampBornPos( camp )
 		return nil
 	end
 
-	return self._config["basement"..camp.."Pos"]
+	local pos = self._config["camp"..camp.."Pos"]
+	if(pos == nil) then
+		pos = self._map:getValidPos()
+	end
+	return pos
 end
 
 function Battle:getCampBornDir( camp )
@@ -566,7 +561,11 @@ function Battle:getCampBornDir( camp )
 		return nil
 	end
 
-	return self._config["basement"..camp.."Dir"]
+	local dir = self._config["camp"..camp.."Dir"]
+	if(dir == nil) then
+		dir = self._config.bornDir
+	end
+	return dir
 end
 
 function Battle:getCampTypeId( camp )
@@ -590,7 +589,6 @@ function Battle:joinPlayer(ctrlId,typeId,camp,isAi)
 		flag = self._mode.getCtrlId() == ctrlId
 	end
 
-	local campId = self:getCampTypeId(camp)
 	local pos = self:getCampBornPos(camp)
 	local dir = self:getCampBornDir(camp)
 

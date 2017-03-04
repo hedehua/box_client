@@ -497,7 +497,7 @@ function ObjectRender:setHpPercent(percent)
     end
 
     -- local size = self._bloodBarSprite.node:getContentSize()
-    self._bloodBarSprite.node:setContentSize({width=100*percent,height=15})
+    self._bloodBarSprite.node:setContentSize({width=80*percent,height=10})
 end
 
 

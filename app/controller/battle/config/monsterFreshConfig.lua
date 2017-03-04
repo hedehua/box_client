@@ -1,6 +1,7 @@
 local monsterFreshConfig = {
-	{id = 1001,groupId = 1001,chance = 100,monsters = {2001},count = 1,drop = 1001},
-	--{id = 1002,groupId = 1001,chance = 20,monsters = {5002},count = 2,drop =1002},
+	{id = 1001,groupId = 1001,chance = 20,camp = 1,monsters = {2001},count = 1,drop = 1001},
+	{id = 1002,groupId = 1001,chance = 50,camp = 2,monsters = {2001},count = 1,drop = 1001},
+	{id = 1003,groupId = 1001,chance = 30,camp = 3,monsters = {2001},count = 1,drop = 1001},
 }
 
 return monsterFreshConfig

@@ -33,17 +33,17 @@ local battleConfig = {
 		playerDrop = 2003,
 		monster = 1001,					-- monsterFreshConfig
 		monsterInterval = 300,
-		monsterDelay = 50, 				-- 延迟多久刷第一波怪（通常为1即） 		
+		monsterDelay = 10, 				-- 延迟多久刷第一波怪（通常为1即） 		
 		timeOut = 3000,			
 		maxMonsterCount = 20, 			-- 怪物数量上限
 
 		basement1 = 6001,   				-- 塔1
 		basement2 = 6002,					-- 塔2
 
-		basement1Pos = {-800,0},
-		basement2Pos = {800,0},
-		basement1Dir = {1,0},
-		basement2Dir = {-1,0},
+		camp1Pos = {-800,0},
+		camp2Pos = {800,0},
+		camp1Dir = {1,0},
+		camp2Dir = {-1,0},
 	},
 	
 }

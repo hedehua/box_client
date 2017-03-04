@@ -232,8 +232,12 @@ function BattleTeam:updateMember()
 	end
 
 	-- 同类别合并
-	for i = 1,#self._members do
+	for i = 0,#self._members do
 		local cur = self._members[i]
+		if(i == 0) then
+			cur = self
+		end
+		
 		local nxt = self._members[i+1]
 		if(cur:needRemove() or nxt == nil or nxt:needRemove())then
 			
