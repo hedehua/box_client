@@ -434,7 +434,13 @@ end
 
 -- 淡入接口 duration:时长
 function ObjectRender:fadeIn(duration) 
+    if(self._avatar == nil) then
+        self:addFunc(self.fadeIn,self,duration)
+        return
+    end
+    duration = duration or 0.1
     transition.fadeIn(self._avatar,{time = duration})
+    -- self._avatar:setOpacity(255) 
 end
 
 -- 淡出 duration :时长
@@ -526,6 +532,9 @@ function ObjectRender:setHp(cur,max,tween)
 end
 
 function ObjectRender:playAudio(path) 
+    if(path == nil or path == '') then
+        return
+    end
     local AudioManager = require "app.manager.audioManager"
     AudioManager:getInstance():playEffect(path)
 end

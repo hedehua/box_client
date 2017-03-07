@@ -3,11 +3,16 @@ local SkillConfig = require("app.controller.battle.config.skillConfig")
 local Missile = require("app.controller.battle.core.missile")
 -- local Character = require("./character")
 
+local static_count = 0
+local getNextId = function()
+    static_count = static_count + 1
+    return static_count;
+end
 local Skill = {}
 function Skill.new(  )
     local skill = {}
     setmetatable(skill,{__index = Skill})
-    skill._id = 0                -- 唯一索引
+    skill._id = getNextId()     -- 唯一索引
     skill._typeId = 0  			-- 配置表id
     skill._cd = 0
     skill._frameCount = 1
@@ -74,6 +79,9 @@ function Skill:resetCd(params)
 end
 
 function Skill:resetInterval() 
+    if(self._config.interval <=0) then
+        return
+    end
     self._nextMissileTime = self._frameCount + self._config.interval
 end
 
@@ -91,7 +99,7 @@ function Skill:update()
     end
 
     if(self._frameCount >= self._nextMissileTime and self._nextMissileTime >0) then
-        if(self._restMissile >0) then
+        if(self._restMissile > 0) then
             self:castMissile()
             self:resetInterval()
         end
@@ -114,12 +122,15 @@ function Skill:cast()
         return false
     end
 
+    self:resetInterval()
+    self:resetRestMissile()
+
     if(not self:castMissile()) then
         return false
     end
     
     self:resetCd() 
-    self:resetInterval()
+
     return true
 end
 

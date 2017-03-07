@@ -44,6 +44,7 @@ function Character.new()
 	obj._frameCount = 0
 	obj._camp = nil
 	obj._knockCd = 0
+	obj._mass = 1
 	return obj
 end
 
@@ -66,15 +67,15 @@ function Character:init(typeId,pos,dir,camp)
 		self:setCircleCollider(pos.x,pos.y,self._config.radius)
 		self:setMaxHp(self._config.maxHp);  			
 		self:setHp(self._config.defaultHp,false);
+		self:setMass(1)
 	end
 	
 	self._enableRot = false
 	if(self._render ~= nil and self._config ~= nil) then
 		self._render:setTypeId(self._typeId);
 		self._render:setCamp(self._camp)
-		self._render:setIcon(self._config.icon)
 		self._render:setSize(self._config.radius * 2,self._config.radius * 2)
-		self._render:startBlink()
+		self._render:fadeIn()
 		self:loadAvatar(self._config.res)
 		self:updateRenderPos()
 	end
@@ -211,8 +212,12 @@ function Character:die()
 end
 
 function Character:revive()
+	self:setMass(1)
 	self:setHp(self._config.defaultHp,false);
 	self._state = Enum.ECharacterState.Init
+	if(self._render ~= nil) then
+		self._render:fadeIn()
+	end
 end
 
 -- character: caster
@@ -234,6 +239,7 @@ function Character:beMerge(ch)
 end
 function Character:merge(ch)
 	self:setMaxHp(self._maxHp * 2)
+	self:setMass(self._mass + 1)
 	self:setHp(self._maxHp,true)
 end
 function Character:setLeader(flag) 
@@ -264,11 +270,19 @@ function Character:addHp(character,hp)
 	-- end
 end
 
+function Character:getMass(  )
+	return self._mass
+end
+
+function Character:setMass( mass )
+	self._mass = mass
+	if(self._render ~=nil) then
+		self._render:setIcon(tostring(self._mass))
+	end
+end
+
 function Character:setMaxHp(value)
 	self._maxHp = value
-	if(self._render ~=nil) then
-		self._render:setIcon(tostring(self._maxHp))
-	end
 end
 
 function Character:setHp(value,tween)

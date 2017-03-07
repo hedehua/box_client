@@ -69,15 +69,6 @@ BattleObject.clearAll = function()
 	objects = nil
 end
 BattleObject.getObjectById = function (id) 
-	-- if(objects == nil)
-	-- 	return nil
-	-- end
-	-- for(local i = objects.length - 1;i >=0 ;i--)
-	-- 	local obj = objects[i]
-	-- 	if(id === obj._id)
-	-- 		return obj
-	-- 	end
-	-- end
 	if(objectsDic == nil)then
 		return nil
 	end

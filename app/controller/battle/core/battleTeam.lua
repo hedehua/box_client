@@ -50,7 +50,8 @@ function Character:castSkillEx()
 		return
 	end
 
-	local skill = self._skills[1]
+	local index = self:getMass()
+	local skill = self._skills[index]
 	if(skill == nil) then
 		print("no skill")
 		return

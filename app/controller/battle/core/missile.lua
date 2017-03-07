@@ -143,11 +143,10 @@ function Missile:cast()
     local refs = {
         [Enum.EMoveType.Direction] = function(  )
             local dir = self:getDir()
+            dir = dir:rotate(self._config.dir)
             self:moveDir(dir)
         end,
         [Enum.EMoveType.ToTargetPos]  = function(  )
-            -- local dir = self:getDir()
-            -- dir = dir:rotate(self._config.dir)   -- 朝向旋转
             local obj = self:findObjectById(self._targetId)
             local dir = obj:getPos():sub(self:getPos())
             self:moveDir(dir)
