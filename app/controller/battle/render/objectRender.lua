@@ -19,10 +19,10 @@ local CampIcon = {
 }
 
 local CampColor = {
-    [1] = cc.color(255, 255, 255),
-    [2] = cc.color(1, 145, 242),
-    [3] = cc.color(98, 202, 1),
-    [4] = cc.color(255, 114, 43),
+    [0] = cc.color(255, 255, 255),
+    [1] = cc.color(1, 145, 242),
+    [2] = cc.color(98, 202, 1),
+    [3] = cc.color(255, 114, 43),
 }
 
 local ext = 0.5
@@ -413,6 +413,14 @@ function ObjectRender:setCamp(camp)
             return
         end
         self._campSprite.node:setSpriteFrame(sp)
+    end
+
+    if(self._bloodBarSprite == nil) then
+        self:initBloodNode();
+    end
+
+    if(self._bloodBarSprite ~= nil)then
+        self._bloodBarSprite.node:setColor(CampColor[camp])
     end
 end
 

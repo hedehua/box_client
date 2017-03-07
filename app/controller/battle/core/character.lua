@@ -67,12 +67,13 @@ function Character:init(typeId,pos,dir,camp)
 		self:setCircleCollider(pos.x,pos.y,self._config.radius)
 		self:setMaxHp(self._config.maxHp);  			
 		self:setHp(self._config.defaultHp,false);
-		self:setMass(1)
+		
 	end
 	
 	self._enableRot = false
 	if(self._render ~= nil and self._config ~= nil) then
 		self._render:setTypeId(self._typeId);
+		self._render:setIcon(self._config.icon)
 		self._render:setCamp(self._camp)
 		self._render:setSize(self._config.radius * 2,self._config.radius * 2)
 		self._render:fadeIn()

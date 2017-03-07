@@ -7,10 +7,10 @@ function UIBattleEnd:ctor( ... )
   self._btnEscape = nil
   self._btnRetry = nil
 
-  self._rankRoot = nil
+  -- self._rankRoot = nil
   self._scoreRoot = nil
 
-  self._rankNode = nil
+  -- self._rankNode = nil
   self._scoreNode = nil
 
   self._tittleNode = nil
@@ -35,9 +35,9 @@ function UIBattleEnd:loaded(res)
   self.super.loaded(self,res)
 
   local tnode = nil
-  self._rankRoot = res:getChildByName("rank")
-  tnode = self._rankRoot:getChildByName("txt") 
-  self._rankNode = tnode:getComponent("cc.Label")
+  -- self._rankRoot = res:getChildByName("rank")
+  -- tnode = self._rankRoot:getChildByName("txt") 
+  -- self._rankNode = tnode:getComponent("cc.Label")
 
   self._scoreRoot = res:getChildByName("score")
   tnode = self._scoreRoot:getChildByName("txt")

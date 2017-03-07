@@ -12,7 +12,7 @@ local skillConfig = {
 
 	{id = 2001,script = 2001,missileCount = 1,interval = 0,name = "目标",skillType = 1,target = 1,attackRadius = 300,attack = 1,cd = 30},
 
-	{id = 6001,script = 6001,missileCount = 3,interval = 5,name = "远程",skillType = 1,target = 1,attackRadius = 350,attack = 1,cd = 20},
+	{id = 6001,script = 6001,missileCount = 1,interval = 0,name = "远程",skillType = 1,target = 1,attackRadius = 350,attack = 1,cd = 60},
 	{id = 6002,script = 6002,missileCount = 3,interval = 5,name = "远程",skillType = 1,target = 1,attackRadius = 350,attack = 1,cd = 20},
 }
 
