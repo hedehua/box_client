@@ -4,6 +4,19 @@ local ItemConfig = require("app.controller.battle.config.itemConfig")
 local Random = require("app.controller.battle.core.random")
 local BattleObject = require("app.controller.battle.core.battleObject")
 
+local loadConfig = function( name )
+	return require "app.controller.battle.config."..name
+end
+
+local getConfigByName = function( tableName,id )
+	if(tableName == nil) then
+		return nil
+	end
+	
+	local tb = loadConfig(tableName)
+	return getConfig(tb,id)
+end
+
 local getConfig = function (tb,id) 
 	if(tb == nil) then
 		return nil;
@@ -16,6 +29,7 @@ local getConfig = function (tb,id)
 	end
 	return nil;
 end
+
 local getConfigByGroup = function (tb,groupId) 
 	if(tb == nil or groupId <=0 )then
 		return

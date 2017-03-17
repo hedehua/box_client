@@ -1,6 +1,6 @@
 local BattleObject = require("app.controller.battle.core.battleObject")
 local ObjectRender = require("app.controller.battle.render.objectRender")
-local Common = require("app.Common.include")
+local Common = require("app.common.include")
 
 local BattleRender = cc.class("BattleRender")
 

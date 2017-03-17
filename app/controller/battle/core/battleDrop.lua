@@ -48,11 +48,11 @@ function BattleDrop:init(typeId,camp,pos)
 	self:setSpeed(WorldConfig.dropSpeed)
 	
 	if(self._render ~= nil)then
-		self._render:setIcon(self._contentConfig.icon)
-		self._render:setCamp(Enum.ECamp.None)
+		-- self._render:setIcon(self._contentConfig.icon)
+		-- self._render:setCamp(Enum.ECamp.None)
 		self._render:setSize(self._contentConfig.radius * 2,self._contentConfig.radius * 2)
 	end
-	self:loadAvatar(self._contentConfig.res) 
+	self:loadAvatar(self._config.res) 
 end
 function BattleDrop:update() 
 	

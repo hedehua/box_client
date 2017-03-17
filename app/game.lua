@@ -110,7 +110,7 @@ function Game:switchState(stateName)
 		self._curState = nil;
 	end
 
-	for i = 1,table.length(self._states) do
+	for i = 1,#self._states do
 		local state = self._states[i];
 	
 		if(state.__cname == stateName) then
@@ -153,14 +153,12 @@ function Game:initModels()
 end
 
 function Game:initSetting()
-	-- cc.game.setFrameRate(WorldConfig.gameInterval)
-	
-	-- -- // 0 - 通过引擎自动选择。 
-	-- -- // 1 - 强制使用 canvas 渲染。 
-	-- -- // 2 - 强制使用 WebGL 渲染，但是在部分 Android 浏览器中这个选项会被忽略。 
-	-- cc.game.renderMode = 1
+	local director = cc.Director:getInstance()
+	 --turn on display FPS
+    director:setDisplayStats(true)
 
-	-- cc.director.setDisplayStats(true)
+    --set FPS. the default value is 1.0/60 if you don't call this
+    director:setAnimationInterval(1.0 / 60)
 end
 
 return Game

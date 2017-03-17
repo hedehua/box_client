@@ -15,13 +15,13 @@ end
 
 function StateResUpdate:enter() 
     self.super.enter(self)
-    local commonAsset = Common.assetPathTable
-    for i,name in ipairs(commonAsset) do
-        if(self.taskQue == nil) then
-            self.taskQue = {}
-        end
-        table.insert( self.taskQue, commonAsset[name] )
-    end
+    -- local commonAsset = Common.assetPathTable
+    -- for i,name in ipairs(commonAsset) do
+    --     if(self.taskQue == nil) then
+    --         self.taskQue = {}
+    --     end
+    --     table.insert( self.taskQue, commonAsset[name] )
+    -- end
 end
 function StateResUpdate:update(dt) 
     self.super.update(self,dt)
@@ -31,7 +31,7 @@ function StateResUpdate:update(dt)
     if(ResManager:getInstance():isLoading()) then
         return 
     end
-    if(self.taskQue ~= nil and table.length(self.taskQue) > 0)then
+    if(self.taskQue ~= nil and #self.taskQue > 0)then
         local assetPath = self.taskQue[1]
         if(assetPath ~= nil) then
             table.remove(self.taskQue,1)

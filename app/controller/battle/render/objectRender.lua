@@ -11,17 +11,11 @@ local transition = require "cocos.framework.transition"
 
 
 local objRoot = nil
-local CampIcon = {
-    [1] = "circle_mian",
-    [2] = "circle_blue",
-    [3] = "circle_green",
-    [4] = "circle_orange",
-}
 
 local CampColor = {
     [0] = cc.color(255, 255, 255),
     [1] = cc.color(1, 145, 242),
-    [2] = cc.color(98, 202, 1),
+    [2] = cc.color(135, 219, 21),
     [3] = cc.color(255, 114, 43),
 }
 
@@ -390,10 +384,10 @@ function ObjectRender:setText(name)
 end
 
 local sprefs = {
-    [0] = "circle_mian",
-    [1] = "circle_blue",
-    [2] = "circle_green",
-    [3] = "circle_orange",   
+    [0] = "empty",
+    [1] = "blue",
+    [2] = "green",
+    [3] = "orange",   
 }
 function ObjectRender:setCamp(camp)  
     if(self._avatar == nil) then

@@ -13,6 +13,21 @@ function UILogin:init()
   self:setResPath(Common.assetPathTable.uiLogin)
 end
 
+-- function UILogin:load(  )
+--     local scene = cc.Director:getInstance():getRunningScene()
+--     local layer = cc.Layer:create()
+
+--     local rect = cc.rect(0,0,1280,960)
+--     local bg = cc.Sprite:create("raw-assets/texture/bg_pix.png", rect)
+--     local logo = cc.Sprite:create()
+--     scene:addChild(layer)
+--     layer:addChild( bg )    
+--     bg:setPosition( cc.p(rect.width/2, rect.height/2))
+--     bg:setColor(cc.color(43,98,191,255))
+
+--     self._resObject = layer
+-- end
+
 function UILogin:loaded(res)
   self.super.loaded(self,res)
 

@@ -9,7 +9,7 @@ local worldConfig = {
 	reviewTime = 100,
 	dropSpeed = 100,		--  掉落飞向玩家的速度
 	rubsRate = 10, 			-- 每增加一个单位速度削弱
-	vectorPrecision = 100,
+	vectorPrecision = 1000,
 
 	defaultBattle = 1001,
 	defaultPlayer = 1000,
@@ -25,7 +25,6 @@ local worldConfig = {
 	hpTime = 0.2,
 
 	serverAddr = "192.168.0.111",
-	-- serverAddr = "115.28.181.162",
 	serverPort = "3014",
 }
 

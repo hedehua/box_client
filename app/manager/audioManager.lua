@@ -17,6 +17,7 @@ end
 
 function AudioManager:playMusic( path )
 	local audio = require "cocos.framework.audio"
+	audio.setMusicVolume(0.1)
 	audio.playMusic(path)
 end
 

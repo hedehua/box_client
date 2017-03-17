@@ -102,6 +102,7 @@ function UIBase:fresh()
 		return
 	end
 end
+
 function UIBase:load()
 	-- // 加载资源
 	local cb = function(err,res) 
@@ -110,6 +111,7 @@ function UIBase:load()
 
 	ObjManager:getInstance():load(self._resPath,cb);
 end
+
 function UIBase:unload() 
 	self._queier = nil
 
@@ -151,6 +153,7 @@ function UIBase:_loaded(err,res)
 	end
 	self:notify("onLoaded",self.name)
 end
+
 -- // 回调函数中不能使用函数重载，父类无法获取到参数，所以用这个函数过渡一下
 -- // 这个问题是因为基于CCClass才引发的
 function UIBase:loaded(res)

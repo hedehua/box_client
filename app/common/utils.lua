@@ -1,19 +1,3 @@
---  /**
---  * trace
---  * @param [int] [count=10]
---  */
--- // function trace (count) {
--- //     local caller = arguments.callee.caller;
--- //     var i = 0;
--- //     count = count || 10;
--- //     cc.log("***----------------------------------------  ** " + (i + 1));
--- //     while (caller && i < count) {
--- //         cc.log(caller.toString());
--- //         caller = caller.caller;
--- //         i++;
--- //         cc.log("***---------------------------------------- ** " + (i + 1));
--- //     }
--- // }
 
 local formatSeconds = function(remainTime)  
 
@@ -37,4 +21,5 @@ end
 return {
    formatSeconds = formatSeconds,
    getVisibleSize = getVisibleSize,
+   fileLog = fileLog,
 }
