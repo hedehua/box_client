@@ -120,7 +120,7 @@ function UIBattle:loaded(res)
     local dist = cc.pGetLength(delta);
     
     if(dist > WorldConfig.maxTouch) then
-      pos = cc.pAdd(cc.p(originPos.x,originPos.y),cc.pMul(cc.pNormalize(delta),70));
+      pos = cc.pAdd(cc.p(originPos.x,originPos.y),cc.pMul(cc.pNormalize(delta),WorldConfig.maxTouch));
     end
   
     self:setTouchPos( pos )  
@@ -152,7 +152,6 @@ function UIBattle:loaded(res)
         self:onTouchBegin(cc.p(-1,0),cc.pGetAngle(cc.p(-1,0),cc.p(1,0)))
         return
     end
-    print(angle)
     self:onTouchBegin(cc.pNormalize(pos),angle) 
   end
 

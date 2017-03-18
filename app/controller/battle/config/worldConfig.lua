@@ -19,8 +19,8 @@ local worldConfig = {
 	touchAngle = math.pi / 4,
 	touchTime = 40,
 
-	maxTouch = 60,			-- 虚拟摇杆使用
-	minTouch = 30,
+	maxTouch = 40,			-- 虚拟摇杆使用
+	minTouch = 10,
 
 	hpTime = 0.2,
 

@@ -47,12 +47,16 @@ local function _createAnimation(uuid, assets)
     return animation
 end
 
+function AnimationComponent:onLoad(target)
+    self._sprite = target:getComponent("cc.Sprite")
+end
+
 function AnimationComponent:ctor(props, assets)
     AnimationComponent.super.ctor(self)
     self.props = props
     self._animations = {}
-    if not self.props._clips then return end
 
+    if not self.props._clips then return end
     for _, clipaval in ipairs(self.props._clips) do
         local animation, clip = _createAnimation(clipaval.__uuid__, assets)
         animation:retain()
@@ -72,9 +76,8 @@ function AnimationComponent:play(target, callback)
         return
     end
 
-    local spriteComponent = target.components["cc.Sprite"]
+    local spriteComponent = self._sprite -- target.components["cc.Sprite"]
     local sprite = spriteComponent.node
-
     for _, animation in ipairs(self._animations) do
         local animate = cc.Animate:create(animation)
         if animation.loop == _LOOP_LOOP then

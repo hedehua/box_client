@@ -12,6 +12,9 @@ local _SPRITES_MAP = {
     [_STATE_PRESSED]  = "pressedSprite",
 }
 
+local _SCALE_ZOOM = "zoomScale"
+local _SCALE_DURATION = "duration"
+
 local _getRect, _inRect
 local _onTouchBegan, _onTouchMoved, _onTouchEnded, _onTouchCancelled
 local _updateSprite
@@ -21,6 +24,7 @@ function ButtonComponent:ctor(asset, assets)
     self.transition = asset["transition"]
     self._colors = {}
     self._spriteFrames = {}
+    self._scale = {}
 
     if self.transition == 1 then
         -- colors
@@ -37,6 +41,9 @@ function ButtonComponent:ctor(asset, assets)
                 self._spriteFrames[k1] = spriteFrame
             end
         end
+    elseif self.transition == 3 then
+        self._scale.zoom = asset[_SCALE_ZOOM]
+        self._scale.duration = asset[_SCALE_DURATION]
     end
 
     self.state = _STATE_IDLE
@@ -206,7 +213,7 @@ end
 
 _onTouchMoved = function(self, touch)
     if self.state ~= _STATE_IDLE and self.state ~= _STATE_PRESSED then
-        return
+        return false
     end
 
     local p = touch:getLocation()
@@ -220,6 +227,7 @@ _onTouchMoved = function(self, touch)
     if lastState ~= self.state then
         _updateSprite(self)
     end
+    return true
 end
 
 _onTouchEnded = function(self)
@@ -230,6 +238,7 @@ _onTouchEnded = function(self)
     if lastState ~= self.state then
         _updateSprite(self)
     end
+    return true
 end
 
 _onTouchCancelled = function(self)
@@ -240,6 +249,7 @@ _onTouchCancelled = function(self)
     if lastState ~= self.state then
         _updateSprite(self)
     end
+    return true
 end
 
 _updateSprite = function(self)
@@ -259,6 +269,13 @@ _updateSprite = function(self)
         else
             sprite.node:setSpriteFrame(spriteFrame)
         end
+    elseif self.transition == 3 then
+        local transition = require "cocos.framework.transition"
+        local actionTo1 = transition.scaleTo(sprite.node,{scaleX = self._scale.zoom, scaleY = self._scale.zoom,time = self._scale.duration});
+        local actionTo2 = transition.scaleTo(sprite.node,{scaleX = 1, scaleY = 1,time = 0.1});
+        local seq = transition.sequence({actionTo1,actionTo2});
+        sprite.node:runAction(seq)
+        
     end
 end
 

@@ -6,7 +6,7 @@ local AssetPathTable = {
    
    -- // 音乐
     musicLogin = "raw-assets/resources/music/music_01.mp3",
-    -- // musicBattle = "music/music_logo"
+    musicBattle = "raw-assets/resources/music/music_02.mp3",
 
     -- // 图集
     atlasIcon = "atlas/icon_atlas",

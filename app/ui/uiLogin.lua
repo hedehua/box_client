@@ -13,20 +13,6 @@ function UILogin:init()
   self:setResPath(Common.assetPathTable.uiLogin)
 end
 
--- function UILogin:load(  )
---     local scene = cc.Director:getInstance():getRunningScene()
---     local layer = cc.Layer:create()
-
---     local rect = cc.rect(0,0,1280,960)
---     local bg = cc.Sprite:create("raw-assets/texture/bg_pix.png", rect)
---     local logo = cc.Sprite:create()
---     scene:addChild(layer)
---     layer:addChild( bg )    
---     bg:setPosition( cc.p(rect.width/2, rect.height/2))
---     bg:setColor(cc.color(43,98,191,255))
-
---     self._resObject = layer
--- end
 
 function UILogin:loaded(res)
   self.super.loaded(self,res)
@@ -35,14 +21,44 @@ function UILogin:loaded(res)
   local mode1 = bottom:getChildByName("mode_1");
   self._button1 = mode1:getComponent("cc.Button")
 
-  self._button1:on(cc.Handler.EVENT_TOUCH_BEGAN,function(  )
+  self._button1:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
     self:onButtonClick(1)
   end)
+
+  local effect = res:getChildByName("effect")
+
+  local transition = require "cocos.framework.transition"
+  
+  local actions = {}
+  for i = 1,10 do
+      local action = transition.moveTo(effect,{x = math.random(-200,200), y = math.random(0,200),time = 5});
+      table.insert(actions,action)
+  end
+
+  local seq = transition.sequence(actions);
+  effect:runAction(cc.RepeatForever:create(seq))
+
+  local logo = res:getChildByName("logo")
+  -- local SpriteFrameManager = require("app.manager.spriteFrameManager")
+  -- local gridNode = cc.NodeGrid:create()
+  -- local spriteFrame = SpriteFrameManager:getInstance():getSpriteFrame("logo")
+  -- local sprite = cc.Sprite:createWithSpriteFrame(spriteFrame)
+  -- logo:addChild(gridNode)
+  -- gridNode:addChild(sprite)
+    
+  -- local waveAction = cc.Waves:create(32, cc.size(16,16), 8, 4, true, true)
+  -- gridNode:runAction(cc.RepeatForever:create(waveAction))
+
+  local actionTo1 = transition.scaleTo(logo,{scaleX = 1.05, scaleY = 1.05,time = 2});
+  local actionTo2 = transition.scaleTo(logo,{scaleX = 1, scaleY = 1,time = 0.1});
+  local actionTo2 = transition.scaleTo(logo,{scaleX = 1, scaleY = 1,time = 5});
+  local seq = transition.sequence({actionTo1,actionTo2,actionTo3});
+  logo:runAction(cc.RepeatForever:create(seq))
 
 end
 
 function UILogin:unload( )
-  self._button1:off(cc.Handler.EVENT_TOUCH_BEGAN,self._onStart)
+  self._button1:off(cc.Handler.EVENT_TOUCH_ENDED,self._onStart)
   UIBase.unload(self)
 end
 

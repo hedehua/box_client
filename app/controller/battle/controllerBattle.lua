@@ -470,6 +470,7 @@ function ControllerBattle:onGameOver(result)
     if(self._uiBattle ~= nil) then
       self._uiBattle:close()
     end
+
   end
   self:stopMusic()
 end
@@ -529,7 +530,7 @@ function ControllerBattle:excuteKeycode(keyCode)
 end
    
 function ControllerBattle:playMusic()
-    AudioManager:getInstance():playMusic(Common.assetPathTable.musicLogin)
+    AudioManager:getInstance():playMusic(Common.assetPathTable.musicBattle)
 end
 
 function ControllerBattle:stopMusic() 

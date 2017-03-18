@@ -47,7 +47,7 @@ function ControllerLogin:open(arg1)
   self._ui:init();
   self._ui:open();
 
-  -- // AudioManager.instance.playMusic(Common.assetPathTable.musicLogin)
+  AudioManager:getInstance():playMusic(Common.assetPathTable.musicLogin)
 
 end
 function ControllerLogin:close(arg1)
