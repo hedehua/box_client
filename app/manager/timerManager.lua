@@ -49,8 +49,8 @@ end
 @param callback 回调方法
 @param data 数据
 ]]
-function TimerManager:runOnce(callback, data)
-    self:start(callback, 0, 1, data)
+function TimerManager:runOnce(callback, duration)
+    self:start(callback, duration, 1, nil)
 end
 
 --[[

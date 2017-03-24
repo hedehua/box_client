@@ -12,6 +12,20 @@ local ExceptRight = { Enum.Direction.Left,Enum.Direction.Down,Enum.Direction.Up}
 local ExceptUp = { Enum.Direction.Left,Enum.Direction.Right,Enum.Direction.Down}
 local ExceptDown = { Enum.Direction.Left,Enum.Direction.Right,Enum.Direction.Up}
 
+function Base:getSmartDir( exceptDir )
+    self._cache = self._cache or {}
+    for i = #self._cache,1 do
+        table.remove(self._cache,i)
+    end
+
+    for i = Enum.Direction.Up,Enum.Direction.Left do
+        if(i ~= exceptDir and i ~= self._lastDir) then
+            table.insert(self._cache,i)
+        end
+    end
+    return self._cache[Utils.random(1,#self._cache)]
+end
+
 function Base:check()
     local map = Utils.getObjectByType("BattleMap")
     if(map ~= nil)then
@@ -19,20 +33,37 @@ function Base:check()
         local circle = leader:getCollider();
         local rect = map:getCollider()
         if(circle:detectBoundR(rect,self._config.panicDist))then
-            return ExceptRight[Utils.random(1,3)]
+            return self:getSmartDir(Enum.Direction.Right)
         end
         if(circle:detectBoundL(rect,self._config.panicDist))then
-            return ExceptLeft[Utils.random(1,3)]
+            return self:getSmartDir(Enum.Direction.Left)
         end
         if(circle:detectBoundT(rect,self._config.panicDist))then
-            return ExceptUp[Utils.random(1,3)]
+            return self:getSmartDir(Enum.Direction.Up)
         end
         if(circle:detectBoundB(rect,self._config.panicDist))then
-            return ExceptDown[Utils.random(1,3)]
+            return self:getSmartDir(Enum.Direction.Down)
         end
 
     end
     return nil
+end
+
+function Base:search(  )
+    local leader = self._team:getLeader()
+    if(leader == nil)then
+        print("error,no leader")
+        return
+    end
+
+    self._ai._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
+    self._ai._drop = Utils.getDropByDist(leader._id,self._config.fov)
+
+end
+
+function Base:move( d )
+    self._lastDir = d
+    self._team:move(d)
 end
 
 -- 随机溜达
@@ -56,7 +87,7 @@ function Idle:init(ai,team,conf)
 end
 
 function Idle:enter()
-    
+    self:search()
 end
 
 function Idle:leave()
@@ -85,9 +116,7 @@ function Idle:update()
         d = Utils.random(Enum.Direction.Up,Enum.Direction.Left)
     end
 
-    -- print(self._team._id,"idle",d)
-
-    self._team:move(d)
+    self:move(d)
 end
 
 
@@ -130,15 +159,7 @@ function Search:getNext()
 end
 
 function Search:enter()
-    local leader = self._team:getLeader()
-    if(leader == nil)then
-        print("error,no leader")
-        return
-    end
-
-    self._ai._enemy = Utils.getEnemyByDist(leader._id,self._config.fov)
-    self._ai._drop = Utils.getDropByDist(leader._id,self._config.fov)
-    -- print(self._team.__cname,self._team._typeId,'>',self._ai._enemy.__cname,self._ai._enemy._typeId,'~',self._ai._drop)
+   self:search()
 end
 
 function Search:leave()
@@ -149,7 +170,7 @@ function Search:update()
     
     local d = self:check()
     if(d ~= nil)then
-        self._team:move(d)
+        self:move(d)
         return
     end
    
@@ -193,7 +214,7 @@ function Pursue:getNext()
 end
 
 function Pursue:enter()
-
+    self:search()
 end
 
 function Pursue:leave()
@@ -203,7 +224,7 @@ end
 function Pursue:update()
     local d = self:check()
     if(d ~= nil)then
-        self._team:move(d)
+        self:move(d)
         return
     end
     if(self._ai._enemy == nil or not self._ai._enemy:isAlive())then
@@ -216,9 +237,8 @@ function Pursue:update()
     local angle  = delta:signAngle(Vector2.new(1,0))
 
     d = Utils.angleToDirection(angle)
-    -- print(self._team._id,"pursue",delta.x,delta.y,'@',angle,d)
-    self._team:move(d)
-    self._team:tryCastSkill()
+
+    self:move(d)
 end
 
 local Pick = {}
@@ -249,7 +269,7 @@ function Pick:getNext()
 end
 
 function Pick:enter()
-
+    self:search()
 end
 
 function Pick:leave()
@@ -259,7 +279,7 @@ end
 function Pick:update()
     local d = self:check()
     if(d ~= nil) then
-        self._team:move(d)
+        self:move(d)
         return
     end
 
@@ -269,11 +289,15 @@ function Pick:update()
     end
 
     local dropPos = self._ai._drop:getPos();
+    if(dropPos == nil) then
+        return
+    end
+
     local delta = dropPos:sub(leaderPos)
     local angle  = delta:signAngle(Vector2.new(1,0))
 
     d = Utils.angleToDirection(angle)
-    self._team:move(d)
+    self:move(d)
 end
 
 local Escape = {}
@@ -309,7 +333,7 @@ function Escape:getNext()
 end
 
 function Escape:enter()
-
+    self:search()
 end
 
 function Escape:leave()
@@ -319,7 +343,7 @@ end
 function Escape:update()
     local d = self:check()
     if(d ~= nil)then
-        self._team:move(d)
+        self:move(d)
         return
     end
 
@@ -333,7 +357,7 @@ function Escape:update()
 
     d = Utils.angleToDirection(angle)
     -- print(self._team._id,"escape",delta.x,delta.y,'@',angle,d)
-    self._team:move(d)
+    self:move(d)
 end
 
 

@@ -38,13 +38,14 @@ function BattleMap:clampPos( pos )
 		return
 	end
 
+
 	local left = self._collider:left()
 	local right = self._collider:right()
 	local top = self._collider:top()
 	local bottom = self._collider:bottom()
 	local x = math.min(math.max(left,pos.x),right)
 	local y = math.min(math.max(bottom,pos.y),top)
-
+	-- print(pos.x,pos.y,' > ',x,y)
 	return Vector2.new(x,y)
 end
 

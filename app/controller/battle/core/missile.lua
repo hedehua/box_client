@@ -43,7 +43,7 @@ function Missile.needTarget(typeId)
         return false
     end
    
-    return true
+    return false
 end 
 -- end
 
@@ -62,8 +62,9 @@ function Missile:init(typeId,camp,casterId)
     if(self._render ~= nil) then
         self._render:setTypeId(self._typeId);
         self._render:setSize(self._config.radius * 2,self._config.radius * 2)
-        self._render:playAudio(self._config.audio)
+        self._render:playMissileAudio()
         self._render:setCamp(self._camp)
+        self._render:addMotion()
     end
     self:loadAvatar(self._config.res)
 
@@ -168,7 +169,11 @@ function Missile:cast()
         end
     }
 
-    refs[self._config.moveType]();
+    local moveType = self._config.moveType
+    if(self._targetId == nil or self._targetId < 0) then
+        moveType = Enum.EMoveType.Direction
+    end
+    refs[moveType]();
     self._casted = true
 
     return true
@@ -254,10 +259,9 @@ function Missile:tryHitTarget(target)
     table.insert(self._hitObjs,target._id)
     self:tryCastCollidermissile()
 
-    if(self._config.hitEffect ~= nil)then
-        if(self._render~= nil) then
-            self._render:playEffect(self._config.hitEffect,self:getPos(),0.2)
-        end
+    if(self._render~= nil) then
+        self._render:playBoomEffect(self:getPos(),0.1)
+        self._render:playBoomAudio()
     end
 
     self._hitCount = self._hitCount + 1

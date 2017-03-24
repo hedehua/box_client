@@ -164,10 +164,9 @@ function Skill:castMissile(typeId,parentId)
         parentId = -1
     end
     
-    local targets = nil
+    local targets = self:findTarget()
 
     if(Missile.needTarget(typeId)) then
-        targets = self:findTarget()
         if(targets == nil) then
             return false
         end

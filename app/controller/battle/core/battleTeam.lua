@@ -117,7 +117,7 @@ function BattleTeam:isMonster()
 end
 
 function BattleTeam:initAi() 
-	self._ai = Ai.new(1,self)
+	self._ai = Ai.new(self._config.ai,self)
 	self:resetAi()
 end
 
@@ -133,6 +133,8 @@ function BattleTeam:updateAi()
 	if(self._frameCount < self._aiInterval) then
 		return
 	end
+
+	self:updateSkillAi()
 
 	if(self._ai ~= nil)then
 		self._ai:update();
@@ -243,7 +245,7 @@ function BattleTeam:updateMember()
 		if(cur:needRemove() or nxt == nil or nxt:needRemove())then
 			
 		else		
-			if(cur:getHp() == nxt:getHp() and cur:getCategory() == nxt:getCategory())then
+			if(cur:getMass() == nxt:getMass() and cur:getCategory() == nxt:getCategory())then
 				cur:merge(nxt)
 				nxt:beMerge(cur);
 			end
@@ -303,7 +305,7 @@ function BattleTeam:removeMember(member)
 	end
 end
 
-function BattleTeam:hitOther(  )
+function BattleTeam:hitOther( target )
 	self._killCount = self._killCount + 1
 end
 
@@ -355,7 +357,7 @@ function BattleTeam:revive()
 
 	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
 	self._killCount = 0
-	self:setPos(self._bornPos)
+	self:setPos(self._bornPos:clone())
 	self:updateRenderPos()
 
 	BattleTeam.super.revive(self)	

@@ -7,10 +7,7 @@ function UIBattleEnd:ctor( ... )
   self._btnEscape = nil
   self._btnRetry = nil
 
-  -- self._rankRoot = nil
   self._scoreRoot = nil
-
-  -- self._rankNode = nil
   self._scoreNode = nil
 
   self._tittleNode = nil
@@ -35,9 +32,6 @@ function UIBattleEnd:loaded(res)
   self.super.loaded(self,res)
 
   local tnode = nil
-  -- self._rankRoot = res:getChildByName("rank")
-  -- tnode = self._rankRoot:getChildByName("txt") 
-  -- self._rankNode = tnode:getComponent("cc.Label")
 
   self._scoreRoot = res:getChildByName("score")
   tnode = self._scoreRoot:getChildByName("txt")
@@ -49,35 +43,27 @@ function UIBattleEnd:loaded(res)
   local bt1 = res:getChildByName("bt_1");
   self._btnEscape = bt1:getComponent("cc.Button")
   self._btnEscape:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
+    Common.utils.playButtonClick()
     self:notify("onEscape")
   end);
 
   local bt2 = res:getChildByName("bt_2");
   self._btnRetry = bt2:getComponent("cc.Button")
   self._btnRetry:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
+    Common.utils.playButtonClick()
     self:notify("onRetry")  
   end);
 
 end
 function UIBattleEnd:fresh()
       
-  -- if(self._rankRoot ~= nil) then
-  --   self._rankRoot.active = (self._rank ~= nil)
-  -- end
-  -- if(self._rankNode ~= nil and self._rank ~= nil) then
-  --   self._rankNode.string =  self._rank
-  -- end
+  if(self._scoreNode ~= nil and self._score ~= nil) then
+      self._scoreNode.node:setString(self._score..'')
+  end
 
-  -- if(self._scoreRoot ~= nil) then
-  --   self._scoreRoot.active = (self._score ~= nil)
-  -- end
-  -- if(self._scoreNode ~= nil and self._score ~= nil) then
-  --   self._scoreNode.string =  self._score 
-  -- end
-
-  -- if(self._tittleNode ~= nil) then
-  --   self._tittleNode.string = self._tittle
-  -- end
+  if(self._tittleNode ~= nil) then
+      self._tittleNode.node:setString(self._tittle..'')
+  end
 
 end
 

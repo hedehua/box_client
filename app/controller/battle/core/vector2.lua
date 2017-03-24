@@ -1,11 +1,10 @@
 -- 一个整型的向量封装
 
-local pi = 3.14
+local pi = math.pi
 local Vector2 = {}
 function Vector2.new(x,y)
     local v = {} 
     setmetatable(v,{__index = Vector2})
-    v._factor = 100
     v.x = x or 0
     v.y = y or 0
     return v
@@ -21,13 +20,13 @@ function Vector2:norm ()
         return self
     end
     local v = Vector2.new();
-    return v:setv(self.x * self._factor  / l,self.y * self._factor  / l)
+    return v:setv(self.x / l,self.y / l)
 end
 
 function Vector2:setv (x,y)
     self.x = x 
     self.y = y 
-    self:round()
+    -- self:round()
     return self
 end
 
@@ -60,7 +59,7 @@ function Vector2:add (v)
     end
     self.x = self.x + v.x
     self.y = self.y + v.y
-    self:floor()
+    -- self:floor()
     return self
 end
 
@@ -72,21 +71,21 @@ function Vector2:sub (v)
 
     self.x = self.x - v.x
     self.y = self.y - v.y
-    self:floor()
+    -- self:floor()
     return self
 end
 
 function Vector2:scale (factor)
     self.x = self.x * factor
     self.y = self.y * factor
-    self:floor()
+    -- self:floor()
     return self
 end
 
 function Vector2:mult (v)
     self.x = self.x * v.x
     self.y = self.y * v.y
-    self:floor()
+    -- self:floor()
     return self
 end
 
@@ -118,9 +117,9 @@ function Vector2:moveFace (dir,len)
     if(dir == nil)then
         print("[vector]dir nil")
     end
-    self.x = self.x + dir.x * len /  self._factor;
-    self.y = self.y + dir.y * len / self._factor;
-    self:floor()
+    self.x = self.x + dir.x * len ;
+    self.y = self.y + dir.y * len ;
+    -- self:floor()
     return self
 end
 
@@ -132,9 +131,6 @@ function Vector2:rotate (angle)      -- 旋转角度angle
 end
 
 function Vector2:signAngle (v)
-    -- local s = self.x * v.y - v.x * self.y;  
-    -- local c = self.x * v.x + self.y * v.y;
-    -- return math.atan2(s,c);
     return math.atan2(self.y,self.x) 
 end
 

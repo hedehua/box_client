@@ -4,9 +4,9 @@ local worldConfig = {
 	battleInterval = 25,  -- 比server略高一点 消除update颗粒问题
 	aiInterval = 5,
 	minStep = 50,
-	minAngle = math.pi /36,
+	minAngle = math.pi /360,
 	bornTime = 60,
-	reviewTime = 100,
+	reviewTime = 40,
 	dropSpeed = 100,		--  掉落飞向玩家的速度
 	rubsRate = 10, 			-- 每增加一个单位速度削弱
 	vectorPrecision = 1000,
@@ -20,7 +20,7 @@ local worldConfig = {
 	touchTime = 40,
 
 	maxTouch = 40,			-- 虚拟摇杆使用
-	minTouch = 10,
+	minTouch = 5,
 
 	hpTime = 0.2,
 

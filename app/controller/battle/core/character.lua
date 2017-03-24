@@ -39,8 +39,6 @@ function Character.new()
 	obj._enableRevive = false
 	obj._state = Enum.ECharacterState.None
 
-	obj._isBornning = false       -- 出生的缓冲区
-	obj._stopBlinkTime = 0
 	obj._frameCount = 0
 	obj._camp = nil
 	obj._knockCd = 0
@@ -53,8 +51,6 @@ function Character:init(typeId,pos,dir,camp)
 	
 	self._typeId = typeId
 	self._camp = camp
-	self._isBornning = true
-	self._stopBlinkTime = self._frameCount + WorldConfig.bornTime
 	self._state = Enum.ECharacterState.Init
 
 	self:initConfig()
@@ -161,17 +157,6 @@ function Character:update()
 	if(self._knockCd ~= nil and self._knockCd > 0) then
 		self._knockCd = self._knockCd - 1;
 	end
-	
-	--  解除出生态
-	if(self._frameCount >= self._stopBlinkTime and self._stopBlinkTime > 0)then
-
-		self._isBornning = false
-		self._stopBlinkTime = -1
-
-		if(self._render ~= nil) then
-			self._render:stopBlink()
-		end
-	end
 
 	self:updateSkill()
 	Character.super.update(self)
@@ -195,11 +180,11 @@ function Character:isBlock(argument)
 end
 
 function Character:recieveKnock()
-	return not self._isBornning
+	return true
 end
 
 function Character:die()
-	-- print(self._id,"die",self._hp,debug.traceback())
+
 	if(self._state ~= Enum.ECharacterState.Init) then
 		return
 	end
@@ -214,6 +199,7 @@ end
 
 function Character:revive()
 	self:setMass(1)
+	self:setMaxHp(self._config.maxHp)
 	self:setHp(self._config.defaultHp,false);
 	self._state = Enum.ECharacterState.Init
 	if(self._render ~= nil) then
@@ -226,7 +212,11 @@ end
 function Character:behit(character,damage)
 	local preHp = self._hp
 	self:setHp(math.floor(self:getHp()-damage),true)
-	return self._hp <= 0 and preHp > 0
+	local dead = self._hp <= 0 and preHp > 0
+	if(dead and character._isHero) then
+		self._render:tweenEffect()
+	end
+	return dead
 end
 function Character:beKnock(character,damage)
 	if(self._knockCd ~= nil and self._knockCd > 0) then
@@ -276,7 +266,7 @@ function Character:getMass(  )
 end
 
 function Character:setMass( mass )
-	self._mass = mass
+	self._mass = math.min(mass,6)
 	if(self._render ~=nil) then
 		self._render:setIcon(tostring(self._mass))
 	end
@@ -399,15 +389,17 @@ function Character:cloneQuePos()
 	end
 	return t
 end
-function Character:inherit(target) 
-	self._posQue = target:cloneQuePos()
-	self._isMove = target._isMove
-	self._dir = target:getDir()
-	self._restMoveTime = target._restMoveTime
-	self._targetPos = target._targetPos
-	self._speedChange = target._speedChange
-	self:setPos(target:getPos())
-end
+
+-- function Character:inherit(target) 
+-- 	self._posQue = target:cloneQuePos()
+-- 	self._isMove = target._isMove
+-- 	self._dir = target:getDir()
+-- 	self._restMoveTime = target._restMoveTime
+-- 	self._targetPos = target._targetPos
+-- 	self._speedChange = target._speedChange
+-- 	self:setPos(target:getPos())
+-- end
+
 function Character:meetBlock() 
 
 	self:moveEnd()
@@ -468,7 +460,7 @@ function Character:updateSkill()
 	end
 end
 
-function Character:tryCastSkill() 
+function Character:updateSkillAi() 
 
 	if(not self:isAlive())then
 		return

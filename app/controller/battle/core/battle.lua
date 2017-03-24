@@ -721,6 +721,11 @@ local colliderEvents = {
 			end
 
 			local caster = BattleObject.getObjectById(sourceObj:getCasterId())
+			if(caster == nil) then
+				print("no caster",sourceObj:getCasterId())
+				return
+			end
+
 			if(targetObj:behit(caster,skill:getAttack()))then
 				caster:hitOther(targetObj)
 			end

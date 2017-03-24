@@ -93,6 +93,8 @@ function ObjectRender.new()
     obj._x = nil
     obj._y = nil
 
+    obj._motion = nil
+
     return obj
 end
 
@@ -122,6 +124,15 @@ function ObjectRender:uninit()
     end
     self:destroyAvatar()
     self._valid = false
+
+end
+
+
+function ObjectRender:addMotion(  )
+    if(self._avatar == nil) then
+        self:addFunc(self.addMotion,self)
+        return
+    end
 
 end
 
@@ -297,6 +308,10 @@ function ObjectRender:setPos (x,y)               -- 通用的设置坐标接口
     end
     
     self._avatar:setPosition(x,y)
+
+    if(self._motion ~= nil) then
+        self._motion:setPosition(cc.p(x,y))
+    end
 end
 
 function ObjectRender:setRot(angle) 
@@ -440,9 +455,10 @@ function ObjectRender:fadeIn(duration)
         self:addFunc(self.fadeIn,self,duration)
         return
     end
+    self._avatar:stopAllActions();
     duration = duration or 0.1
     transition.fadeIn(self._avatar,{time = duration})
-    -- self._avatar:setOpacity(255) 
+
 end
 
 -- 淡出 duration :时长
@@ -463,31 +479,12 @@ end
 -- 闪烁，interval：闪烁周期
 function ObjectRender:startBlink() 
 
-    -- local interval = 0.25
-    -- if(self._avatar == nil) then
-    --     self._blinkInterval = interval
-    --     return
-    -- end
-    
-    -- self._blink = cc.repeatForever(cc.sequence(cc.fadeIn(interval), cc.fadeOut(interval)));
-    -- self._avatar:runAction(self._blink)
-    
 end
 -- 停止闪烁
 function ObjectRender:stopBlink() 
 
-    -- if(self._avatar == nil) then
-    --     self._blinkInterval = -1
-    --     return
-    -- end
-
-    -- if(self._blink ~= nil and self._blink.getOriginalTarget ()~= nil) then
-    --     self._avatar:stopAction(self._blink)
-    -- end
-        
-    -- self._blink = nil
-    -- self._avatar:setOpacity(255);
 end
+
 function ObjectRender:setHpPercent(percent) 
 
     if(self._avatar  == nil) then
@@ -533,7 +530,24 @@ function ObjectRender:setHp(cur,max,tween)
 
 end
 
+function ObjectRender:playBoomEffect( pos,duration )
+    self:playEffect(Common.assetPathTable.hit,pos,duration)
+end
+
+function ObjectRender:playMissileAudio(  )
+    self:playAudio(Common.assetPathTable.missile)
+end
+
+function ObjectRender:playBoomAudio() 
+    self:playAudio(Common.assetPathTable.boom)
+end
+
+function ObjectRender:playPickAudio() 
+    self:playAudio(Common.assetPathTable.pick)
+end
+
 function ObjectRender:playAudio(path) 
+
     if(path == nil or path == '') then
         return
     end
@@ -549,9 +563,15 @@ function ObjectRender:playEffect(effectPath,pos,duration)
     local p = cc.p(pos.x,pos.y)
     EffectManager:getInstance():playEffect(effectPath,p,duration)
 end
-function ObjectRender:playEffectByName(effectName,pos,duration) 
-    local effectPath = Common.assetPathTable[effectName]
-    self:playEffect(effectPath,pos,duration)
+
+function ObjectRender:tweenEffect( )
+    if(self._avatar == nil) then
+        return
+    end
+    local effectPath = Common.assetPathTable.reward
+    local pos1 = cc.p(self._x,self._y)
+    local pos2 = cc.p(20,283)
+    EffectManager:getInstance():tweenEffect(effectPath,pos1,pos2)
 end
 
 return ObjectRender

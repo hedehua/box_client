@@ -18,8 +18,14 @@ local getVisibleSize = function()
     return visibleSize
 end
 
+local playButtonClick = function(  )
+    local AudioManager = require("app.manager.audioManager")
+    AudioManager:getInstance():playUIClick()
+end
+
 return {
    formatSeconds = formatSeconds,
    getVisibleSize = getVisibleSize,
    fileLog = fileLog,
+   playButtonClick = playButtonClick,
 }

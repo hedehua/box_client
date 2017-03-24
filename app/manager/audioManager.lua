@@ -26,6 +26,12 @@ function AudioManager:playEffect( path )
     audio.playSound(path,false)
 end
 
+function AudioManager:playUIClick(  )
+	local path = "raw-assets/resources/music/button.mp3"
+	local audio = require "cocos.framework.audio"
+    audio.playSound(path,false)
+end
+
 function AudioManager:stopMusic( path )
 	local audio = require "cocos.framework.audio"
 	audio.stopMusic(path)

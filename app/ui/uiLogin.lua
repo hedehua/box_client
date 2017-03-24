@@ -18,11 +18,25 @@ function UILogin:loaded(res)
   self.super.loaded(self,res)
 
   local bottom = res:getChildByName("bottom")
-  local mode1 = bottom:getChildByName("mode_1");
-  self._button1 = mode1:getComponent("cc.Button")
+  local start = bottom:getChildByName("start");
+  self._button1 = start:getComponent("cc.Button")
 
   self._button1:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
     self:onButtonClick(1)
+  end)
+
+  local stats = bottom:getChildByName("stats");
+  self._button2 = stats:getComponent("cc.Button")
+
+  self._button2:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
+    self:onStatsButtonClick()
+  end)
+
+  local setting = bottom:getChildByName("setting");
+  self._button3 = setting:getComponent("cc.Button")
+
+  self._button3:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
+    self:onSettingButtonClick()
   end)
 
   local effect = res:getChildByName("effect")
@@ -31,7 +45,7 @@ function UILogin:loaded(res)
   
   local actions = {}
   for i = 1,10 do
-      local action = transition.moveTo(effect,{x = math.random(-200,200), y = math.random(0,200),time = 5});
+      local action = cc.MoveTo:create(5, cc.p(math.random(-200,200),math.random(0,200)))
       table.insert(actions,action)
   end
 
@@ -49,12 +63,16 @@ function UILogin:loaded(res)
   -- local waveAction = cc.Waves:create(32, cc.size(16,16), 8, 4, true, true)
   -- gridNode:runAction(cc.RepeatForever:create(waveAction))
 
-  local actionTo1 = transition.scaleTo(logo,{scaleX = 1.05, scaleY = 1.05,time = 2});
-  local actionTo2 = transition.scaleTo(logo,{scaleX = 1, scaleY = 1,time = 0.1});
-  local actionTo2 = transition.scaleTo(logo,{scaleX = 1, scaleY = 1,time = 5});
+  local actionTo1 = cc.ScaleTo:create(2, 1.1)
+  local actionTo2 = cc.ScaleTo:create(1, 1)
+  local actionTo3 = cc.ScaleTo:create(3, 1)
   local seq = transition.sequence({actionTo1,actionTo2,actionTo3});
   logo:runAction(cc.RepeatForever:create(seq))
 
+  local img = Common.assetPathTable.texturePix
+  self._motion = cc.MotionStreak:create(2, 1.0, 50.0, cc.c3b(255, 255, 0),img)
+  res:addChild(self._motion)
+  self._motion:runAction(seq)
 end
 
 function UILogin:unload( )
@@ -66,7 +84,18 @@ function UILogin:fresh()
 end
 
 function UILogin:onButtonClick(arg1,arg2)
+    Common.utils.playButtonClick()
     self:notify("start",arg1,arg2);
+end
+
+function UILogin:onSettingButtonClick(  )
+    Common.utils.playButtonClick()
+    self:notify("setting")
+end
+
+function UILogin:onStatsButtonClick(  )
+    Common.utils.playButtonClick()
+    self:notify("stats")
 end
 
 return UILogin

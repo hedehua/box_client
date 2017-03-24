@@ -9,6 +9,7 @@ function BattleRender:onCreate( ... )
     self._objects = nil
     self._rootNode = nil
     self._followObj = nil
+    self._posx = nil
 end
 
 
@@ -63,8 +64,20 @@ function BattleRender:asyncPos()
             x = math.max(-width/2 + screen.width/2,x)
             x = math.min(width/2 - screen.width/2,x)
         end
-        self._rootNode:setPositionX(-x + screen.width/2)
+        x = -x + screen.width/2
+        -- y = -y + screen.height/2
+
+        if(self._posx ~= nil) then
+            local dist = math.abs(x - self._posx)
+            if(dist > 10) then
+                x = (self._posx + x) * 0.5
+            end
+        end
+
+        self._rootNode:setPositionX(x)
         -- self._rootNode:setPosition(-x + screen.width/2,-y + screen.height/2)
+
+        self._posx = x
     end
 end
 

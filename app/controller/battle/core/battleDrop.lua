@@ -83,6 +83,9 @@ function BattleDrop:needRemove(argument)
 end
 function BattleDrop:bePicked(argument)  -- 被拾取
 	self._needRemove = true
+	if(self._render ~= nil) then
+		self._render:playPickAudio()
+	end
 end
 function BattleDrop:getCamp() 
 	return self._camp

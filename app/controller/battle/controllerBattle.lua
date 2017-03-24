@@ -428,51 +428,70 @@ function ControllerBattle:onGameOver(result)
     return
   end
   
-  if(self._uiBattleEnd ~= nil)then
-
-    local refs = {
-      [Enum.EResult.Timeout] = function( ... )
-        return Common.stringTable.TimeOut
-      end,
-      [Enum.EResult.Succ] = function( ... )
-        if(result.winner == nil) then
-          return Common.stringTable.Tied
-        end
-        if(result.winner == self._curCamp) then
-          return Common.stringTable.Succ
-        end
-      
-        return Common.stringTable.Fail  
-      end,
-      [Enum.EResult.PlayerDie] = function( ... )
-        return Common.stringTable.PlayerDie
-      end
-    }
-    local tittle = refs[result.endType]
-    local scores = result.scores
-    local rank = nil
-    local score = nil
-
-    if(scores ~= nil) then
-      for i = 1,#scores do
-
-        local item = scores[i]
-        if(item.ctrlId == self._curId) then
-          rank = item.rank
-          score = item.score
-        end
-      end
-    end
-
-    self._uiBattleEnd:setResult(tittle,rank,score)
-    self._uiBattleEnd:open()
-
-    if(self._uiBattle ~= nil) then
-      self._uiBattle:close()
-    end
-
+  if(self._uiBattleEnd == nil)then
+    return
   end
+
+  local refs = {
+    [Enum.EResult.Timeout] = function( ... )
+      return Common.stringTable.TimeOut
+    end,
+    [Enum.EResult.Succ] = function( ... )
+      if(result.winner == nil) then
+        return Common.stringTable.Tied
+      end
+      if(result.winner == self._curCamp) then
+        return Common.stringTable.Succ
+      end
+    
+      return Common.stringTable.Fail  
+    end,
+    [Enum.EResult.PlayerDie] = function( ... )
+      return Common.stringTable.PlayerDie
+    end
+  }
+
+  local musicrefs = {
+    [Enum.EResult.Timeout] = function( ... )
+      return Common.assetPathTable.succ
+    end,
+    [Enum.EResult.Succ] = function( ... )
+      if(result.winner ~= self._curCamp) then
+        return Common.assetPathTable.fail
+      end
+    
+      return Common.assetPathTable.musicSucc
+    end,
+    [Enum.EResult.PlayerDie] = function( ... )
+      return Common.assetPathTable.fail
+    end
+  }
+  local tittle = refs[result.endType]()
+  local scores = result.scores
+  local rank = nil
+  local score = nil
+
+  if(scores ~= nil) then
+      for i = 1,#scores do
+          local item = scores[i]
+          if(item.ctrlId == self._curId) then
+              rank = item.rank
+              score = item.score
+          end
+      end
+  end
+
+  self._uiBattleEnd:setResult(tittle,rank,score)
+  self._uiBattleEnd:open()
+
+  if(self._uiBattle ~= nil) then
+    self._uiBattle:close()
+  end
+
   self:stopMusic()
+
+  AudioManager:getInstance():playEffect(musicrefs[result.endType]())
+
 end
 
 function ControllerBattle:onSkillButtonClick(  )

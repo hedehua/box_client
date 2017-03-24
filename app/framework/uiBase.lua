@@ -82,9 +82,9 @@ function UIBase:open()
 	self:fresh();
 
 	if(self:isTweenShow()) then
-		local actionTo1 = transition.scaleTo(self._resObject,{scaleX = 1.05, scaleY = 1.05,time = 0.05});
-		local actionTo2 = transition.scaleTo(self._resObject,{scaleX = 0.9, scaleY = 0.9,time = 0.05});
-		local actionTo3 = transition.scaleTo(self._resObject,{scaleX = 1,scaleY = 1,time = 0.1});
+		local actionTo1 = cc.ScaleTo:create(0.05, 1.05) 
+		local actionTo2 = cc.ScaleTo:create(0.05, 0.9) 
+		local actionTo3 = cc.ScaleTo:create(0.1, 1)
 		local seq = transition.sequence({actionTo1,actionTo2,actionTo3});
 		self._resObject:runAction(seq)
 	end

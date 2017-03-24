@@ -133,25 +133,25 @@ function UIBattle:loaded(res)
 
     -- -- /* 4向逻辑
 
-    if(angle >= -WorldConfig.touchAngle and angle < WorldConfig.touchAngle) then
-        self:onTouchBegin(cc.p(1,0),cc.pGetAngle(cc.p(1,0),cc.p(1,0)))
-        return
-    end
+    -- if(angle >= -WorldConfig.touchAngle and angle < WorldConfig.touchAngle) then
+    --     self:onTouchBegin(cc.p(1,0),cc.pGetAngle(cc.p(1,0),cc.p(1,0)))
+    --     return
+    -- end
 
-    if(angle >= math.pi/2 -WorldConfig.touchAngle and angle < math.pi/2 + WorldConfig.touchAngle) then
-        self:onTouchBegin(cc.p(0,-1),cc.pGetAngle(cc.p(0,-1),cc.p(1,0)))
-        return
-    end
+    -- if(angle >= math.pi/2 -WorldConfig.touchAngle and angle < math.pi/2 + WorldConfig.touchAngle) then
+    --     self:onTouchBegin(cc.p(0,-1),cc.pGetAngle(cc.p(0,-1),cc.p(1,0)))
+    --     return
+    -- end
 
-    if(angle >= -math.pi/2 -WorldConfig.touchAngle and angle < -math.pi/2 + WorldConfig.touchAngle)then
-        self:onTouchBegin(cc.p(0,1),cc.pGetAngle(cc.p(0,1),cc.p(1,0)))
-        return
-    end 
+    -- if(angle >= -math.pi/2 -WorldConfig.touchAngle and angle < -math.pi/2 + WorldConfig.touchAngle)then
+    --     self:onTouchBegin(cc.p(0,1),cc.pGetAngle(cc.p(0,1),cc.p(1,0)))
+    --     return
+    -- end 
 
-    if(angle >= math.pi - WorldConfig.touchAngle or angle < -math.pi + WorldConfig.touchAngle) then
-        self:onTouchBegin(cc.p(-1,0),cc.pGetAngle(cc.p(-1,0),cc.p(1,0)))
-        return
-    end
+    -- if(angle >= math.pi - WorldConfig.touchAngle or angle < -math.pi + WorldConfig.touchAngle) then
+    --     self:onTouchBegin(cc.p(-1,0),cc.pGetAngle(cc.p(-1,0),cc.p(1,0)))
+    --     return
+    -- end
     self:onTouchBegin(cc.pNormalize(pos),angle) 
   end
 
