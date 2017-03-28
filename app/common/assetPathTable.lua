@@ -25,6 +25,9 @@ local AssetPathTable = {
     missile = "raw-assets/resources/audio/bottle.mp3",
 
     texturePix = "raw-assets/texture/bg_pix.png",
+    sliderBar = "raw-internal/image/default_progressbar_bg.png",
+    sliderThumb = "raw-internal/image/default_btn_normal.png",
+    sliderProgress = "raw-internal/image/default_sprite_splash.png",
 
     reward = "resources/effect/p_reward.prefab",
 

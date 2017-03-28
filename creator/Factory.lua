@@ -24,6 +24,7 @@ local ButtonComponent         = cc.import(".components.ButtonComponent")
 local EditBoxComponent        = cc.import(".components.EditBoxComponent")
 local AnimationComponent      = cc.import(".components.AnimationComponent")
 local WidgetComponent         = cc.import(".components.WidgetComponent")
+local SliderComponent         = cc.import(".components.SliderComponent")
 
 -- set
 local _direct = {
@@ -209,6 +210,13 @@ end
 
 factory["cc.PrefabInfo"] = function( asset )
     return nil
+end
+
+factory["cc.Slider"] = function( asset,assets )
+
+    local slider = ccui.Slider:create()
+
+    return SliderComponent.new(slider,assets)
 end
 
 local _M = {}

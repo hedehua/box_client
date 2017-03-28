@@ -17,7 +17,7 @@ end
 
 
 function ModelUser:init()
-
+	self:loadData()
 	-- // 可在此处增加测试数据
 	self:addRole({_roleId = 10000001,_typeId = 1001,_attack = 12,_maxHp = 100})
 	self:addRole({_roleId = 10000002,_typeId = 1002,_attack = 15,_maxHp = 50})
@@ -76,7 +76,6 @@ function ModelUser:removeRole(role)
 end
 
 function ModelUser:getCoin(  )
-	self:loadData()
 	return self._coin
 end
 
@@ -85,23 +84,46 @@ function ModelUser:setCoin( coin )
 	self:saveData()
 end
 
-local COIN_COUNT = "coin"
-local USER_NAME = "user"
+local KEY_COIN_COUNT = "coin"
+local KEY_USER_NAME = "user"
+local KEY_AUDIO_VOLUME = "audio"
+local KEY_MUSIC_VOLUME = "music"
+
 local DEFAULT_USER_NAME = 'abc'
+local DEFAULT_VOLUME = 80
+
+function ModelUser:getAudioVolume(  )
+	return cc.UserDefault:getInstance():getIntegerForKey(KEY_AUDIO_VOLUME)
+end
+
+function ModelUser:setAudioVolume( volume )
+	cc.UserDefault:getInstance():setIntegerForKey(KEY_AUDIO_VOLUME,volume)
+end
+
+function ModelUser:getMusicVolume(  )
+	return cc.UserDefault:getInstance():getIntegerForKey(KEY_MUSIC_VOLUME)
+end
+
+function ModelUser:setMusicVolume( volume )
+	cc.UserDefault:getInstance():setIntegerForKey(KEY_MUSIC_VOLUME,volume)
+end
 
 function ModelUser:loadData(  )
-	local userExist = cc.UserDefault:getInstance():getStringForKey(USER_NAME)
+	local userExist = cc.UserDefault:getInstance():getStringForKey(KEY_USER_NAME)
 	if(userExist == nil or userExist == '') then
 		local WorldConfig = require("app.controller.battle.config.worldConfig")
-		cc.UserDefault:getInstance():setStringForKey(USER_NAME,DEFAULT_USER_NAME)
+		cc.UserDefault:getInstance():setStringForKey(KEY_USER_NAME,DEFAULT_USER_NAME)
+		cc.UserDefault:getInstance():setStringForKey(KEY_AUDIO_VOLUME,DEFAULT_VOLUME)
+		cc.UserDefault:getInstance():setStringForKey(KEY_MUSIC_VOLUME,DEFAULT_VOLUME)
+		
 		self:setCoin(WorldConfig.defaultCoin)
 	end
 	-- print(userExist)
-	self._coin = cc.UserDefault:getInstance():getIntegerForKey(COIN_COUNT)
+	self._coin = cc.UserDefault:getInstance():getIntegerForKey(KEY_COIN_COUNT)
 end
 
 function ModelUser:saveData(  )
-	cc.UserDefault:getInstance():setIntegerForKey(COIN_COUNT, self._coin)
+	cc.UserDefault:getInstance():setIntegerForKey(KEY_COIN_COUNT, self._coin)
 end
 
 return ModelUser

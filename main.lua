@@ -65,6 +65,7 @@ local function __main()
     app:run()
 
     _cleanmem()
+    print(ccui.Slider)
 end
 
 xpcall(__main, __G__TRACKBACK__)

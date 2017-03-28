@@ -37,4 +37,16 @@ function AudioManager:stopMusic( path )
 	audio.stopMusic(path)
 end
 
+function AudioManager:setAudioVolume( volume )
+	local audio = require "cocos.framework.audio"
+	audio.setSoundsVolume(volume)
+end
+
+function AudioManager:setMusicVolume( volume )
+	local audio = require "cocos.framework.audio"
+	audio.setMusicVolume(volume)
+end
+
+
+
 return AudioManager

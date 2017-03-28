@@ -62,6 +62,8 @@ function ControllerLogin:open(arg1)
     self._ui:init();
     self._ui:open();
 
+    local volume = UserModel:getInstance():getMusicVolume()
+    AudioManager:getInstance():setAudioVolume(volume/100)
     AudioManager:getInstance():playMusic(Common.assetPathTable.musicLogin)
 
 end
@@ -148,7 +150,21 @@ function ControllerLogin:openSetting(  )
           cancel = function(  )
             self._uiSetting:uninit()
             self._uiSetting = nil
-          end
+          end,
+          setAudioVolume = function( volume )
+            UserModel:getInstance():setAudioVolume( volume )
+            AudioManager:getInstance():setAudioVolume(volume/100)
+          end,
+          getAudioVolume = function( )
+            return UserModel:getInstance():getAudioVolume(  )
+          end,
+          setMusicVolume = function( volume )
+            UserModel:getInstance():setMusicVolume( volume )
+            AudioManager:getInstance():setMusicVolume(volume/100)
+          end,
+          getMusicVolume = function( )
+            return UserModel:getInstance():getMusicVolume(  )
+          end,
         })
         self._uiSetting:init()
     end
