@@ -114,7 +114,7 @@ function Battle:exec(cmd,arg1,arg2,arg3,arg4,arg5)
 			self:move(arg1,arg2,arg3)
 		end,
 		[Enum.CMD.Join] = function(  )
-			self:joinPlayer(arg1,arg2,arg3,arg4)
+			self:joinPlayer(arg1,arg2,arg3,arg4,arg5)
 		end,
 		[Enum.CMD.Leave] = function(  )
 			self:leaveTeam(arg1)
@@ -136,23 +136,28 @@ function Battle:exec(cmd,arg1,arg2,arg3,arg4,arg5)
 	end
 	func()
 	
-end--pushCmd
-function Battle:DoCMD(cmd,arg1,arg2,arg3,arg4,arg5)
-	if(self._mode == nil)then
-		return
-	end
-	self._mode.pushCmd(cmd,arg1,arg2,arg3,arg4,arg5)
 end
+
+function Battle:DoCMD(cmd,arg1,arg2,arg3,arg4,arg5)
+	-- if(self._mode == nil)then
+	-- 	return
+	-- end
+	-- self._mode.pushCmd(cmd,arg1,arg2,arg3,arg4,arg5)
+
+	self:exec(cmd,arg1,arg2,arg3,arg4,arg5)
+end
+
 function Battle:setMode(mode)    -- 设置模式管道
 	self._mode = mode
-	-- cc.log(" -- set mode -- ",self._mode)
 end
+
 function Battle:getTypeId() 
 	if(self._mode == nil)then
 		return nil
 	end
 	return self._mode.getBattleId()
 end
+
 function Battle:getSeed() 
 	if(self._mode == nil)then
 		return nil
@@ -177,9 +182,15 @@ function Battle:update()
 		return
 	end
 
-	if(self:isOver())then
-		return
+	self._frameCount = self._frameCount + 1;
+
+	if(self._frameCount == self._overTime) then
+		self:gameOver()
 	end
+
+	-- if(self:isOver())then
+	-- 	return
+	-- end
 
 	if(self._mode ~= nil)then
 		local pack = self._mode.peekCmd();
@@ -194,10 +205,8 @@ function Battle:update()
 		until (false)
 	end
 
-	self._frameCount = self._frameCount + 1;
-
 	if(self:checkOver())then
-		self:gameOver() 
+		self:delayGameOver()
 	end
 
 	self:tryGenerateDrop()
@@ -319,7 +328,7 @@ function Battle:initPlayers( )
 	end
 	for i =1,#datas do
 		local data = datas[i]
-		self:joinPlayer(data.ctrlId,data.typeId,data.camp,data.isAi)
+		self:joinPlayer(data.ctrlId,data.typeId,data.camp,data.isAi,data.coin)
 	end
 end
 
@@ -406,14 +415,13 @@ function Battle:tryGenerateMonster()
 
 	local cfg = cfgArr[i]
 	local camp = cfg.camp
-	local dir = self:getCampBornDir(camp)
-	local pos = self:getCampBornPos(camp)
-	self:generateMonster(cfg,pos,dir,camp)	
+	
+	self:generateMonster(cfg,camp)	
 	self:initIntervalMonster(self._config.monsterInterval)		
 
 end
 
-function Battle:generateMonster( cfg,pos,dir,camp )
+function Battle:generateMonster( cfg,camp )
 	if cfg.monsters == nil then
 		print("monsters nil")
 		return
@@ -421,6 +429,8 @@ function Battle:generateMonster( cfg,pos,dir,camp )
 
 	for j = 1,cfg.count do
 		local chars = {};
+		local dir = self:getCampBornDir(camp)
+		local pos = self:getCampBornPos(camp)
 		
 		for m = 1,#cfg.monsters do
 			table.insert(chars,{typeId = cfg.monsters[m]})
@@ -479,13 +489,23 @@ function Battle:checkOver()
 	
 	return false
 end
+
+function Battle:delayGameOver(  )
+	if(self._isOver) then
+		return
+	end
+	self._isOver = true
+	self._overTime = self._frameCount + 30
+end
+
 function Battle:gameOver() 
 
 	if(self._mode ~= nil)then
 		self._mode.onGameOver(self._result)
 	end
 	self:reset()
-	self._isOver = true
+	
+	self._running = false
 end
 function Battle:joinDrop(typeId,camp,pos) 
 	local drop = BattleDrop.new()
@@ -576,7 +596,7 @@ function Battle:getCampTypeId( camp )
 	return self._config["basement"..camp]
 end
 
-function Battle:joinPlayer(ctrlId,typeId,camp,isAi) 
+function Battle:joinPlayer(ctrlId,typeId,camp,isAi,coin) 
 	
 	if(self._map == nil)then
 		error("map error,can't join player")
@@ -599,7 +619,14 @@ function Battle:joinPlayer(ctrlId,typeId,camp,isAi)
 		dir = self._config.bornDir
 	end
 
-	local team = self:joinTeam({ctrlId = ctrlId,camp = camp,pos = pos,dir =dir,flag = flag,chars = {{typeId = typeId}}})
+	local team = self:joinTeam({
+		ctrlId = ctrlId,
+		camp = camp,
+		pos = pos,
+		dir =dir,
+		flag = flag,
+		chars = {{typeId = typeId,coin = coin}}
+	})
 	if(team == nil)then
 		return -1;
 	end
@@ -656,9 +683,10 @@ function Battle:joinTeam(data)
 	})
       
 	local typeId = chars[1].typeId
+	local coin = chars[1].coin
 	local vpos = Vector2.new(pos[1],pos[2])
 	local vdir = Vector2.new(dir[1],pos[2])
-	team:init(typeId,vpos,vdir,camp,flag,ctrlId); 
+	team:init(typeId,vpos,vdir,camp,flag,ctrlId,coin); 
 	self:addTeam(team);
 	return team
 end
@@ -693,7 +721,7 @@ local colliderEvents = {
 			}
 			refs[context.dropType]()
 		
-			targetObj:bePicked()
+			targetObj:bePicked(sourceObj)
 		end
 	},
 	Missile = {
@@ -707,6 +735,10 @@ local colliderEvents = {
 			end
 
 			local caster = BattleObject.getObjectById(sourceObj:getCasterId())
+			if(caster == nil) then
+				print("no caster",sourceObj:getCasterId())
+				return
+			end
 			if(targetObj:behit(caster,skill:getAttack()))then
 				caster:hitOther(targetObj)
 			end
@@ -931,6 +963,13 @@ function Battle:getFrame()
 	return self._frameCount
 end
 
+function Battle:getCost(  )
+	if(self._config == nil) then
+		return 0
+	end
+	return self._config.cost
+end
+
 function Battle:getKillCount(ctrlId) 
 	if(ctrlId == nil or ctrlId < 0)then
 		cc:log("getkillcount arguments error")
@@ -945,6 +984,22 @@ function Battle:getKillCount(ctrlId)
 	end
 	return team:getKillCount()
 end
+
+function Battle:getCoinCount( ctrlId )
+	if(ctrlId == nil or ctrlId < 0)then
+		cc:log("getkillcount arguments error")
+		return 0
+	end
+	if(self._teams == nil)then
+		return 0
+	end
+	local team = self:getTeamByCtrId(ctrlId)
+	if(team == nil)then
+		return 0
+	end
+	return team:getCoinCount()
+end
+
 function Battle:getBasementHp(camp)
 
 	if(camp == nil)then
@@ -1014,7 +1069,7 @@ function Battle:updateScore()
 			table.insert(self._score.item,rankInfo)
 			dirty = true
 		end
-		local score = team:getKillCount()
+		local score = team:getCoinCount()
 		if(rankInfo.score ~= score)then
 			dirty = true
 		end

@@ -14,16 +14,16 @@ local ExceptDown = { Enum.Direction.Left,Enum.Direction.Right,Enum.Direction.Up}
 
 function Base:getSmartDir( exceptDir )
     self._cache = self._cache or {}
-    for i = #self._cache,1 do
+    for i = #self._cache,1,-1 do
         table.remove(self._cache,i)
     end
-
     for i = Enum.Direction.Up,Enum.Direction.Left do
         if(i ~= exceptDir and i ~= self._lastDir) then
             table.insert(self._cache,i)
         end
     end
-    return self._cache[Utils.random(1,#self._cache)]
+    local index = Utils.random(1,#self._cache)
+    return self._cache[index]
 end
 
 function Base:check()

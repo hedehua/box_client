@@ -82,19 +82,29 @@ function UIBase:open()
 	self:fresh();
 
 	if(self:isTweenShow()) then
-		local actionTo1 = cc.ScaleTo:create(0.05, 1.05) 
-		local actionTo2 = cc.ScaleTo:create(0.05, 0.9) 
+		local actionTo1 = cc.ScaleTo:create(0.05, 1.02) 
+		local actionTo2 = cc.ScaleTo:create(0.05, 0.98) 
 		local actionTo3 = cc.ScaleTo:create(0.1, 1)
 		local seq = transition.sequence({actionTo1,actionTo2,actionTo3});
 		self._resObject:runAction(seq)
 	end
 end
 function UIBase:close()
-	-- // 关闭界面
+
 	self._active = false
 	if(self._resObject == nil) then
 		return
 	end
+
+	if(self:isTweenShow()) then
+		local actionTo1 = cc.ScaleTo:create(0.05, 1.05) 
+		local actionTo2 = cc.ScaleTo:create(0.05, 0.9) 
+		local actionTo3 = cc.FadeOut:create(0.1)
+		local seq = transition.sequence({actionTo1,actionTo2,actionTo3});
+		self._resObject:runAction(seq)
+		return
+	end
+
 	self._resObject:setVisible(self._active);
 end
 function UIBase:fresh()

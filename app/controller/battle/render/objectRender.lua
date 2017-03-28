@@ -92,8 +92,11 @@ function ObjectRender.new()
     obj._sizeY = 1
     obj._x = nil
     obj._y = nil
+    obj._scaleX = 1
+    obj._scaleY  = 1
 
     obj._motion = nil
+    obj._queier = nil
 
     return obj
 end
@@ -135,6 +138,22 @@ function ObjectRender:addMotion(  )
     end
 
 end
+
+function ObjectRender:setQueier(q)
+    self._queier = q
+end
+
+function ObjectRender:request(eventType,arg1,arg2,arg3)
+    if(self._queier == nil) then
+        return nil;
+    end
+    local r = self._queier[eventType]
+    if(r ~= nil) then
+        return r(arg1,arg2,arg3);
+    end
+    return nil;
+end
+
 
 function ObjectRender:setVisible(value)
     
@@ -249,13 +268,14 @@ function ObjectRender:update(dt)
     end
    
 end
+
 function ObjectRender:updatePos(pos,dir,enableRot)           -- 为战斗使用，其他地方不要轻易使用
 
     self._x = pos.x
     self._y = pos.y
 
     if(self._isFollowTarget)then
-        setCenterPos(x,y)
+        setCenterPos(self._x ,self._y)
     end
 
     if(self._pos == nil) then
@@ -264,7 +284,7 @@ function ObjectRender:updatePos(pos,dir,enableRot)           -- 为战斗使用�
     else
         self._pos.x = self._x
         self._pos.y = self._y
-        self:tweenPos(self._x,self._y,tweenTime)
+        self:tweenPos(self._x,self._y,1 / WorldConfig.battleInterval)
     end
 
     if(not enableRot) then
@@ -275,6 +295,7 @@ function ObjectRender:updatePos(pos,dir,enableRot)           -- 为战斗使用�
     local t = cc.p(0,100)
     self:setRot(cc.pGetAngle(s,t)* 180/3.14)
 end
+
 function ObjectRender:tweenPos(x,y,duration)
     if(self._avatar == nil) then
         return
@@ -283,8 +304,11 @@ function ObjectRender:tweenPos(x,y,duration)
     self._restTime = duration
     self._speedX = (x - px) / duration
     self._speedY = (y - py) / duration
+    self:stepPos(cc.detaTime)
 end
+
 function ObjectRender:stepPos(dt)
+
     if(self._avatar == nil)then
         return
     end
@@ -323,14 +347,19 @@ function ObjectRender:setRot(angle)
 
     self._avatar:setRotation(angle)
 end
+
 function ObjectRender:getPos() 
     return self._x,self._y
 end
+
 function ObjectRender:getRoot() 
     return self._avatar  
 end
+
 function ObjectRender:setScale(x,y) 
-    
+    self._scaleX = x
+    self._scaleY = y
+
     if(self._avatar == nil)then
         self:addFunc(self.setScale,self,x,y)
         return
@@ -338,6 +367,7 @@ function ObjectRender:setScale(x,y)
    
     self._avatar:setScale(x,y)
 end
+
 function ObjectRender:setSize(x,y) 
     self._sizeX = x
     self._sizeY = y
@@ -542,8 +572,16 @@ function ObjectRender:playBoomAudio()
     self:playAudio(Common.assetPathTable.boom)
 end
 
-function ObjectRender:playPickAudio() 
-    self:playAudio(Common.assetPathTable.pick)
+function ObjectRender:playPickAudio(dropType)
+
+    if(dropType == 1) then 
+        self:playAudio(Common.assetPathTable.pick)
+        return
+    end
+    if(dropType == 2) then
+        self:playAudio(Common.assetPathTable.coin)
+        return
+    end
 end
 
 function ObjectRender:playAudio(path) 
@@ -564,14 +602,50 @@ function ObjectRender:playEffect(effectPath,pos,duration)
     EffectManager:getInstance():playEffect(effectPath,p,duration)
 end
 
-function ObjectRender:tweenEffect( )
+function ObjectRender:tweenShow( dropType  )
+    if(self._avatar == nil) then
+        self:addFunc(self.tweenShow,self,dropType)
+        return
+    end
+    if(dropType == 1) then
+        local action1 = cc.ScaleTo:create(0.1, 1.2)
+        local action2 = cc.ScaleTo:create(0.05, self._scaleX)
+        local seq = cc.Sequence:create({action1,action2})
+        self._avatar:runAction(seq)
+        return
+    end
+    if(dropType == 2) then
+        local seq = cc.FadeIn:create(0.1)
+        self._avatar:runAction(seq)
+        return
+    end
+    print('unkown',dropType)
+end
+
+function ObjectRender:flyEffect(pos,dropType )
+
+    if(dropType ~= 2) then
+        return
+    end
+
     if(self._avatar == nil) then
         return
     end
-    local effectPath = Common.assetPathTable.reward
-    local pos1 = cc.p(self._x,self._y)
-    local pos2 = cc.p(20,283)
-    EffectManager:getInstance():tweenEffect(effectPath,pos1,pos2)
+
+    local TimerManager = require "app.manager.timerManager"
+    local AudioManager = require "app.manager.audioManager"
+    
+    TimerManager:getInstance():start(function(  )
+        local cx,cy = self:request("getCenter")
+        local effectPath = Common.assetPathTable.reward
+        local pos1 = cc.p(pos.x,pos.y)
+        local pos2 = cc.p(700-cx,700-cy) 
+        EffectManager:getInstance():flyEffect(effectPath,pos1,pos2)
+    end, 0.2, 3, nil) 
+    
+    TimerManager:getInstance():runOnce(function( )
+        AudioManager:getInstance():playEffect(Common.assetPathTable.eatCoin)
+    end,1)
 end
 
 return ObjectRender

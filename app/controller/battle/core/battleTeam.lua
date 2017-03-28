@@ -36,6 +36,7 @@ function BattleTeam.new()
 	obj._dropId = nil			-- 死亡時掉落
 
 	obj._killCount = 0
+	obj._coinCount = 0
 	obj._aiInterval = 0
 
 	obj._moveInterval = 1
@@ -44,9 +45,16 @@ function BattleTeam.new()
 	return obj
 end
 
-function Character:castSkillEx()
+function BattleTeam:onCast( )
+	self:addCoin(-1)
+end
+
+function BattleTeam:castSkillEx()
 	if(self._skills == nil) then
 		print('no skill')
+		return
+	end
+	if(self._coinCount <= 0) then
 		return
 	end
 
@@ -79,13 +87,14 @@ function BattleTeam:update()
 
 end
 
-function BattleTeam:init (typeId,pos,dir,camp,flag,ctrlId)
+function BattleTeam:init (typeId,pos,dir,camp,flag,ctrlId,coin)
 	
 	BattleTeam.super.init(self,typeId,pos,dir,camp)
 	
 	self._ctrlId = ctrlId
 	self._bornPos = self:getPos()
 	self._bornDir = self:getDir()
+	self._coinCount = coin or 0
 	self._curDirection = Utils.arrToDirection(self._bornDir.x,self._bornDir.y)
 	self:setLeader(flag)
 	self:setLayer(1)
@@ -362,6 +371,11 @@ function BattleTeam:revive()
 
 	BattleTeam.super.revive(self)	
 end
+
+function BattleTeam:addCoin( count )
+	self._coinCount = self._coinCount + count
+end
+
 function BattleTeam:pickMember(data) 
 	local typeId = data.typeId
 	if(self._waitJoinMember == nil)then
@@ -369,21 +383,22 @@ function BattleTeam:pickMember(data)
 	end
 	table.insert(self._waitJoinMember,typeId)
 end
+
 function BattleTeam:pickItem(data) 
 	local config = data.config
 	if(config == nil)then
-		cc:error("pickItem error")
+		print("pickItem error")
 		return
 	end
 	local itemType = config.itemType
 	local val = config.arg1
 	
 	local refs = {
-		[1]=function ()
-			local leader = self:getLeader()
-			if(leader ~= nil and leader:isValid())then
-				leader:addHp(nil,val)
-			end
+		[1] = function ( )
+			self:addHp(nil,val)
+		end,
+		[2] = function( )
+			self:addCoin(val)
 		end
 	}
 	refs[itemType]()
@@ -466,12 +481,18 @@ function BattleTeam:needCheckCollider()
 	return true
 end
 
-function BattleTeam:getKillCount() 
+function BattleTeam:getCoinCount( )
+	return self._coinCount
+end
+
+function BattleTeam:getKillCount( ) 
 	return self._killCount
 end
-function BattleTeam:getCtrlId() 
+
+function BattleTeam:getCtrlId( ) 
 	return self._ctrlId
 end
+
 function BattleTeam:isBasement()
 	return self._isBasement
 end

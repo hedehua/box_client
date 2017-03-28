@@ -10,6 +10,7 @@ function BattleRender:onCreate( ... )
     self._rootNode = nil
     self._followObj = nil
     self._posx = nil
+    self._posy = nil
 end
 
 
@@ -42,6 +43,7 @@ function BattleRender:uninit(params)
         self._objects = nil
     end
 end
+
 function BattleRender:update(dt) 
     for i = 1,#self._objects do
         local obj = self._objects[i]
@@ -74,16 +76,34 @@ function BattleRender:asyncPos()
             end
         end
 
-        self._rootNode:setPositionX(x)
+        self:setRootPosition(x,screen.height/2)
         -- self._rootNode:setPosition(-x + screen.width/2,-y + screen.height/2)
+    end
+end
 
-        self._posx = x
+function BattleRender:setRootPosition( x,y )
+    
+    self._posx = x
+    self._posy = y
+
+    if(x ~= nil and y ~= nil)then
+        self._rootNode:setPosition(x,y)
+        return
+    end
+    if(x ~= nil) then
+        self._rootNode:setPositionX(x)
+        return
+    end
+    if(y ~= nil) then
+        self._rootNode:setPositionY(y)
+        return
     end
 end
 
 function BattleRender:setQueier(q)
 	self._queier = q
 end
+
 function BattleRender:request(eventType,arg1,arg2,arg3)
 	if(self._queier == nil) then
 		return nil;
@@ -94,6 +114,7 @@ function BattleRender:request(eventType,arg1,arg2,arg3)
 	end
 	return nil;
 end
+
 function BattleRender:notify(eventType,arg1,arg2,arg3)
 	if(self._queier == nil) then
 		return nil;
@@ -111,7 +132,7 @@ function BattleRender:initRoot()
   local scene = cc.Director:getInstance():getRunningScene()
   self._rootNode = scene:getChildByName("scene_root")         
   local screen = Common.utils.getVisibleSize()
-  self._rootNode:setPosition(screen.width/2,screen.height/2)
+  self:setRootPosition(screen.width/2,screen.height/2)
 end
 
 function BattleRender:uninitRoot() 
@@ -128,6 +149,11 @@ function BattleRender:addRender(obj)
     local render = ObjectRender.new();
     render:init();
     render:setParent(self._rootNode)
+    render:setQueier({
+        getCenter = function(  )
+            return self._posx,self._posy
+        end
+    })
 
     if(self._objects == nil) then
         self._objects = {}

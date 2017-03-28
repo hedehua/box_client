@@ -63,7 +63,7 @@ function Character:init(typeId,pos,dir,camp)
 		self:setCircleCollider(pos.x,pos.y,self._config.radius)
 		self:setMaxHp(self._config.maxHp);  			
 		self:setHp(self._config.defaultHp,false);
-		
+		self:setMass(self._config.mass)
 	end
 	
 	self._enableRot = false
@@ -213,9 +213,6 @@ function Character:behit(character,damage)
 	local preHp = self._hp
 	self:setHp(math.floor(self:getHp()-damage),true)
 	local dead = self._hp <= 0 and preHp > 0
-	if(dead and character._isHero) then
-		self._render:tweenEffect()
-	end
 	return dead
 end
 function Character:beKnock(character,damage)
@@ -240,9 +237,15 @@ function Character:setLeader(flag)
 		self._render:setFollowTarget()
 	end
 end
+
+function Character:isHero( ... )
+	return self._isHero
+end
+
 function Character:isLeader(argument) 
 	return self._isLeader
 end
+
 function Character:setTeam(id) 
 	self._teamId = id
 end
@@ -442,12 +445,20 @@ function Character:initSkill()
 			end,
 			castMissile = function(missile) 
 				self:notify("castMissile",missile)
+			end,
+			castSkill = function(  )
+				self:onCast()
 			end
 		})
 		skill:init(id,self:getCamp(),self._id)
 		table.insert(self._skills,skill)
 	end
 end
+
+function Character:onCast( )
+	-- body
+end
+
 function Character:updateSkill() 
 	if(self._skills == nil) then
 		return

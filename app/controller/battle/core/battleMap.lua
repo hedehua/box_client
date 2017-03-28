@@ -29,7 +29,7 @@ end
 
 function BattleMap:getValidPos() 
 	local bounds = self:getCollider()
-	local pos = {Utils.random(bounds:left() + 400,bounds:right() -400),Utils.random(bounds:bottom() + 400,bounds:top() - 400)}
+	local pos = {Utils.random(bounds:left() + 100,bounds:right() -100),Utils.random(bounds:bottom() + 400,bounds:top() - 400)}
 	return pos
 end
 
@@ -45,7 +45,6 @@ function BattleMap:clampPos( pos )
 	local bottom = self._collider:bottom()
 	local x = math.min(math.max(left,pos.x),right)
 	local y = math.min(math.max(bottom,pos.y),top)
-	-- print(pos.x,pos.y,' > ',x,y)
 	return Vector2.new(x,y)
 end
 

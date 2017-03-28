@@ -67,6 +67,7 @@ function UIBattle:loaded(res)
   local countNode = top:getChildByName("kill_count")
   self._timeNode = timeNode:getComponent("cc.Label")
   self._killNode = countNode:getComponent("cc.Label")
+  self._countNode = countNode
 
   self._rankNode = topRight:getChildByName("rank")
   self._rankGrid = self._rankNode:getChildByName("grid")
@@ -156,6 +157,10 @@ function UIBattle:loaded(res)
   end
 
   local _onTouchEnded = function (touch, event) 
+      local pos = res:convertTouchToNodeSpaceAR (touch)
+      if(pos.x > 0 or pos.y > 0) then
+          return
+      end
       self:setStickActive(false)
       self:onTouchEnd()
       self._touchPos = nil
@@ -272,118 +277,124 @@ function UIBattle:setTouchPos(pos)
   self._touchNode:setPosition(pos)
 end
 function UIBattle:fresh()
-  if(not self._active) then
-    return
-  end
-  self:freshTime()
-  self:freshKillCount()
-  self:freshRank()
-  self:freshBasementHp();
+    if(not self._active) then
+        return
+    end
+    self:freshTime()
+    self:freshKillCount()
+    self:freshRank()
+    self:freshBasementHp();
 end
+
 function UIBattle:freshTime()
-  if(self._timeNode ~= nil) then
-    self._timeNode.node:setString(Common.utils.formatSeconds(self:request("getRestTime")))
-  end
+    if(self._timeNode ~= nil) then
+        self._timeNode.node:setString(Common.utils.formatSeconds(self:request("getRestTime")))
+    end
 end
+
 function UIBattle:freshKillCount()
-  if(self._killNode ~= nil) then
-   self._killNode.node:setString(self:request("getKillCount"))
-  end
+    if(self._killNode ~= nil) then
+        self._killNode.node:setString(self:request("getKillCount"))
+    end
 end
 
 function UIBattle:freshRank()
- if(self._rankNode == nil) then
-   return
- end
- local rank = self:request("getRank")
- 
- if(rank == nil or rank.item == nil) then
-   self:setRankActive(false)
-   self:setMyRankActive(false)
-   return
- end
- self:setRankActive(true)
- self:setMyRankActive(true)
-
- if(not rank.dirty) then
-   return
- end
-
- rank.dirty = false
-
- if(self._rankItems == nil) then
-   self._rankItems = {}
-   local children = self._rankGrid:getChildren()
-   for i = 1,#children do
-     local node = children[i]
-     table.insert(self._rankItems,node:getComponent("cc.Label"))
+   if(self._rankNode == nil) then
+     return
    end
- end
- local myRankInfo = nil
- local ctrlId = self:request("getMyId")
- for i = 1,#rank.item do
-   local info = rank.item[i]
-   if(info.ctrlId == ctrlId) then
-     myRankInfo = info
+   local rank = self:request("getRank")
+   
+   if(rank == nil or rank.item == nil) then
+     self:setRankActive(false)
+     self:setMyRankActive(false)
+     return
    end
-   local lb = self._rankItems[i]
-   if(lb == nil) then
-     break
+   self:setRankActive(true)
+   self:setMyRankActive(true)
+
+   if(not rank.dirty) then
+     return
    end
-   lb.node:setString(getName(info.ctrlId).." "..info.score)
- end
- if(self._myRankRoot == nil or myRankInfo == nil) then
-   return
- end
- self._myRankNode.node:setString(Common.stringTable.Rank..''..myRankInfo.rank)
- self._myContextNode.node:setString(getName(myRankInfo.ctrlId).." "..myRankInfo.score)
+
+   rank.dirty = false
+
+   if(self._rankItems == nil) then
+     self._rankItems = {}
+     local children = self._rankGrid:getChildren()
+     for i = 1,#children do
+       local node = children[i]
+       table.insert(self._rankItems,node:getComponent("cc.Label"))
+     end
+   end
+   local myRankInfo = nil
+   local ctrlId = self:request("getMyId")
+   for i = 1,#rank.item do
+     local info = rank.item[i]
+     if(info.ctrlId == ctrlId) then
+       myRankInfo = info
+     end
+     local lb = self._rankItems[i]
+     if(lb == nil) then
+       break
+     end
+     lb.node:setString(getName(info.ctrlId).." "..info.score)
+   end
+   if(self._myRankRoot == nil or myRankInfo == nil) then
+     return
+   end
+   self._myRankNode.node:setString(Common.stringTable.Rank..''..myRankInfo.rank)
+   self._myContextNode.node:setString(getName(myRankInfo.ctrlId).." "..myRankInfo.score)
 end
+
 function UIBattle:freshBasementHp()
  
- if(self._basementHpNode == nil) then
-   return
- end
- local hp = self:request("getBasementHp")
- if(hp == nil ) then
-   self:setBasementActive(false)
-   return
- end
+   if(self._basementHpNode == nil) then
+     return
+   end
+   local hp = self:request("getBasementHp")
+   if(hp == nil ) then
+     self:setBasementActive(false)
+     return
+   end
 
-  if(hp == self._basementHp ) then
-    return
-  end
+    if(hp == self._basementHp ) then
+      return
+    end
 
- self:setBasementActive(true)
+   self:setBasementActive(true)
 
- self._basementHpNode.node:setString(hp)
- self._basementHp = hp
+   self._basementHpNode.node:setString(hp)
+   self._basementHp = hp
 end
+
 function UIBattle:setRankActive(active)
- if(self._rankNode == nil) then
-   return
- end
- if(self._rankNode:isVisible() == active) then
-   return
- end
- self._rankNode:setVisible(active) 
+   if(self._rankNode == nil) then
+     return
+   end
+   if(self._rankNode:isVisible() == active) then
+     return
+   end
+   self._rankNode:setVisible(active) 
 end
+
 function UIBattle:setMyRankActive(active)
- if(self._myRankRoot == nil) then
-   return
- end
- if(self._myRankRoot:isVisible() == active) then
-   return
- end
- self._myRankRoot:setVisible(active)
+   if(self._myRankRoot == nil) then
+     return
+   end
+   if(self._myRankRoot:isVisible() == active) then
+     return
+   end
+   self._myRankRoot:setVisible(active)
 end
+
 function UIBattle:setBasementActive(active)
- if(self._basementRoot == nil) then
-   return
- end
- if(self._basementRoot:isVisible() == active) then
-   return
- end
- self._basementRoot:setVisible(active)
+   if(self._basementRoot == nil) then
+     return
+   end
+   if(self._basementRoot:isVisible() == active) then
+     return
+   end
+   self._basementRoot:setVisible(active)
 end
 
 function UIBattle:getTempName()

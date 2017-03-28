@@ -46,7 +46,7 @@ end
 function App:run ()
     self._game = Game.new();
     self._game:init();
-    self._game:start();
+
 end
 
 

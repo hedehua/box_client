@@ -10,39 +10,29 @@ end
 
 function UIStats:init( ... )
   -- body
-  self.super.init(self)
-  self:setResPath(Common.assetPathTable.uiStats)
+    self.super.init(self)
+    self:setResPath(Common.assetPathTable.uiStats)
 end
 
-function UIBase:useStack( ... )
-  return false
+function UIStats:useStack( ... )
+    return false
 end
 
 function UIStats:loaded(res)
       
-  self.super.loaded(self,res)
+    self.super.loaded(self,res)
 
-  local stats = res:getChildByName("mask");
-  local mask = stats:getComponent("cc.Button")
+    local stats = res:getChildByName("mask");
+    local mask = stats:getComponent("cc.Button")
 
-  mask:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
-  		self:notify("close")
-  end)
-
-
-end
-
-function UIStats:fresh()
-      
-
-end
-
-function UIStats:setResult(tittle,rank,score)
+    mask:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
+    		self:notify("close")
+    end)
 
 end
 
 function UIStats:isTweenShow() 
-  return true
+    return true
 end
   
 return UIStats

@@ -344,7 +344,7 @@ function BattleObject:stopMove()
 	self._restMoveTime = 0
 end
 
-function BattleObject:update()
+function BattleObject:update(dt)
 
 	if(not self:isValid()) then
 		return;
@@ -353,7 +353,7 @@ function BattleObject:update()
 	self:updateMoveInfo();
 	
 	if(self:updatePos()) then
-		self:updateRenderPos();
+		self:updateRenderPos(dt);
 	end
 
 end

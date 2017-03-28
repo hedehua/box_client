@@ -51,6 +51,7 @@ function BattleDrop:init(typeId,camp,pos)
 		-- self._render:setIcon(self._contentConfig.icon)
 		-- self._render:setCamp(Enum.ECamp.None)
 		self._render:setSize(self._contentConfig.radius * 2,self._contentConfig.radius * 2)
+		self._render:tweenShow(self._config.dropType)
 	end
 	self:loadAvatar(self._config.res) 
 end
@@ -70,26 +71,25 @@ function BattleDrop:update()
 		self._render:updatePos(self._pos,self._dir);
 	end
 
-	-- if(self._frameCount == self._timeOut - WorldConfig.bornTime){
-	-- 	if(self._render ~= nil){
-	-- 		self._render.startBlink()
-	-- 	}
-	-- }
-
 	BattleDrop.super.update(self)
 end
+
 function BattleDrop:needRemove(argument) 
 	return self._needRemove
 end
-function BattleDrop:bePicked(argument)  -- 被拾取
+
+function BattleDrop:bePicked(obj)  -- 被拾取
 	self._needRemove = true
-	if(self._render ~= nil) then
-		self._render:playPickAudio()
+	if(self._render ~= nil and obj:isHero()) then
+		self._render:playPickAudio(self._config.dropType)
+		self._render:flyEffect(self:getPos(),self._config.dropType)
 	end
 end
+
 function BattleDrop:getCamp() 
 	return self._camp
 end
+
 function BattleDrop:getDrop() 
 	if(self._config == nil)then
 		return nil
@@ -98,11 +98,14 @@ function BattleDrop:getDrop()
 		dropType 	= self._config.dropType,
 		typeId 		= self._config.typeId,
 		config 		= self._contentConfig,
+		arg1		= self._contentConfig.arg1
 	}
 end
+
 function BattleDrop:isBlock(argument) 
 	return false
 end
+
 function BattleDrop:beDetect(character,dist)
 	
 	if(self._targetObj ~= nil)then

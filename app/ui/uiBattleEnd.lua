@@ -4,66 +4,74 @@ local Common = require("app.common.include")
 
 local UIBattleEnd = cc.class("UIBattleEnd",UIBase)
 function UIBattleEnd:ctor( ... )
-  self._btnEscape = nil
-  self._btnRetry = nil
+    self._btnEscape = nil
+    self._btnRetry = nil
 
-  self._scoreRoot = nil
-  self._scoreNode = nil
+    self._scoreRoot = nil
+    self._scoreNode = nil
+    self._emptyNode = nil
 
-  self._tittleNode = nil
+    self._tittleNode = nil
 
-  self._tittle = nil
-  self._score = nil
-  self._rank = nil
+    self._tittle = nil
+    self._score = nil
+    self._rank = nil
 end
 
 function UIBattleEnd:init( ... )
   -- body
-  self.super.init(self)
-  self:setResPath(Common.assetPathTable.uiBattleEnd)
+    self.super.init(self)
+    self:setResPath(Common.assetPathTable.uiBattleEnd)
 end
 
-function UIBase:useStack( ... )
-  return false
+function UIBattleEnd:useStack( ... )
+    return false
 end
 
 function UIBattleEnd:loaded(res)
       
-  self.super.loaded(self,res)
+    self.super.loaded(self,res)
 
-  local tnode = nil
+    local tnode = nil
 
-  self._scoreRoot = res:getChildByName("score")
-  tnode = self._scoreRoot:getChildByName("txt")
-  self._scoreNode = tnode:getComponent("cc.Label")
+    self._scoreRoot = res:getChildByName("score")
+    tnode = self._scoreRoot:getChildByName("txt")
+    self._scoreNode = tnode:getComponent("cc.Label")
 
-  tnode = res:getChildByName("tittle")
-  self._tittleNode = tnode:getComponent("cc.Label")
+    tnode = res:getChildByName("tittle")
+    self._tittleNode = tnode:getComponent("cc.Label")
 
-  local bt1 = res:getChildByName("bt_1");
-  self._btnEscape = bt1:getComponent("cc.Button")
-  self._btnEscape:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
-    Common.utils.playButtonClick()
-    self:notify("onEscape")
-  end);
+    self._emptyNode = res:getChildByName("empty")
 
-  local bt2 = res:getChildByName("bt_2");
-  self._btnRetry = bt2:getComponent("cc.Button")
-  self._btnRetry:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
-    Common.utils.playButtonClick()
-    self:notify("onRetry")  
-  end);
+    local bt1 = res:getChildByName("bt_1");
+    self._btnEscape = bt1:getComponent("cc.Button")
+    self._btnEscape:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
+      Common.utils.playButtonClick()
+      self:notify("onEscape")
+    end);
+
+    local bt2 = res:getChildByName("bt_2");
+    self._btnRetry = bt2:getComponent("cc.Button")
+    self._btnRetry:on(cc.Handler.EVENT_TOUCH_BEGAN, function (event) 
+      Common.utils.playButtonClick()
+      self:notify("onRetry")  
+    end);
 
 end
 function UIBattleEnd:fresh()
       
-  if(self._scoreNode ~= nil and self._score ~= nil) then
-      self._scoreNode.node:setString(self._score..'')
-  end
+    if(self._score ~= nil) then
+        self._scoreNode.node:setString(self._score..'')
+        self._scoreRoot:setVisible(true)
+        self._emptyNode:setVisible(false)
+    else
+        self._scoreRoot:setVisible(false)
+        self._emptyNode:setVisible(true)
+    end
 
-  if(self._tittleNode ~= nil) then
-      self._tittleNode.node:setString(self._tittle..'')
-  end
+    if(self._tittleNode ~= nil) then
+        self._tittleNode.node:setString(self._tittle..'')
+    end
 
 end
 
@@ -74,11 +82,11 @@ function UIBattleEnd:setResult(tittle,rank,score)
 end
 
 function UIBattleEnd:unload( )
-  UIBase.unload(self)
+    UIBase.unload(self)
 end
 
 function UIBattleEnd:isTweenShow() 
-  return true
+    return true
 end
   
 return UIBattleEnd

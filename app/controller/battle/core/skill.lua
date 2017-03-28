@@ -130,6 +130,7 @@ function Skill:cast()
     end
     
     self:resetCd() 
+    self:notify("castSkill")
 
     return true
 end

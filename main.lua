@@ -5,6 +5,7 @@ cc.FileUtils:getInstance():addSearchPath("src/")
 
 cc.DEBUG = cc.DEBUG_INFO --cc.DEBUG_VERBOSE
 cc.DEBUG_DISABLE_DUMP_TRACEBACK = true
+cc.detaTime = 0
 
 local logFileName = "log_file.txt"  
 local writablePath = cc.FileUtils:getInstance():getWritablePath()

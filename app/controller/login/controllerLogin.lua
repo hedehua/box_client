@@ -24,6 +24,8 @@ function ControllerLogin:ctor( ... )
     self._ui = nil
     self._uiStats = nil
     self._uiSetting = nil
+    self._uiSelect = nil
+    self._uiShop = nil
 end
 
 function ControllerLogin:uninit()
@@ -38,9 +40,7 @@ function ControllerLogin:open(arg1)
     self._ui = UILogin.new();
     self._ui:setQueier({
         start = function(arg1)
-            self:loginToServer(function()
-              ControllerBattle:getInstance():requestStart(arg1);
-            end)
+            self:openSelect()
         end,
         stats = function(  )
             self:openStats()
@@ -48,8 +48,14 @@ function ControllerLogin:open(arg1)
         setting = function(  )
             self:openSetting()
         end,
+        shop = function(  )
+            self:openShop()
+        end,
         onLoaded = function(name)
             LoadingManager:getInstance():stop();
+        end,
+        getCoin = function(  )
+            return UserModel:getInstance():getCoin()
         end
     });
 
@@ -76,12 +82,70 @@ function ControllerLogin:openStats(  )
     self._uiStats:open()
 end
 
+function ControllerLogin:openSelect(  )
+    if(self._uiSelect == nil) then
+        local UISelect = require("app.ui.uiSelect")
+        self._uiSelect = UISelect.new()
+        self._uiSelect:setQueier({
+            selectItem = function( index )
+
+                local TimerManager = require "app.manager.timerManager"
+                TimerManager:getInstance():runOnce(function(  )
+                    self._uiSelect:uninit()
+                    self._uiSelect = nil
+                end,0.2)
+                self._uiSelect:close()
+
+                self:loginToServer(function()
+                  ControllerBattle:getInstance():requestStart(index);
+                end)
+            end,
+            close = function(  )
+                self._uiSelect:uninit()
+                self._uiSelect = nil
+            end
+        })
+        self._uiSelect:init()
+    end
+    self._uiSelect:open()
+end
+
+function ControllerLogin:openShop(  )
+    if(self._uiShop == nil) then
+        local UIShop = require("app.ui.uiShop")
+        self._uiShop = UIShop.new()
+        self._uiShop:setQueier({
+            close = function(  )
+                self._uiShop:uninit()
+                self._uiShop = nil
+            end,
+            selectItem = function( index )
+                local coin = UserModel:getInstance():getCoin()
+                UserModel:getInstance():setCoin(coin + WorldConfig["goods"..index])
+                self._uiShop:uninit()
+                self._uiShop = nil
+                self._ui:fresh()
+            end
+        })
+        self._uiShop:init()
+    end
+    self._uiShop:open()
+end
+
 function ControllerLogin:openSetting(  )
     if(self._uiSetting == nil) then
         local UIStats = require("app.ui.uiSetting")
         self._uiSetting = UIStats.new()
         self._uiSetting:setQueier({
-          close = function( ... )
+          close = function(  )
+            self._uiSetting:uninit()
+            self._uiSetting = nil
+          end,
+          confirm = function(  )
+            self._uiSetting:uninit()
+            self._uiSetting = nil
+          end,
+          cancel = function(  )
             self._uiSetting:uninit()
             self._uiSetting = nil
           end

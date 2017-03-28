@@ -142,48 +142,39 @@ function ControllerBattle:update(dt)
 
 end
 
-function ControllerBattle:tick(dt) 
+function ControllerBattle:tick() 
     if(self._battle ~= nil) then
         self._battle:update();
     end 
 end
 
 function ControllerBattle:requestStart(arg) 
-  -- local tos = {
-  --   uid = UserModel:getInstance():getUid(),
-  --   battleTid = arg,
-  --   playerTid = WorldConfig.defaultPlayer,
-  --   battleType = WorldConfig.defaultMode,
-  -- }
 
-  -- Net:request("connector.entryHandler.startBattle",tos,function(data) 
-  --    if(data.code ~= 200) then
-  --      cc.error("error");
-  --      return;
-  --    end
-  --    self:open(false,data.battleInfo)
-  -- end)
+    local BattleConfig = require("app.controller.battle.config.battleConfig")
+
+    local config = Utils.getConfig(BattleConfig,arg)
+    local cost = config.cost
+    local coin = UserModel:getInstance():getCoin()
+    if(coin < cost) then
+        print("no enough coin")
+        return false
+    end
+    UserModel:getInstance():setCoin(coin - cost)
+    
     self:open(false,{
         ctrlId = 1,
         mode = 1,
         battleTid = arg,
         players = {
-          { ctrlId = 1,typeId = 1000 ,camp = Enum.ECamp.Blue ,isAi = false}
+          { ctrlId = 1,typeId = 1000 ,camp = Enum.ECamp.Blue ,isAi = false,coin = cost}
         },
         seed = 2016,
         frame = 0,
     })
+
+    return true
   
 end
-
--- function ControllerBattle:wait()
---     TipsManager:getInstance():playBlink(Common.stringTable.WaitPlayer)
--- end
-
--- function ControllerBattle:waitEnd()
---     TipsManager:getInstance():stopBlink();
---     TipsManager:getInstance():playCd(3);
--- end
 
 function ControllerBattle:getMyCamp()
     if(self._battle == nil) then
@@ -244,8 +235,8 @@ function ControllerBattle:open(auto,info)
         return
       end
 
-      local tos = {cmd =cmd,arg1=arg1,arg2=arg2,arg3=arg3}
-      Net:notify("battle.battleHandler.doCmd",tos);
+      -- local tos = {cmd =cmd,arg1=arg1,arg2=arg2,arg3=arg3}
+      -- Net:notify("battle.battleHandler.doCmd",tos);
     end,
 
     popCmd = function() 
@@ -273,7 +264,6 @@ function ControllerBattle:open(auto,info)
         self._curCamp = self:getMyCamp()
       end
       
-      print("game over")
       -- Net:request("battle.battleHandler.leavePlayer",{},function(params) 
       --   self:onGameOver(result)
       -- end);
@@ -321,7 +311,7 @@ function ControllerBattle:open(auto,info)
     end,
     getKillCount = function() 
       if(self._battle ~= nil)then
-        return self._battle:getKillCount(self._curId)
+        return self._battle:getCoinCount(self._curId)
       end
       return 0
     end,
@@ -364,7 +354,9 @@ function ControllerBattle:open(auto,info)
     end,
     onRetry = function()
       self:reset()
-      self:requestStart(self._curBattleId);
+      if(not self:requestStart(self._curBattleId)) then
+        self:close()
+      end
     end
   })
 
@@ -372,30 +364,31 @@ function ControllerBattle:open(auto,info)
   self._running = true;
   self._frameCount = info.frame or 0
   self._waiting = true
+
 end
 
 function ControllerBattle:initNet() 
 
-  Net:on("onBattleTick",function(data) 
-     if(self._battle == nil) then
-      return;
-    end
+  -- Net:on("onBattleTick",function(data) 
+  --    if(self._battle == nil) then
+  --     return;
+  --   end
     
-    if(not self._running) then
-      cc.error("no running")
-      return;
-    end
+  --   if(not self._running) then
+  --     cc.error("no running")
+  --     return;
+  --   end
 
-    if(self._waiting == true) then
-      self:waitEnd();
-      self._waiting = false
-    end
+  --   if(self._waiting == true) then
+  --     self:waitEnd();
+  --     self._waiting = false
+  --   end
 
-    self._frameCount = self._frameCount + 1;
-  end);
-  Net:on("onCmd",function(data) 
-   self:cacheCmd(data)
-  end);
+  --   self._frameCount = self._frameCount + 1;
+  -- end);
+  -- Net:on("onCmd",function(data) 
+  --  self:cacheCmd(data)
+  -- end);
 end
 
 function ControllerBattle:cacheCmd(data) 
@@ -425,16 +418,16 @@ end
 
 function ControllerBattle:onGameOver(result)
   if(result == nil) then
-    return
+      return
   end
   
   if(self._uiBattleEnd == nil)then
-    return
+      return
   end
 
   local refs = {
     [Enum.EResult.Timeout] = function( ... )
-      return Common.stringTable.TimeOut
+        return Common.stringTable.TimeOut
     end,
     [Enum.EResult.Succ] = function( ... )
       if(result.winner == nil) then
@@ -459,8 +452,8 @@ function ControllerBattle:onGameOver(result)
       if(result.winner ~= self._curCamp) then
         return Common.assetPathTable.fail
       end
-    
-      return Common.assetPathTable.musicSucc
+      
+      return Common.assetPathTable.succ
     end,
     [Enum.EResult.PlayerDie] = function( ... )
       return Common.assetPathTable.fail
@@ -480,12 +473,19 @@ function ControllerBattle:onGameOver(result)
           end
       end
   end
+  
+  if(result.endType == Enum.EResult.Succ and result.winner == self._curCamp) then
+      local coin = UserModel:getInstance():getCoin(score)
+      UserModel:getInstance():setCoin(coin + score)
+  else
+      score = nil
+  end
 
   self._uiBattleEnd:setResult(tittle,rank,score)
   self._uiBattleEnd:open()
 
   if(self._uiBattle ~= nil) then
-    self._uiBattle:close()
+      self._uiBattle:close()
   end
 
   self:stopMusic()
@@ -514,8 +514,8 @@ function ControllerBattle:touchIn(delta,angle)
 
     self._curDirection = angle
  
-    local x = math.floor(delta.x * WorldConfig.vectorPrecision) 
-    local y = math.floor(delta.y * WorldConfig.vectorPrecision)
+    local x = delta.x -- math.floor(delta.x) 
+    local y = delta.y -- math.floor(delta.y)
 
     self._battle:DoCMD(Enum.CMD.MoveEx,self:getCtrlId(),x,y)
 end

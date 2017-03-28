@@ -22,6 +22,8 @@ function Game:ctor()
 	self._managers = nil
 	self._models = nil
 	self._frameCount = 0
+	self._lastTime = 0
+	self._root = nil
 end
 	
 function Game:init()
@@ -29,6 +31,10 @@ function Game:init()
 	self:initModels();
 	self:initManagers();
 	self:initStates();
+
+	TimerManager:getInstance():runOnce(function(  )
+    	self:start();
+    end,0)
 end
 
 function Game:uninit()
@@ -84,10 +90,55 @@ end
 
 function Game:start()
 	print('-- game start --')
-	local dt = 1/WorldConfig.gameInterval
-	TimerManager:getInstance():start(function( )
+	local scene = cc.Director:getInstance():getRunningScene()
+    self._root = scene:getChildByName("game_root") 
+	self._root:scheduleUpdateWithPriorityLua(function( dt )
+		cc.detaTime = dt
 		self:update(dt)
-	end,dt)
+	end,0)
+
+	local function onKeyPressed(keyCode, event)  
+
+	end  
+
+	local function onKeyReleased(keyCode, event)  
+		if(keyCode == 6 or keyCode == 7) then
+			if(cc.Director:getInstance():isPaused()) then
+				return
+			end
+
+			local UIDialog = require("app.ui.uiDialog")
+			local dialog = UIDialog.new()
+			dialog:setQueier({
+	          close = function( )
+	            dialog:uninit()
+	            dialog = nil
+	            cc.Director:getInstance():resume()
+	          end,
+	          cancel = function( )
+	          	dialog:uninit()
+	            dialog = nil
+	            cc.Director:getInstance():resume()
+	          end,
+	          confirm = function( )
+	          	dialog:uninit()
+	            dialog = nil
+	            cc.Director:getInstance():endToLua(); 
+	          end
+	        })
+	        cc.Director:getInstance():pause()
+	        dialog:init()
+	        dialog:open()
+		end
+	end  
+
+	local listener = cc.EventListenerKeyboard:create()  
+	listener:registerScriptHandler(onKeyPressed, cc.Handler.EVENT_KEYBOARD_PRESSED)  
+	listener:registerScriptHandler(onKeyReleased, cc.Handler.EVENT_KEYBOARD_RELEASED)  
+
+	cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self._root)  
+
+	
 	self:switchState("StateResUpdate")
 end
 
@@ -153,6 +204,7 @@ function Game:initModels()
 end
 
 function Game:initSetting()
+
 	local director = cc.Director:getInstance()
 	 --turn on display FPS
     director:setDisplayStats(true)
