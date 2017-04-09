@@ -75,15 +75,6 @@ function ModelUser:removeRole(role)
 	end
 end
 
-function ModelUser:getCoin(  )
-	return self._coin
-end
-
-function ModelUser:setCoin( coin )
-	self._coin = coin
-	self:saveData()
-end
-
 local KEY_COIN_COUNT = "coin"
 local KEY_USER_NAME = "user"
 local KEY_AUDIO_VOLUME = "audio"
@@ -113,17 +104,20 @@ function ModelUser:loadData(  )
 	if(userExist == nil or userExist == '') then
 		local WorldConfig = require("app.controller.battle.config.worldConfig")
 		cc.UserDefault:getInstance():setStringForKey(KEY_USER_NAME,DEFAULT_USER_NAME)
-		cc.UserDefault:getInstance():setStringForKey(KEY_AUDIO_VOLUME,DEFAULT_VOLUME)
-		cc.UserDefault:getInstance():setStringForKey(KEY_MUSIC_VOLUME,DEFAULT_VOLUME)
-		
+
+		self:setMusicVolume(DEFAULT_VOLUME)
+		self:setAudioVolume(DEFAULT_VOLUME)
 		self:setCoin(WorldConfig.defaultCoin)
 	end
-	-- print(userExist)
-	self._coin = cc.UserDefault:getInstance():getIntegerForKey(KEY_COIN_COUNT)
 end
 
-function ModelUser:saveData(  )
-	cc.UserDefault:getInstance():setIntegerForKey(KEY_COIN_COUNT, self._coin)
+function ModelUser:getCoin(  )
+	return cc.UserDefault:getInstance():getIntegerForKey(KEY_COIN_COUNT)
 end
+
+function ModelUser:setCoin( coin )
+	cc.UserDefault:getInstance():setIntegerForKey(KEY_COIN_COUNT, coin)
+end
+
 
 return ModelUser

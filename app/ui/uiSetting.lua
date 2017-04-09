@@ -29,21 +29,21 @@ function UISetting:loaded(res)
         self:notify("close")
     end)
 
-    local cancel = res:getChildByName("cancel");
-    local cancelBtn = cancel:getComponent("cc.Button")
+    -- local cancel = res:getChildByName("cancel");
+    -- local cancelBtn = cancel:getComponent("cc.Button")
 
-    cancelBtn:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
-        Common.utils.playButtonClick()
-        self:notify("cancel")
-    end)
+    -- cancelBtn:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
+    --     Common.utils.playButtonClick()
+    --     self:notify("cancel")
+    -- end)
 
-    local confirm = res:getChildByName("confirm");
-    local confirmBtn = cancel:getComponent("cc.Button")
+    -- local confirm = res:getChildByName("confirm");
+    -- local confirmBtn = cancel:getComponent("cc.Button")
 
-    confirmBtn:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
-        Common.utils.playButtonClick()
-        self:notify("cancel")
-    end)
+    -- confirmBtn:on(cc.Handler.EVENT_TOUCH_ENDED,function(  )
+    --     Common.utils.playButtonClick()
+    --     self:notify("cancel")
+    -- end)
 
     local slider1 = ccui.Slider:create()
     slider1:setTouchEnabled(true)

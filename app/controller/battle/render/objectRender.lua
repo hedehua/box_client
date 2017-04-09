@@ -190,7 +190,6 @@ function ObjectRender:destroyAvatar()
     end
 
     if(self._avatar ~= nil) then
-        objRoot:removeChild(self._avatar)
         ObjManager:getInstance():unload(self._avatar);
         self._avatar = nil
     end
@@ -233,14 +232,11 @@ function ObjectRender:loadAvatar(resPath)
     end
     
     self._isLoading = true
-    ObjManager:getInstance():load(resPath,function(err,res)
-
+    if(objRoot == nil) then
         local scene = cc.Director:getInstance():getRunningScene()
-        
-        if(objRoot == nil) then
-            objRoot = scene:getChildByName("scene_root")
-        end
-        objRoot:addChild(res)
+        objRoot = scene:getChildByName("scene_root")
+    end
+    ObjManager:getInstance():load(resPath,function(err,res)
 
         self._avatar = res
         self._isLoading = false
@@ -252,7 +248,7 @@ function ObjectRender:loadAvatar(resPath)
         end
         self:callCacheFunc()
   
-    end);
+    end,objRoot);
     
     
 end

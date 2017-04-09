@@ -77,6 +77,7 @@ function ButtonComponent:onLoad(target)
     cc.printdebug("[Asset]   - [Button] set listener for %s%s[%s]", name, target.__type, target.__id)
 
     local listener = cc.EventListenerTouchOneByOne:create()
+    self._listner = listener
     listener:setSwallowTouches(true)
     listener:registerScriptHandler(function(touch, event)
         if(_onTouchBegan(self, touch)) then
@@ -201,6 +202,7 @@ _inRect = function(rect, p)
 end
 
 _onTouchBegan = function(self, touch)
+
     if self.state ~= _STATE_IDLE then return false end
     local p = touch:getLocation()
     local rect = _getRect(self._sprite.node)
@@ -208,10 +210,12 @@ _onTouchBegan = function(self, touch)
 
     self.state = _STATE_PRESSED
     _updateSprite(self)
+    
     return true
 end
 
 _onTouchMoved = function(self, touch)
+
     if self.state ~= _STATE_IDLE and self.state ~= _STATE_PRESSED then
         return false
     end
@@ -227,10 +231,12 @@ _onTouchMoved = function(self, touch)
     if lastState ~= self.state then
         _updateSprite(self)
     end
+
     return true
 end
 
-_onTouchEnded = function(self)
+
+_onTouchEnded = function(self,touch)
     local lastState = self.state
     if self.state == _STATE_PRESSED then
         self.state = _STATE_IDLE
@@ -241,7 +247,7 @@ _onTouchEnded = function(self)
     return true
 end
 
-_onTouchCancelled = function(self)
+_onTouchCancelled = function(self,touch)
     local lastState = self.state
     if self.state == _STATE_PRESSED then
         self.state = _STATE_IDLE
@@ -249,6 +255,7 @@ _onTouchCancelled = function(self)
     if lastState ~= self.state then
         _updateSprite(self)
     end
+
     return true
 end
 

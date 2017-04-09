@@ -521,11 +521,11 @@ function ControllerBattle:touchIn(delta,angle)
 end
 
 function ControllerBattle:touchOut(  )
-    if(self._battle == nil) then
-      return
-    end
-    self._curDirection = nil
-    self._battle:DoCMD(Enum.CMD.StopMove,self:getCtrlId())
+    -- if(self._battle == nil) then
+    --   return
+    -- end
+    -- self._curDirection = nil
+    -- self._battle:DoCMD(Enum.CMD.StopMove,self:getCtrlId())
 end
 
 function ControllerBattle:excuteKeycode(keyCode) 

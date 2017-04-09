@@ -32,74 +32,17 @@ end
 function ObjManager:uninit()
 	self:reset()
 end
+
 function ObjManager:update()
     
-    if(self._dirty ~= nil) then
-        return
-    end
-
-    if(self._tasks == nil) then
-        return
-    end
-    
-    local item = self._tasks[1];
-    if(item == nil) then
-        return
-    end
-    table.remove(self._tasks,1)
-
-    item.cb(self:instantiateImm(item.asset))
-    if(#self._tasks == 0) then
-        self._dirty = false
-    end
-end
-function ObjManager:hasTask() 
-	return self._tasks ~= nil and table.length(self._tasks) > 0  
-end
-function ObjManager:addTask(asset,cb) 
-    if(self._tasks == nil)then
-        self._tasks = {}
-    end
-    self._taskSeq = self._taskSeq + 1
-    local item = {id = self._taskSeq,asset = asset,cb = cb}
-    table.insert(self._tasks,item)
-    self._dirty = true
-    return item.id
 end
 
-function ObjManager:instantiateImm( asset )
-
-end
-
-function ObjManager:instantiate(asset,cb) 
-    if(asset == nil or cb == nil)then
-        cc.error("instantiate arguments error")
-        return nil
-    end
-    return self:addTask(asset,cb)
-end
-
-function ObjManager:destroyObject(id) 
-    if(id == nil or id < 0) then
-        return
-    end
-    if(self._tasks == nil) then
-        return
-    end
-    for i = table.length(self._tasks),1 do
-        local item = self._tasks[i]
-        if(item.id == id) then
-            table.remove(self._tasks,i)
-            break;
-        end
-    end
-end
-function ObjManager:load(resName,callback) 				
+function ObjManager:load(resName,callback,objRoot) 				
 
 	local info = self:getFromCache(resName)
 
 	if(info ~= nil) then
-		self:addTo(info.path,info.res)
+		self:addTo(info.path,info.res,info.root)
 		if(callback ~= nil)then
 			callback(nil,info.res);
 		end
@@ -110,21 +53,28 @@ function ObjManager:load(resName,callback)
     local assets = creator.getAssets()
     local asset = assets:createPrefab(resName)
 
-    self:addTo(resName,asset)
+    self:addTo(resName,asset,objRoot)
+
+    objRoot:addChild(asset)
 	if(callback ~= nil) then
 		callback(err,asset);
 	end
 
 end
 
-function ObjManager:unload(obj) 
+function ObjManager:unload(obj,clear) 
 	if(obj == nil) then
 		return false;
 	end
 	for i = #self._objectsArr,1,-1 do
 		local info = self._objectsArr[i]
 		if(info ~= nil and info.res == obj) then
-			-- self:addToCache(info)  -- TODO::
+			if(clear) then
+				info.root:removeChild(obj)
+			else
+				self:addToCache(info) 
+			end
+			
 			table.remove(self._objectsArr,i)
 			return true
 		end
@@ -134,12 +84,12 @@ function ObjManager:unload(obj)
 	return false		
 end
 
-function ObjManager:addTo(resName,obj) 
+function ObjManager:addTo(resName,obj,root) 
 	if(obj == nil) then
 		return
 	end
 
-	table.insert(self._objectsArr,{res = obj,path = resName})
+	table.insert(self._objectsArr,{res = obj,path = resName,root = root})
 end
 
 function ObjManager:addToCache(info)
@@ -150,7 +100,8 @@ function ObjManager:addToCache(info)
 	if(self._objectsCache == nil) then
 		self._objectsCache = {}
 	end
-	-- info.res:setVisible(false)  
+	info.res:setVisible(false)
+	info.res:stopAllActions()
 	table.insert(self._objectsCache,info)
 end
 function ObjManager:getFromCache(resName)
@@ -167,6 +118,7 @@ function ObjManager:getFromCache(resName)
 		if(info.path == resName) then
 			table.remove(self._objectsCache,i)
 			info.res:setVisible(true) 
+			info.res:setOpacity(255)
 			return info
 		end
 	end

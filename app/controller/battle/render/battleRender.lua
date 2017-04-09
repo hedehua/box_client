@@ -45,6 +45,7 @@ function BattleRender:uninit(params)
 end
 
 function BattleRender:update(dt) 
+    self:asyncPos()
     for i = 1,#self._objects do
         local obj = self._objects[i]
         if(self._followObj == nil and obj:isFollowTarget() and obj:getRoot() ~= nil) then
@@ -53,7 +54,6 @@ function BattleRender:update(dt)
         obj:update(dt)
     end
     
-   self:asyncPos()
 end
 -- -1024 1024
 -- -1024+screen.width/2
@@ -69,12 +69,7 @@ function BattleRender:asyncPos()
         x = -x + screen.width/2
         -- y = -y + screen.height/2
 
-        if(self._posx ~= nil) then
-            local dist = math.abs(x - self._posx)
-            if(dist > 10) then
-                x = (self._posx + x) * 0.5
-            end
-        end
+        x = (self._posx + x) * 0.5
 
         self:setRootPosition(x,screen.height/2)
         -- self._rootNode:setPosition(-x + screen.width/2,-y + screen.height/2)

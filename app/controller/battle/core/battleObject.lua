@@ -312,11 +312,14 @@ function BattleObject:moveTo(pos,interrupt)   -- interrupt == true,强制打断�
 end
 
 function BattleObject:moveDir(dir)
+
 	self._targetPos = nil
-	self._dir = dir:clone():norm()
+	
 	self._restMoveTime = 0
 	self._isMove = true
 	self._recalcMove = true
+	self._dir = dir:clone():norm()
+
 end
 
 function BattleObject:moveEnd()
@@ -344,7 +347,7 @@ function BattleObject:stopMove()
 	self._restMoveTime = 0
 end
 
-function BattleObject:update(dt)
+function BattleObject:update()
 
 	if(not self:isValid()) then
 		return;
@@ -353,7 +356,7 @@ function BattleObject:update(dt)
 	self:updateMoveInfo();
 	
 	if(self:updatePos()) then
-		self:updateRenderPos(dt);
+		self:updateRenderPos();
 	end
 
 end

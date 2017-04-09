@@ -20,40 +20,36 @@ local objRoot = nil
 
 function EffectManager:playEffect(resName,pos,duration)
 
-	ObjManager:getInstance():load(resName,function(err,res) 
+	if(objRoot == nil) then
 		local scene = cc.Director:getInstance():getRunningScene()
-        
-        if(objRoot == nil) then
-            objRoot = scene:getChildByName("scene_root")
-        end
-
-        objRoot:addChild(res)
+		objRoot = scene:getChildByName("scene_root")
+	end
+	ObjManager:getInstance():load(resName,function(err,res) 
 
 		res:setPosition(pos.x,pos.y)
 		TimerManager:getInstance():runOnce(function()
-			objRoot:removeChild(res)
 			ObjManager:getInstance():unload(res)
 		end, duration);
-	end)
+	end,objRoot)
 
 end
 
 function EffectManager:flyEffect( resName,pos1,pos2 )
-	ObjManager:getInstance():load(resName,function(err,res) 
+	
+	if(objRoot == nil) then
 		local scene = cc.Director:getInstance():getRunningScene()
+	    objRoot = scene:getChildByName("scene_root")
+	end
+
+	ObjManager:getInstance():load(resName,function(err,res) 
         
-        if(objRoot == nil) then
-            objRoot = scene:getChildByName("scene_root")
-        end
-
-        objRoot:addChild(res)
-
 		res:setPosition(pos1.x,pos1.y)
+		local action5 = cc.FadeIn:create(0.05)
   	    local action1 = cc.ScaleTo:create(0.1, 0.8)
   	    local action2 = cc.ScaleTo:create(0.2, 0.5)
   	    local action3 = cc.DelayTime:create(0.2)
   	    local action4 = cc.ScaleTo:create(0.3, 0.5)
-  	    local action5 = cc.FadeOut:create(0.2)
+  	    local action5 = cc.FadeOut:create(0.15)
 
 	    local bezier = {  
 		    cc.p(pos1.x, pos1.y),  
@@ -69,10 +65,9 @@ function EffectManager:flyEffect( resName,pos1,pos2 )
 	    res:runAction(seq1)
 	    res:runAction(seq2)
 		TimerManager:getInstance():runOnce(function() 
-			objRoot:removeChild(res)
 			ObjManager:getInstance():unload(res)
 		end, 1.1);
-	end)
+	end,objRoot)
 end
 
 return EffectManager

@@ -623,7 +623,7 @@ function Battle:joinPlayer(ctrlId,typeId,camp,isAi,coin)
 		ctrlId = ctrlId,
 		camp = camp,
 		pos = pos,
-		dir =dir,
+		dir = dir,
 		flag = flag,
 		chars = {{typeId = typeId,coin = coin}}
 	})

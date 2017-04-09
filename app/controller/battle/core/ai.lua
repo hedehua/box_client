@@ -7,11 +7,6 @@ local Vector2 = require("app.controller.battle.core.vector2")
 local Ai = {}
 local Base = {}
 
-local ExceptLeft = { Enum.Direction.Right,Enum.Direction.Down,Enum.Direction.Up}
-local ExceptRight = { Enum.Direction.Left,Enum.Direction.Down,Enum.Direction.Up}
-local ExceptUp = { Enum.Direction.Left,Enum.Direction.Right,Enum.Direction.Down}
-local ExceptDown = { Enum.Direction.Left,Enum.Direction.Right,Enum.Direction.Up}
-
 function Base:getSmartDir( exceptDir )
     self._cache = self._cache or {}
     for i = #self._cache,1,-1 do

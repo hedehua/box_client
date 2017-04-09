@@ -63,7 +63,7 @@ function ControllerLogin:open(arg1)
     self._ui:open();
 
     local volume = UserModel:getInstance():getMusicVolume()
-    AudioManager:getInstance():setAudioVolume(volume/100)
+    AudioManager:getInstance():setMusicVolume(volume/100)
     AudioManager:getInstance():playMusic(Common.assetPathTable.musicLogin)
 
 end

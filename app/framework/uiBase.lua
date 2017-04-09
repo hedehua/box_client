@@ -119,7 +119,11 @@ function UIBase:load()
 		self:_loaded(err,res);
 	end
 
-	ObjManager:getInstance():load(self._resPath,cb);
+	if(uiRoot == nil) then
+        local scene = cc.Director:getInstance():getRunningScene()
+        uiRoot = scene:getChildByName("ui_root")  
+    end
+	ObjManager:getInstance():load(self._resPath,cb,uiRoot);
 end
 
 function UIBase:unload() 
@@ -129,10 +133,7 @@ function UIBase:unload()
 		return
 	end
 
-	if(uiRoot ~= nil) then
-		uiRoot:removeChild(self._resObject)
-	end
-	ObjManager:getInstance():unload(self._resObject)
+	ObjManager:getInstance():unload(self._resObject,true)
 	self._resObject = nil
 
 end
@@ -143,15 +144,8 @@ function UIBase:_loaded(err,res)
 		print("error:load res nil",err,res);
 		return;
 	end
-
-	if(uiRoot == nil) then
-        local scene = cc.Director:getInstance():getRunningScene()
-        uiRoot = scene:getChildByName("ui_root")  
-    end
     
-    uiRoot:addChild(res)
     res:setPosition({x=0,y=0,z=0})
-    
 
 	self._resObject = res
 	self:loaded(res);

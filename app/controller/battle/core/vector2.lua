@@ -134,4 +134,8 @@ function Vector2:signAngle (v)
     return math.atan2(self.y,self.x) 
 end
 
+function Vector2:isZero(  )
+    return self.x == 0 and self.y == 0
+end
+
 return Vector2

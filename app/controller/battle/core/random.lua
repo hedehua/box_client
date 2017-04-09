@@ -9,7 +9,7 @@ local randomRange = function(range)
     -- randSeed = multiplier * (randSeed + adder) + adder;
     -- randSeed = ((randSeed >>> 16));
     -- return randSeed % range
-    return math.random(range)
+    return math.random(0,range)
 end
 
 local random = function(min,max) 
@@ -19,7 +19,9 @@ end
 local setSeed = function(seed) 
     randSeed = seed
 end
+
 return  {
     random = random,
     setSeed = setSeed
 }
+
